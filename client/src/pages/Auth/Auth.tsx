@@ -3,6 +3,11 @@ import styled from "styled-components";
 import BackBtn from '../../components/Forms/BackBtn/BackBtn';
 import FormInput from '../../components/Forms/FormInput/FormInput';
 import FormSubmit from '../../components/Forms/FormSubmit/FormSubmit';
+import Message from '../../components/Message/Message';
+import { useAppDispatch, useAppSelector } from '../../store/Hooks';
+import { changeMessage } from '../../store/MainSlice';
+import { useHttp } from '../../hooks/http.hook';
+import { changeInputs } from '../../store/LoginSlice';
 
 const AuthStyled = styled.div`
   height: 100vh;
@@ -30,14 +35,53 @@ const Form = styled.form`
 `;
 
 function Auth() {
+  const dispatch = useAppDispatch();
+  const message = useAppSelector(state => state.main.message);
+  const inputsValue = useAppSelector(state => state.login.inputsValue);
+  const {request, error, loading} = useHttp();
+
+  const changeHandler = (event: any) => {
+    dispatch(changeInputs({
+      ...inputsValue,
+      [event.target.name]: event.target.value
+    }));
+  };
+
+  React.useEffect(() => {
+    dispatch(changeMessage(error));
+  }, [error, message]);
+
+  const authHandler = async(event: React.MouseEvent<HTMLInputElement>) => {
+    event.preventDefault();
+    dispatch(changeMessage(""));
+
+    try {
+      interface ReadyData {
+        name: string;
+        password: string;
+      }
+
+      const readyData: ReadyData ={
+        name: inputsValue.name,
+        password: inputsValue.password
+      }
+
+      const data = await request("/api/auth/login", "POST", readyData);
+      dispatch(changeMessage(data.message));
+    } catch(err) {}
+  }
+
   return (
     <AuthStyled>
+
+      <Message text={message} />
+
       <BackBtn />
       <Title>Вход</Title>
       <Form>
-        <FormInput type="email" placeholder="Email" />
-        <FormInput type="password" placeholder="Пароль" />
-        <FormSubmit type="submit" title="Войти" />
+        <FormInput onChange={changeHandler} value={inputsValue.name} type="name" placeholder="Имя пользователя" name="name" />
+        <FormInput onChange={changeHandler} value={inputsValue.password} type="password" placeholder="Пароль" name="password" />
+        <FormSubmit onClick={authHandler} type="submit" title="Войти" />
       </Form>
     </AuthStyled>
   );

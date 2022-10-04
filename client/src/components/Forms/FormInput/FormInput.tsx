@@ -13,20 +13,28 @@ const Wrapper = styled.input`
   outline: none;
   border: none;
   border-bottom: 1px solid #4D3D3D;
+  transition: all 0.3s ease;
 
   &::placeholder {
     color: #4D3D3D;
+  }
+
+  &:focus {
+    border-bottom: 1px solid #31A54B;
   }
 `;
 
 interface FormInputProps {
   type: string;
   placeholder: string;
+  name?: string,
+  onChange?: React.ChangeEventHandler,
+  value?: string;
 }
 
-function FormInput({type, placeholder}: FormInputProps) {
+function FormInput({type, placeholder, name, onChange, value}: FormInputProps) {
   return (
-    <Wrapper type={type} placeholder={placeholder} />
+    <Wrapper onChange={onChange} value={value} type={type} placeholder={placeholder} name={name} />
   );
 }
 
