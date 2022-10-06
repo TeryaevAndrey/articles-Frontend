@@ -22,7 +22,7 @@ router.post(
       const { name, email, password } = req.body;
 
       if (!errors.isEmpty()) {
-        return res.status(400).json({ message: "Что-то пошло не так"});
+        return res.status(400).json({ message: "Что-то пошло не так", errors: errors.array()});
       }
 
       const candidate = await User.findOne({ email });

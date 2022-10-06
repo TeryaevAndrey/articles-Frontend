@@ -22,6 +22,14 @@ const Wrapper = styled.input`
   &:focus {
     border-bottom: 1px solid #31A54B;
   }
+
+  &.error::placeholder {
+    color: red;
+  }
+
+  &.error {
+    border-bottom: 1px solid red;
+  }
 `;
 
 interface FormInputProps {
@@ -30,11 +38,12 @@ interface FormInputProps {
   name?: string,
   onChange?: React.ChangeEventHandler,
   value?: string;
+  className?: string;
 }
 
-function FormInput({type, placeholder, name, onChange, value}: FormInputProps) {
+function FormInput({type, placeholder, name, onChange, value, className}: FormInputProps) {
   return (
-    <Wrapper onChange={onChange} value={value} type={type} placeholder={placeholder} name={name} />
+    <Wrapper className={className} onChange={onChange} value={value} type={type} placeholder={placeholder} name={name} />
   );
 }
 
