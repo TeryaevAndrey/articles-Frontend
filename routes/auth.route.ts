@@ -14,6 +14,12 @@ router.post(
     check("email", "Введите корректный email").isEmail(),
     check("password", "Минимальная длина пароля 8 символов").isLength({
       min: 8,
+    }).custom((value: string, {req}) => {
+      if(value !== req.body.passwordRepeat) {
+        throw new Error("Пароли не совпадают");
+      } else {
+        return value;
+      }
     }),
   ],
   async (req, res) => {

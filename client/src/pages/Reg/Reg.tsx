@@ -35,7 +35,7 @@ const Form = styled.form`
 `;
 
 function Reg() {
-  const {request, error, loading} = useHttp();
+  const {request, error, loading, inputsErrors} = useHttp();
   const dispatch = useAppDispatch();
   const inputsValue = useAppSelector((state) => state.reg.inputsValue);
   const message = useAppSelector((state) => state.main.message);
@@ -58,27 +58,62 @@ function Reg() {
     dispatch(changeMessage(""));
     
     try {
-      if(inputsValue.password === inputsValue.passwordRepeat) {
+
 
         interface ReadyData {
           name: string;
           email: string;
           password: string;
+          passwordRepeat: string;
         }
 
         const readyData: ReadyData = {
           name: inputsValue.name,
           email: inputsValue.email,
-          password: inputsValue.password
+          password: inputsValue.password,
+          passwordRepeat: inputsValue.passwordRepeat
         };
 
         const data = await request("/api/auth/reg", "POST", readyData);
         dispatch(changeMessage(data.message));
-      }
+      
     } catch(err: any) {
       dispatch(changeMessage(err.message));
+
+      dispatch(changeInputs({
+        name: "",
+        email: "",
+        password: "",
+        passwordRepeat: ""
+      }));
     }
   }
+
+  interface InputsErrors {
+    name: string | undefined;
+    email: string | undefined;
+    password: string | undefined;
+  }
+
+  let errors: InputsErrors = {
+    name: undefined,
+    email: undefined,
+    password: undefined,
+  };
+
+  inputsErrors.forEach((el) => {
+    switch(el.param) {
+      case "name":
+        errors.name = el.msg;
+        break;
+      case "email":
+        errors.email = el.msg;
+        break;
+      case "password":
+        errors.password = el.msg;
+        break;
+    };
+  });
 
   return (
     <RegStyled>
@@ -89,27 +124,31 @@ function Reg() {
       <Title>Регистрация</Title>
       <Form>
         <FormInput
+          className={(errors.name !== undefined && inputsValue.name.length === 0) ? "error" : ""}
           onChange={changeHandler}
           value={inputsValue.name}
           type="text"
-          placeholder="Имя пользователя"
+          placeholder={errors.name === undefined ? "Имя пользователя" : errors.name}
           name="name"
         />
         <FormInput
+          className={(errors.email !== undefined && inputsValue.email.length === 0) ? "error" : ""}
           onChange={changeHandler}
           value={inputsValue.email}
           type="email"
-          placeholder="Email"
+          placeholder={errors.email === undefined ? "Email" : errors.email}
           name="email"
         />
         <FormInput
+          className={(errors.password !== undefined && inputsValue.password.length === 0) ? "error" : ""}
           onChange={changeHandler}
           value={inputsValue.password}
           type="password"
-          placeholder="Пароль"
+          placeholder={errors.password === undefined ? "Пароль" : errors.password}
           name="password"
         />
         <FormInput
+          className={(errors.password !== undefined && inputsValue.password.length === 0) ? "error" : ""}
           onChange={changeHandler}
           value={inputsValue.passwordRepeat}
           type="password"
