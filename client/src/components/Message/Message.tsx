@@ -46,7 +46,7 @@ function Message({text}: MessageProps) {
 
   React.useEffect(() => {
     changeState();
-  }, [message])
+  }, [message]);
 
   return (
     <Wrapper className={active}>

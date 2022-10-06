@@ -35,35 +35,10 @@ const Form = styled.form`
 `;
 
 function Reg() {
-  const {request, error, loading, inputsErrors} = useHttp();
+  const {request, error, loading} = useHttp();
   const dispatch = useAppDispatch();
   const inputsValue = useAppSelector((state) => state.reg.inputsValue);
   const message = useAppSelector((state) => state.main.message);
-
-  interface Mistakes {
-    name: string | undefined;
-    email: string | undefined;
-    password: string | undefined;
-  }
-
-  let mistakes: Mistakes = {
-    name: undefined, 
-    email: undefined, 
-    password: undefined
-  };
-
-  inputsErrors.forEach((el) => {
-    switch(el.param) {
-      case "name": 
-        mistakes.name = el.msg;
-        break;
-      case "email":
-        mistakes.email = el.msg;
-        break;
-      case "password":
-        mistakes.password = el.msg;
-    };
-  });
 
   const changeHandler = (event: any) => {
     const result = {
@@ -76,7 +51,7 @@ function Reg() {
 
   React.useEffect(() => {
     dispatch(changeMessage(error));
-  }, [error, message]);
+  }, [error]);
 
   const regHandler = async (event: React.MouseEvent<HTMLInputElement>) => {
     event.preventDefault();
@@ -98,24 +73,10 @@ function Reg() {
         };
 
         const data = await request("/api/auth/reg", "POST", readyData);
-
         dispatch(changeMessage(data.message));
-        
-        mistakes = {
-          name: undefined,
-          email: undefined,
-          password: undefined
-        }
       }
     } catch(err: any) {
-      const data = {
-        name: "",
-        email: "",
-        password: "",
-        passwordRepeat: ""
-      };
-
-      dispatch(changeInputs(data));
+      dispatch(changeMessage(err.message));
     }
   }
 
@@ -128,7 +89,6 @@ function Reg() {
       <Title>Регистрация</Title>
       <Form>
         <FormInput
-          className={mistakes.name !== undefined ? "error" : ""}
           onChange={changeHandler}
           value={inputsValue.name}
           type="text"
@@ -136,7 +96,6 @@ function Reg() {
           name="name"
         />
         <FormInput
-          className={mistakes.email !== undefined ? "error": ""}
           onChange={changeHandler}
           value={inputsValue.email}
           type="email"
@@ -144,7 +103,6 @@ function Reg() {
           name="email"
         />
         <FormInput
-          className={mistakes.password !== undefined ? "error" : ""}
           onChange={changeHandler}
           value={inputsValue.password}
           type="password"
@@ -152,7 +110,6 @@ function Reg() {
           name="password"
         />
         <FormInput
-          className={mistakes.password !== undefined ? "error" : ""}
           onChange={changeHandler}
           value={inputsValue.passwordRepeat}
           type="password"

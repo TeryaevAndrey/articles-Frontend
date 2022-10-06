@@ -40,7 +40,7 @@ router.post(
 
       res.status(201).json({ message: "Пользователь создан" });
     } catch (err) {
-      res
+      return res
         .status(500)
         .json({ message: "Что-то пошло не так. Попробуйте снова." });
     }

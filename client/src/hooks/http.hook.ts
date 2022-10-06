@@ -4,13 +4,6 @@ export const useHttp = () => {
   const [loading, setLoading] = React.useState<boolean>(false); 
   const [error, setError] = React.useState<string>("");
 
-  interface ShortInputsErrors {
-    param: string;
-    msg: string;
-  }
-  
-  const [inputsErrors, setInputsErrors] = React.useState<ShortInputsErrors[]>([]);
-
   const request = React.useCallback(async (
     url: string,
     method: string = "GET", 
@@ -30,20 +23,6 @@ export const useHttp = () => {
       const data = await response.json();
 
       if(!response.ok) {
-
-        interface InputsErrors {
-          value: string | number;
-          msg: string;
-          param: string;
-          location: string;
-        }
-
-        const mistakes = data.errors.map((el: InputsErrors) => {
-          return {param: el.param, msg: el.msg};
-        });
-
-        setInputsErrors(mistakes);
-
         throw new Error(data.message || "Что-то пошло не так");
       }
 
@@ -57,5 +36,5 @@ export const useHttp = () => {
     }
   }, []);
   
-  return {loading, request, error, inputsErrors};
+  return {loading, request, error};
 }
