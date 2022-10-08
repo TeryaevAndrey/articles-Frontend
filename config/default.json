@@ -1,5 +1,5 @@
 {
-  "port": 5000,
+  "port": 6000,
   "mongoUrl": "mongodb+srv://admin:1479314ade777@cluster0.vog1u1h.mongodb.net/?retryWrites=true&w=majority",
-  "secretKey": "1479314ade777"
+  "secretKey": "1479314ade777A"
 }

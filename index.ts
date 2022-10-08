@@ -12,13 +12,17 @@ app.use("/api/auth", require("./routes/auth.route"));
 
 const start = async() => {
   try {
-    await mongoose.connect(mongoUrl);
+    await mongoose.connect(mongoUrl, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
     
     app.listen(PORT, () => {
       console.log(`Server Started port ${PORT}`);
     });
   } catch(err) {
     console.log("Server Error", err);
+    process.exit(1);
   }
 };
 

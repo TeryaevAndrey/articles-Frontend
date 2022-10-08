@@ -37,14 +37,16 @@ export const useHttp = () => {
           location: string;
         }
 
-        const formattedErrors = data.errors.map((el: InputError) => {
-          return {param: el.param, msg: el.msg};
-        }); 
-
-        setInputsErrors(formattedErrors);
+        if(data.errors) {
+          const formattedErrors = data.errors.map((el: InputError) => {
+            return {param: el.param, msg: el.msg};
+          }); 
+  
+          setInputsErrors(formattedErrors);
+        } 
 
         throw new Error(data.message || "Что-то пошло не так");
-      }
+      } 
 
       setLoading(false);
 

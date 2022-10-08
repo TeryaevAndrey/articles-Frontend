@@ -21,7 +21,7 @@ const Line = styled.div`
 function Entrance() {
   return (
     <Wrapper>
-      <EntranceItem to="/auth" icon={UserImg} title="Вход" />
+      <EntranceItem to="/login" icon={UserImg} title="Вход" />
       <Line />
       <EntranceItem to="/reg" icon={UserAddImg} title="Регистрация" />
     </Wrapper>

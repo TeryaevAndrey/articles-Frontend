@@ -51,7 +51,7 @@ function Reg() {
 
   React.useEffect(() => {
     dispatch(changeMessage(error));
-  }, [error]);
+  }, [error, dispatch]);
 
   const regHandler = async (event: React.MouseEvent<HTMLInputElement>) => {
     event.preventDefault();

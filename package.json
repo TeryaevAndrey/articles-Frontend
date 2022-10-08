@@ -21,7 +21,6 @@
     "url": "https://github.com/TeryaevAndrey/articles/issues"
   },
   "homepage": "https://github.com/TeryaevAndrey/articles#readme",
-  "proxy": "http://localhost:5000",
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "concurrently": "^7.4.0",

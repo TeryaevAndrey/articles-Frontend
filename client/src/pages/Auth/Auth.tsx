@@ -49,7 +49,7 @@ function Auth() {
 
   React.useEffect(() => {
     dispatch(changeMessage(error));
-  }, [error, message]);
+  }, [error, dispatch])
 
   const authHandler = async(event: React.MouseEvent<HTMLInputElement>) => {
     event.preventDefault();
@@ -67,8 +67,12 @@ function Auth() {
       }
 
       const data = await request("/api/auth/login", "POST", readyData);
+
       dispatch(changeMessage(data.message));
-    } catch(err) {}
+
+    } catch(err: any) {
+      dispatch(changeMessage(err.message));
+    }
   }
 
   return (
@@ -79,9 +83,9 @@ function Auth() {
       <BackBtn />
       <Title>Вход</Title>
       <Form>
-        <FormInput onChange={changeHandler} value={inputsValue.name} type="name" placeholder="Имя пользователя" name="name" />
+        <FormInput onChange={changeHandler} value={inputsValue.name} type="text" placeholder="Имя пользователя" name="name" />
         <FormInput onChange={changeHandler} value={inputsValue.password} type="password" placeholder="Пароль" name="password" />
-        <FormSubmit onClick={authHandler} type="submit" title="Войти" />
+        <FormSubmit disabled={loading} onClick={authHandler} type="submit" title="Войти" />
       </Form>
     </AuthStyled>
   );
