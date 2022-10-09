@@ -51,7 +51,7 @@ function Exit({name}: ExitProps) {
 
     return(
         <Wrapper>
-            <Name>{name}</Name>
+            <Name onClick={() => navigate("/profile")}>{name}</Name>
             <ExitWrapper onClick={exit}>
                 <Icon src={ExitImg} alt="exit" />
                 <ExitText>Выход</ExitText>

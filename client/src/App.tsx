@@ -1,13 +1,9 @@
 import React from "react";
 import styled, { createGlobalStyle } from "styled-components";
 import Main from "./pages/Main/Main";
-import { Routes, Route } from "react-router-dom";
-import Auth from "./pages/Auth/Auth";
-import Reg from "./pages/Reg/Reg";
-import Profile from "./pages/Profile/Profile";
-import AddArticle from "./pages/AddArticle/AddArticle";
 import { AuthContext } from "./context/auth.context";
 import { useAuth } from "./hooks/auth.hook";
+import { useRoutes } from "./routes";
 
 const GlobalStyled = createGlobalStyle`
   *,
@@ -54,20 +50,14 @@ function App() {
   const {token, userId, login, logout, name} = useAuth();
 
   const isAuth = !!token;
+  const routes = useRoutes(isAuth);
 
   return (
     <AuthContext.Provider value={{
       token, userId, login, logout, isAuth, name
     }}>
       <AppStyled>
-      <Routes>
-        <Route path="/" element={<Main />} />
-        <Route path="/login" element={<Auth />} />
-        <Route path="/reg" element={<Reg />} />
-        <Route path="/profile" element={<Profile />} />
-        <Route path="/add" element={<AddArticle />} />
-        <Route path="*" element={<Auth />} />
-      </Routes>
+      {routes}
       <GlobalStyled />
     </AppStyled>
     </AuthContext.Provider>

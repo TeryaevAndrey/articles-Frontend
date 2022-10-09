@@ -92,7 +92,7 @@ router.post(
 
       const token = jwt.sign({userId: user.id}, secretKey, {expiresIn: "1h"});
 
-      res.json({ message: "Успешно!", token, userId: user.id });
+      res.json({ message: "Успешно!", token, userId: user.id, name: user.name });
     } catch (err) {
       res
         .status(500)

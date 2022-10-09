@@ -13,6 +13,7 @@ const Form = styled.form`
   flex-direction: column;
   gap: 35px;
   max-width: 705px;
+  padding-bottom: 50px;
 `;
 
 function AddArticle() {

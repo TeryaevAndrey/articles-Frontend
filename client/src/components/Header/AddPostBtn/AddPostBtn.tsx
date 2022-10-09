@@ -1,6 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import styled from "styled-components";
+import { AuthContext } from '../../../context/auth.context';
 
 const BtnStyled = styled.button`
   padding: 12px 45px;
@@ -20,8 +21,10 @@ const BtnStyled = styled.button`
 `;
 
 function AddPostBtn() {
+  const auth = React.useContext(AuthContext);
+
   return (
-    <BtnStyled as={NavLink} to="/auth" >
+    <BtnStyled as={NavLink} to={auth.isAuth ? "/add" : "/auth"} >
       Добавить статью
     </BtnStyled>
   );
