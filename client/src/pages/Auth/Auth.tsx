@@ -8,6 +8,8 @@ import { useAppDispatch, useAppSelector } from '../../store/Hooks';
 import { changeMessage } from '../../store/MainSlice';
 import { useHttp } from '../../hooks/http.hook';
 import { changeInputs } from '../../store/LoginSlice';
+import { AuthContext } from '../../context/auth.context';
+import { useNavigate } from 'react-router-dom';
 
 const AuthStyled = styled.div`
   height: 100vh;
@@ -39,6 +41,8 @@ function Auth() {
   const message = useAppSelector(state => state.main.message);
   const inputsValue = useAppSelector(state => state.login.inputsValue);
   const {request, error, loading} = useHttp();
+  const auth = React.useContext(AuthContext);
+  const navigate = useNavigate();
 
   const changeHandler = (event: any) => {
     dispatch(changeInputs({
@@ -67,8 +71,12 @@ function Auth() {
       }
 
       const data = await request("/api/auth/login", "POST", readyData);
+      
+      auth.login(data.token, data.userId, data.name);
 
       dispatch(changeMessage(data.message));
+
+      navigate("/profile");
 
     } catch(err: any) {
       dispatch(changeMessage(err.message));

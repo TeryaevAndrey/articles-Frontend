@@ -6,6 +6,8 @@ import Auth from "./pages/Auth/Auth";
 import Reg from "./pages/Reg/Reg";
 import Profile from "./pages/Profile/Profile";
 import AddArticle from "./pages/AddArticle/AddArticle";
+import { AuthContext } from "./context/auth.context";
+import { useAuth } from "./hooks/auth.hook";
 
 const GlobalStyled = createGlobalStyle`
   *,
@@ -49,8 +51,15 @@ export const TitleFilter = styled.h2`
 `;
 
 function App() {
+  const {token, userId, login, logout, name} = useAuth();
+
+  const isAuth = !!token;
+
   return (
-    <AppStyled>
+    <AuthContext.Provider value={{
+      token, userId, login, logout, isAuth, name
+    }}>
+      <AppStyled>
       <Routes>
         <Route path="/" element={<Main />} />
         <Route path="/login" element={<Auth />} />
@@ -61,6 +70,7 @@ function App() {
       </Routes>
       <GlobalStyled />
     </AppStyled>
+    </AuthContext.Provider>
   );
 }
 
