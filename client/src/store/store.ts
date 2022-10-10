@@ -1,3 +1,4 @@
+import { ArticleSlice } from "./Article";
 import { MainSlice } from "./MainSlice";
 import { RegSlice } from "./RegSlice";
 import { HeaderSlice } from "./HeaderSlice";
@@ -9,7 +10,8 @@ export const store = configureStore({
     main: MainSlice.reducer,
     header: HeaderSlice.reducer,
     reg: RegSlice.reducer,
-    login: LoginSlice.reducer
+    login: LoginSlice.reducer,
+    article: ArticleSlice.reducer
   }
 });
 

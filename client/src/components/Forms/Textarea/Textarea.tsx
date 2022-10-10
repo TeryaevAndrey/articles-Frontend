@@ -21,11 +21,14 @@ const TextareaStyled = styled.textarea`
 interface TextareaProps {
   minHeight: string;
   placeholder: string;
+  name?: string;
+  onChange: React.ChangeEventHandler;
+  value?: string;
 }
 
-function Textarea({minHeight, placeholder}: TextareaProps) {
+function Textarea({minHeight, placeholder, name, onChange, value}: TextareaProps) {
   return (
-    <TextareaStyled minHeight={minHeight} placeholder={placeholder} />
+    <TextareaStyled minHeight={minHeight} placeholder={placeholder} name={name} onChange={onChange} value={value} />
   );
 }
 

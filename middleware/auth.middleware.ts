@@ -1,21 +1,22 @@
-const jwt = require("jsonwebtoken");
+module.exports = (req, res, next) => {
+  const jwt = require("jsonwebtoken");
+  const config = require("config");
 
-module.exports = function(req, res, next) {
-  if(req.method === "OPTIONS") {
-    next();
+  if (req.method === "OPTIONS") {
+    return next();
   }
 
   try {
-    const token = req.headers.authorization.split(" ")[1];
+    const token = req.headers.authorization.split(" ")[1]; // "Bearer TOKEN"
 
-    if(!token) {
-      return res.status(401).json({message: "Вы не авторизованы"});
+    if (!token) {
+      return res.status(401).json({ message: "Нет авторизации" });
     }
 
     const decoded = jwt.verify(token, config.get("secretKey"));
     req.user = decoded;
     next();
-  } catch(err) {
-    res.status(401).json({message: "Вы не авторизованы"});
+  } catch (err) {
+    res.status(500).json({ message: "Нет авторизации"});
   }
-}
+};

@@ -8,11 +8,11 @@ const router = Router();
 
 router.post(
   "/newPost",
-  auth,
   [
     check("title", "Минимальная длина 5 символов").isLength({min: 5}),
     check("text", "Минимальная длина текста 100 символов").isLength({min: 100})
   ],
+  auth,
   async(req, res) => {
     try {
       const errors = validationResult(req);
@@ -51,7 +51,7 @@ router.get(
   auth, 
   async(req, res) => {
     try {
-      const posts = await Post.find({owner: req.user.userId});
+      const posts = await Post.find();
 
       res.json(posts);
     } catch(err) {
