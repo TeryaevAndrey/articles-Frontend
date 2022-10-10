@@ -9,6 +9,7 @@ const app = express();
 
 app.use(express.json({ extended: true }))
 app.use("/api/auth", require("./routes/auth.route"));
+app.use("/api/posts", require("./routes/posts.route"));
 
 const start = async() => {
   try {
