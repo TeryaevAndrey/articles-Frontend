@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from "styled-components";
 import { TitleFilter } from '../../App';
-import AddImg from '../../components/Forms/AddImg/AddImg';
 import FormInput from '../../components/Forms/FormInput/FormInput';
 import FormSubmit from '../../components/Forms/FormSubmit/FormSubmit';
 import Textarea from '../../components/Forms/Textarea/Textarea';
@@ -18,6 +17,30 @@ const Form = styled.form`
   gap: 35px;
   max-width: 705px;
   padding-bottom: 50px;
+`;
+
+const Wrapper = styled.div`
+  width: 350px;
+  position: relative;
+`;
+
+const Input = styled.input`
+  opacity: 0;
+  visibility: hidden;
+  position: absolute;
+`;
+
+const Label = styled.label`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  min-height: 50px;
+  background-color: #fff;
+  color: #4D3D3D;
+  border-radius: 10px;
+  border: 1px solid #4D3D3D;
+  cursor: pointer;
 `;
 
 function AddArticle() {
@@ -62,7 +85,10 @@ function AddArticle() {
       <Header />
       <Form>
         <TitleFilter>Добавление статьи</TitleFilter>
-        <AddImg />
+        <Wrapper>
+      <Input type="file" id="downloadBanner" />
+      <Label htmlFor="downloadBanner">Загрузить баннер</Label>
+    </Wrapper>
         <FormInput onChange={changeHandler} value={inputsValue.title} type="text" placeholder="Название" name="title" />
         <Textarea onChange={changeHandler} value={inputsValue.text} minHeight={"385px"} placeholder="Текст" name="text" />
         <FormSubmit onClick={formHandler} type="submit" title="Сохранить" />
