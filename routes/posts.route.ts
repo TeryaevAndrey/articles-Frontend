@@ -11,66 +11,65 @@ router.post(
   "/newPost",
   auth,
   upload.single("banner"),
-  async(req, res) => {
+  async (req, res) => {
     try {
-      const {title, text} = req.body;
-      const filePath = req.file.path;
+      const { title, text } = req.body;
+      const file = req.file;
+
+      if(file) {
+        const post = new Post({
+          banner: file.path,
+          title,
+          text,
+          owner: req.user.userId,
+        });
+      }
 
       const post = new Post({
-        banner: filePath,
         title,
-        text, 
-        owner: req.user.userId
+        text,
+        owner: req.user.userId,
       });
 
       await post.save();
 
-      res.status(201).json({message: "Пост создан"});
-
-    } catch(err) {
-      res.status(500).json({message: "Что-то пошло не так. Попробуйте снова"});
+      res.status(201).json({ message: "Пост создан" });
+    } catch (err) {
+      res
+        .status(500)
+        .json({ message: "Что-то пошло не так. Попробуйте снова" });
     }
   }
 );
 
-router.get(
-  "/",
-  async(_, res) => {
-    try {
-      const posts = await Post.find();
+router.get("/", async (_, res) => {
+  try {
+    const posts = await Post.find();
 
-      res.json(posts);
-    } catch(err) {
-      res.status(500).json({message: "Не удалось загрузить статьи"});
-    }
+    res.json(posts);
+  } catch (err) {
+    res.status(500).json({ message: "Не удалось загрузить статьи" });
   }
-);
+});
 
-router.get(
-  "/userPosts",
-  auth,
-  async(req, res) => {
-    try {
-      const posts = await Post.find();
+router.get("/userPosts", auth, async (req, res) => {
+  try {
+    const posts = await Post.find();
 
-      res.json(posts);
-    } catch(err) {
-      res.status(500).json({message: "Не удалось загрузить статьи"});
-    }
+    res.json(posts);
+  } catch (err) {
+    res.status(500).json({ message: "Не удалось загрузить статьи" });
   }
-);
+});
 
-router.get(
-  "/:id",
-  async(req, res) => {
-    try {
-      const post = await Post.findById(req.params);
+router.get("/:id", async (req, res) => {
+  try {
+    const post = await Post.findById(req.params);
 
-      res.json(post);
-    } catch(err) {
-      res.status(500).json({message: "Не удалось загрузить статьи"});
-    }
+    res.json(post);
+  } catch (err) {
+    res.status(500).json({ message: "Не удалось загрузить статьи" });
   }
-);
+});
 
 module.exports = router;
