@@ -1,5 +1,5 @@
 import { check, validationResult } from "express-validator";
-import { Router } from "express";
+import { json, Router } from "express";
 
 const auth = require("../middleware/auth.middleware");
 const Post = require("../models/Post");
@@ -11,10 +11,19 @@ router.post(
   "/newPost",
   auth,
   upload.single("banner"),
+  [
+    check("title", "Минимальная длина заголовка - 5 символов").isLength({min: 5}),
+    check("text", "Минимальная длина текста - 100 символов").isLength({min: 100}),
+  ],
   async (req, res) => {
     try {
       const { title, text } = req.body;
       const file = req.file;
+      const errors = validationResult(req);
+
+      if(!errors.isEmpty()) {
+        return res.status(400).json({message: "Что-то пошло не так", errors: errors.array()});
+      }
 
       if(file) {
         const post = new Post({

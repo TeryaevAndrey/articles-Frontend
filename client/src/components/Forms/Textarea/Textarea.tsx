@@ -16,6 +16,14 @@ const TextareaStyled = styled.textarea`
     color: #4D3D3D;
     font-weight: 600;
   }
+
+  &.error::placeholder {
+    color: red;
+  }
+
+  &.error {
+    border-bottom: 1px solid red;
+  }
 `;
 
 interface TextareaProps {
@@ -24,11 +32,12 @@ interface TextareaProps {
   name?: string;
   onChange: React.ChangeEventHandler;
   value?: string;
+  className?: string;
 }
 
-function Textarea({minHeight, placeholder, name, onChange, value}: TextareaProps) {
+function Textarea({minHeight, placeholder, name, onChange, value, className}: TextareaProps) {
   return (
-    <TextareaStyled minHeight={minHeight} placeholder={placeholder} name={name} onChange={onChange} value={value} />
+    <TextareaStyled className={className} minHeight={minHeight} placeholder={placeholder} name={name} onChange={onChange} value={value} />
   );
 }
 
