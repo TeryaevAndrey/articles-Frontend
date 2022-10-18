@@ -1,6 +1,7 @@
 import { model, Schema, Types } from "mongoose";
 
 const schema = new Schema({
+  banner: {type: String, required: false},
   title: {type: String, required: true}, 
   text: {type: String, required: true}, 
   date: {type: Date, default: Date.now},

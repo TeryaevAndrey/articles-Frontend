@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from "styled-components";
 import { TitleFilter } from '../../App';
-import FormInput from '../../components/Forms/FormInput/FormInput';
+import FormInput from "../../components/Forms/FormInput/FormInput";
 import FormSubmit from '../../components/Forms/FormSubmit/FormSubmit';
 import Textarea from '../../components/Forms/Textarea/Textarea';
 import Header from '../../components/Header/Header';
@@ -10,6 +10,7 @@ import { AuthContext } from '../../context/auth.context';
 import { useHttp } from '../../hooks/http.hook';
 import { changeInputs } from '../../store/Article';
 import { useAppDispatch, useAppSelector } from '../../store/Hooks';
+import axios from "axios";
 
 const Form = styled.form`
   display: flex;
@@ -48,32 +49,44 @@ function AddArticle() {
   const inputsValue = useAppSelector(state => state.article.inputsValue);
   const {request} = useHttp();
   const auth = React.useContext(AuthContext);
+  const [banner, setBanner] = React.useState<undefined | File>(undefined);
 
-  const changeHandler = (event: any) => {
+  const changeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     dispatch(changeInputs({
-      ...inputsValue, 
+      ...inputsValue,
       [event.target.name]: event.target.value
     }));
+  }
+
+  const changeFile = (event: React.ChangeEvent<HTMLInputElement>) => {
+      const files = event.target.files;
+      if(!files) {
+          setBanner(undefined);
+          return;
+      }
+
+      setBanner(files[0]);
   }
 
   const formHandler = async(event: React.MouseEvent<HTMLElement>) => {
     event.preventDefault();
 
     try {
-      interface FormData {
-        banner: string;
-        title: string;
-        text: string;
+      const title = inputsValue.title;
+      const text = inputsValue.text;
+
+      const formData = new FormData();
+      if(banner) {
+        formData.append("banner", banner);
       }
-  
-      const readyData: FormData = {
-        banner: "",
-        title: inputsValue.title,
-        text: inputsValue.text
-      }
-  
-       request("/api/posts/newPost", "POST", readyData, {
-        Authorization: `Bearer ${auth.token}`
+      formData.append("title", title);
+      formData.append("text", text);
+      
+      await axios.post("/api/posts/newPost", formData, {
+        headers: {
+          Authorization: `Bearer ${auth.token}`,
+          "Content-Type": "multipart/form-data"
+        }
       });
     } catch(err) {
       console.log(err);
@@ -86,7 +99,7 @@ function AddArticle() {
       <Form>
         <TitleFilter>Добавление статьи</TitleFilter>
         <Wrapper>
-      <Input type="file" id="downloadBanner" />
+      <Input onChange={changeFile} name="banner" type="file" id="downloadBanner" />
       <Label htmlFor="downloadBanner">Загрузить баннер</Label>
     </Wrapper>
         <FormInput onChange={changeHandler} value={inputsValue.title} type="text" placeholder="Название" name="title" />

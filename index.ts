@@ -7,7 +7,9 @@ const PORT = config.get("port") || 5000;
 
 const app = express();
 
-app.use(express.json({ extended: true }))
+app.use(express.json({ extended: true }));
+app.use(express.urlencoded({ extended : true }));
+app.use(express.static(__dirname + "/downloads"));
 app.use("/api/auth", require("./routes/auth.route"));
 app.use("/api/posts", require("./routes/posts.route"));
 
