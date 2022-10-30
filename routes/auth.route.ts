@@ -11,7 +11,7 @@ const router = Router();
 router.post(
   "/reg",
   [
-    check("name", "Минимальная длина имени 5 символов").isLength({ min: 6 }),
+    check("name", "Минимальная длина имени 5 символов").isLength({ min: 5 }),
     check("email", "Введите корректный email").isEmail(),
     check("password", "Минимальная длина пароля 8 символов")
       .isLength({

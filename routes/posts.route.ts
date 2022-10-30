@@ -68,7 +68,7 @@ router.get("/", async (req, res) => {
 
 router.get("/userPosts", auth, async (req, res) => {
   try {
-    const posts = await Post.find();
+    const posts = await Post.find({owner: req.user.userId});
 
     res.json(posts);
   } catch (err) {
