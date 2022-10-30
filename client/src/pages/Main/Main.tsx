@@ -43,7 +43,7 @@ function Main() {
     const text = post.text.slice(0, 100) + "...";
     const date = new Date(post.date).toLocaleDateString();
 
-    return <ArticleBriefly onClick={() => navigate(`/api/posts/:${post._id}`)} banner={`http://localhost:3000/${post.banner}`} title={post.title} text={text} date={date} key={post._id} />
+    return <ArticleBriefly onClick={() => navigate(`/api/posts/${post._id}`)} banner={`http://localhost:3000/${post.banner}`} title={post.title} text={text} date={date} key={post._id} />
   });
 
   return (

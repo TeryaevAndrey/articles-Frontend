@@ -16,10 +16,6 @@ function Logo() {
   const {isAuth} = React.useContext(AuthContext);
 
   const transferToMain = () => {
-    if(isAuth) {
-      return navigate("/profile");
-    } 
-    
     return navigate("/");
   }
 

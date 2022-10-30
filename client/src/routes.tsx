@@ -16,6 +16,7 @@ export function useRoutes(isAuth: boolean) {
         <Route path="/reg" element={<Reg />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/add" element={<AddArticle />} />
+        <Route path="/api/posts/:id" element={<Post />} />
         <Route path="*" element={<Auth />} />
       </Routes>
     )
@@ -25,6 +26,7 @@ export function useRoutes(isAuth: boolean) {
         <Route path="/" element={<Main />} />
         <Route path="/login" element={<Auth />} />
         <Route path="/reg" element={<Reg />} />
+        <Route path="/api/posts/:id" element={<Post />} />
         <Route path="*" element={<Auth />} />
       </Routes>
   );
