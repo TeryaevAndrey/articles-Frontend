@@ -67,7 +67,11 @@ interface ArticleBrieflyProps {
 function ArticleBriefly({onClick, banner, title, text, date }: ArticleBrieflyProps) {
   return (
     <Wrapper onClick={onClick}>
-      <Banner src={banner} alt={title} />
+      {
+        banner && (
+          <Banner src={banner} alt={title} />
+        )
+      }
       <Title>{title}</Title>
       <Text>{text}</Text>
       <Footer>

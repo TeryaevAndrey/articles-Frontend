@@ -53,11 +53,14 @@ router.post(
   }
 );
 
-router.get("/", async (_, res) => {
+router.get("/", async (req, res) => {
   try {
-    const posts = await Post.find();
+    const limit = req.query.limit;
+    const page = req.query.page;
+    const posts = await Post.find().limit(limit).skip(limit * page);
+    const total = await Post.countDocuments();
 
-    res.json(posts);
+    res.json({posts, total});
   } catch (err) {
     res.status(500).json({ message: "Не удалось загрузить статьи" });
   }
