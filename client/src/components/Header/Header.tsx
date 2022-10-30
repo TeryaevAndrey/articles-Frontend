@@ -6,6 +6,7 @@ import Logo from "./Logo/Logo";
 import BurgerImg from "../../img/burger.svg";
 import { useAppDispatch, useAppSelector } from "../../store/Hooks";
 import { openMenuReducer } from "../../store/HeaderSlice";
+import { Link } from "react-router-dom";
 
 export const HeaderStyled = styled.div`
   position: relative;
@@ -61,6 +62,8 @@ function Header() {
     <HeaderStyled>
       <Logo />
       <WrapperBurgerMenu className={stateMenu ? "active" : ""}>
+        <Link to="/">На главную</Link>
+        <Link to="/favourites">Избранное</Link>
         <AddPostBtn />
         <Entrance />
       </WrapperBurgerMenu>

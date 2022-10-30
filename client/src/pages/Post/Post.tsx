@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from "styled-components";
 import ArticleBriefly from '../../components/ArticlePost/ArticlePost';
-import BannerImg from "../../img/bannerExample.svg";
 
 const Wrapper = styled.div`
   max-width: 705px;
@@ -9,10 +8,17 @@ const Wrapper = styled.div`
   margin: 0 auto;
 `;
 
-function Post() {
+interface PostProps {
+  banner?: string;
+  title: string;
+  text: string;
+  date: string;
+}
+
+function Post({banner, title, text, date}: PostProps) {
   return (
     <Wrapper>
-      <ArticleBriefly img={BannerImg} title="Title" text="Lörem ipsum pens lyktiga, diligt inklusive autoråktigt. Intryckssanera råskade, lysade ena. Manga digyn inte lans. Mism juskap, därför att intrasm presat. Dide telefili fotosion. " date="25.09.22" />
+      <ArticleBriefly banner={banner} title={title} text={text} date={date} />
     </Wrapper>
   );
 }

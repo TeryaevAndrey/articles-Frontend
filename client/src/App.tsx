@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import styled, { createGlobalStyle } from "styled-components";
 import Main from "./pages/Main/Main";
 import { AuthContext } from "./context/auth.context";

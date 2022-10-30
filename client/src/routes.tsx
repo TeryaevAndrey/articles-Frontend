@@ -1,9 +1,11 @@
+import React from "react";
 import Main from "./pages/Main/Main";
 import { Routes, Route } from "react-router-dom";
 import Auth from "./pages/Auth/Auth";
 import Reg from "./pages/Reg/Reg";
 import Profile from "./pages/Profile/Profile";
 import AddArticle from "./pages/AddArticle/AddArticle";
+import Post from "./pages/Post/Post";
 
 export function useRoutes(isAuth: boolean) {
   if (isAuth) {

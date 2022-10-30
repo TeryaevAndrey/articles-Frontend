@@ -44,10 +44,13 @@ const Label = styled.label`
   cursor: pointer;
 `;
 
+const Banner = styled.img`
+  width: 100%;
+`;
+
 function AddArticle() {
   const dispatch = useAppDispatch();
   const inputsValue = useAppSelector((state) => state.article.inputsValue);
-  const { request } = useHttp();
   const auth = React.useContext(AuthContext);
   const [banner, setBanner] = React.useState<undefined | File>(undefined);
 
@@ -132,8 +135,6 @@ function AddArticle() {
     });
   }
 
-  console.log(errorsMsg);
-
   return (
     <>
       <Header />
@@ -148,6 +149,9 @@ function AddArticle() {
           />
           <Label htmlFor="downloadBanner">Загрузить баннер</Label>
         </Wrapper>
+        {
+          banner && <Banner src={URL.createObjectURL(banner)} alt="banner"/>
+        }
         <FormInput
           className={(errorsMsg.title !== undefined && inputsValue.title.length === 0) ? "error" : ""}
           onChange={changeHandler}

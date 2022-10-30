@@ -57,16 +57,17 @@ const Like = styled.svg`
 `;
 
 interface ArticleBrieflyProps {
-  img: string;
+  onClick?: React.MouseEventHandler;
+  banner?: string;
   title: string;
   text: string;
   date: string;
 }
 
-function ArticleBriefly({ img, title, text, date }: ArticleBrieflyProps) {
+function ArticleBriefly({onClick, banner, title, text, date }: ArticleBrieflyProps) {
   return (
-    <Wrapper>
-      <Banner src={img} alt={title} />
+    <Wrapper onClick={onClick}>
+      <Banner src={banner} alt={title} />
       <Title>{title}</Title>
       <Text>{text}</Text>
       <Footer>

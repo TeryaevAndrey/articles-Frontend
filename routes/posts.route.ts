@@ -27,20 +27,22 @@ router.post(
 
       if(file) {
         const post = new Post({
-          banner: file.path,
+          banner: file.filename,
           title,
           text,
           owner: req.user.userId,
         });
+
+        post.save();
+      } else {
+        const post = new Post({
+          title,
+          text,
+          owner: req.user.userId,
+        });
+  
+        await post.save();
       }
-
-      const post = new Post({
-        title,
-        text,
-        owner: req.user.userId,
-      });
-
-      await post.save();
 
       res.status(201).json({ message: "Пост создан" });
     } catch (err) {
@@ -73,11 +75,11 @@ router.get("/userPosts", auth, async (req, res) => {
 
 router.get("/:id", async (req, res) => {
   try {
-    const post = await Post.findById(req.params);
+    const post = await Post.findById(req.params.id);
 
     res.json(post);
   } catch (err) {
-    res.status(500).json({ message: "Не удалось загрузить статьи" });
+    res.status(500).json({ message: "Не удалось загрузить статью" });
   }
 });
 
