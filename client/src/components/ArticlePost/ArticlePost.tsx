@@ -14,8 +14,11 @@ const Wrapper = styled.div`
 `;
 
 const Banner = styled.img`
+  width: 100%;
+  height: 405px;
   object-fit: cover;
   margin-bottom: 15px;
+  border-radius: 20px;
 `;
 
 const Title = styled.h2`

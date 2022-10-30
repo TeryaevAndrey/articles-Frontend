@@ -5,6 +5,7 @@ import styled from "styled-components";
 import { TitleFilter } from "../../App";
 import ArticleBriefly from "../../components/ArticlePost/ArticlePost";
 import Header from "../../components/Header/Header";
+import Loader from "../../components/Loader/Loader";
 import ScrollBtn from "../../components/ScrollBtn/ScrollBtn";
 import Sidebar from "../../components/Sidebar/Sidebar";
 import BannerImg from "../../img/bannerExample.svg";
@@ -16,6 +17,7 @@ const Container = styled.div`
 `;
 
 export const Articles = styled.div`
+  width: 100%;
   max-width: 700px;
   display: flex;
   flex-direction: column;
@@ -29,26 +31,34 @@ function Main() {
   const [currentPage, setCurrentPage] = React.useState<number>(0);
   const [fetching, setFetching] = React.useState<boolean>(true);
   const [totalCount, setTotalCount] = React.useState<number>(0);
+  const [loading, setLoading] = React.useState<boolean>(false);
   const navigate = useNavigate();
 
-  const scrollHandler = React.useCallback((e: any) => {
-    if (
-      e.target.documentElement.scrollHeight -
-        (e.target.documentElement.scrollTop + window.innerHeight) <
-      100 && posts.length < totalCount
-    ) {
-      setFetching(true);
-    }
-  }, [posts.length, totalCount]);
+  const scrollHandler = React.useCallback(
+    (e: any) => {
+      if (
+        e.target.documentElement.scrollHeight -
+          (e.target.documentElement.scrollTop + window.innerHeight) <
+          100 &&
+        posts.length < totalCount
+      ) {
+        setFetching(true);
+      }
+    },
+    [posts.length, totalCount]
+  );
 
   React.useEffect(() => {
     if (fetching) {
+      setLoading(true);
       axios
         .get(`/api/posts?limit=${limitCount}&page=${currentPage}`)
         .then((res) => {
           setTotalCount(res.data.total);
           setPosts([...posts, ...res.data.posts]);
           setCurrentPage((prev) => prev + 1);
+          
+          setLoading(false);
         })
         .finally(() => setFetching(false));
     }
@@ -73,7 +83,7 @@ function Main() {
     const text = post.text.slice(0, 100) + "...";
     const date = new Date(post.date).toLocaleDateString();
 
-    if(!post.banner) {
+    if (!post.banner) {
       return (
         <ArticleBriefly
           onClick={() => navigate(`/api/posts/${post._id}`)}
@@ -104,6 +114,7 @@ function Main() {
         <Articles>
           <TitleFilter>Статьи</TitleFilter>
           {resultPosts ? resultPosts : <span>Пока что постов нет...</span>}
+          {loading && <Loader />}
         </Articles>
         <Sidebar />
         <ScrollBtn />
