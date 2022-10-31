@@ -27,7 +27,7 @@ export const Articles = styled.div`
 
 function Main() {
   const [posts, setPosts] = React.useState<any>([]);
-  const limitCount: number = 2;
+  const limitCount: number = 3;
   const [currentPage, setCurrentPage] = React.useState<number>(0);
   const [fetching, setFetching] = React.useState<boolean>(true);
   const [totalCount, setTotalCount] = React.useState<number>(0);

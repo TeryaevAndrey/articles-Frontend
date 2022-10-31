@@ -63,7 +63,7 @@ function Header() {
       <Logo />
       <WrapperBurgerMenu className={stateMenu ? "active" : ""}>
         <Link to="/">На главную</Link>
-        <Link to="/favourites">Избранное</Link>
+        {/* <Link to="/favourites">Избранное</Link> */}
         <AddPostBtn />
         <Entrance />
       </WrapperBurgerMenu>

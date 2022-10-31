@@ -4,26 +4,61 @@ import { useNavigate } from 'react-router-dom';
 import { TitleFilter } from '../../App';
 import ArticleBriefly from '../../components/ArticlePost/ArticlePost';
 import Header from '../../components/Header/Header';
+import Loader from '../../components/Loader/Loader';
 import ScrollBtn from '../../components/ScrollBtn/ScrollBtn';
 import Search from '../../components/Search/Search';
 import { AuthContext } from '../../context/auth.context';
-import BannerImg from "../../img/bannerExample.svg";
 import { Articles } from '../Main/Main';
 
 function Profile() {
   const [posts, setPosts] = React.useState<any>([]);
+  const [loading, setLoading] = React.useState<boolean>(false);
+  const [currentPage, setCurrentPage] = React.useState<number>(0);
+  const [fetching, setFetching] = React.useState<boolean>(true);
+  const [totalCount, setTotalCount] = React.useState<number>(0);
+  const limitCount = 3;
   const navigate = useNavigate();
   const auth = React.useContext(AuthContext);
 
+  const scrollHandler = React.useCallback(
+    (e: any) => {
+      if (
+        e.target.documentElement.scrollHeight -
+          (e.target.documentElement.scrollTop + window.innerHeight) <
+          100 &&
+        posts.length < totalCount
+      ) {
+        setFetching(true);
+      }
+    },
+    [posts.length, totalCount]
+  );
+
   React.useEffect(() => {
-    axios.get("/api/posts/userPosts", {
+    if(fetching) {
+      setLoading(true);
+
+    axios.get(`/api/posts/userPosts?limit=${limitCount}&page=${currentPage}`, {
       headers: {
         Authorization: `Bearer ${auth.token}`
       }
     }).then((res) => {
-        setPosts(res.data);
-      });
-  }, [auth.token]);
+        setTotalCount(res.data.total);
+        setPosts([...posts, ...res.data.posts]);
+        setCurrentPage((prev) => prev + 1);
+
+        setLoading(false);
+      })
+      .finally(() => setFetching(false));
+    }
+  }, [auth.token, fetching]);
+
+  React.useEffect(() => {
+    document.addEventListener("scroll", scrollHandler);
+    return function () {
+      document.removeEventListener("scroll", scrollHandler);
+    };
+  }, [scrollHandler]);
 
   interface Post {
     _id: string;
@@ -70,6 +105,8 @@ function Profile() {
         {
           resultPosts.length > 0 ? resultPosts : <span>У вас нет постов...</span>
         }
+
+        {loading && <Loader />}
       </Articles>
       <ScrollBtn />
     </>

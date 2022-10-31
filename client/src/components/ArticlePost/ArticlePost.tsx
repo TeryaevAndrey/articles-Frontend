@@ -61,13 +61,14 @@ const Like = styled.svg`
 
 interface ArticleBrieflyProps {
   onClick?: React.MouseEventHandler;
+  likeClick?: React.MouseEventHandler;
   banner?: string;
   title: string;
   text: string;
   date: string;
 }
 
-function ArticleBriefly({onClick, banner, title, text, date }: ArticleBrieflyProps) {
+function ArticleBriefly({onClick, likeClick, banner, title, text, date }: ArticleBrieflyProps) {
   return (
     <Wrapper onClick={onClick}>
       {
@@ -79,7 +80,8 @@ function ArticleBriefly({onClick, banner, title, text, date }: ArticleBrieflyPro
       <Text>{text}</Text>
       <Footer>
         <Date>{date}</Date>
-        <Like
+        {/* <Like
+          onClick={likeClick}
           viewBox="0 0 25 25"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
@@ -95,7 +97,7 @@ function ArticleBriefly({onClick, banner, title, text, date }: ArticleBrieflyPro
               <rect width="25" height="25" fill="white" />
             </clipPath>
           </defs>
-        </Like>
+        </Like> */}
       </Footer>
     </Wrapper>
   );

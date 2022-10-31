@@ -68,9 +68,12 @@ router.get("/", async (req, res) => {
 
 router.get("/userPosts", auth, async (req, res) => {
   try {
-    const posts = await Post.find({owner: req.user.userId});
+    const limit = req.query.limit;
+    const page = req.query.page;
+    const posts = await Post.find({owner: req.user.userId}).limit(limit).skip(limit * page);
+    const total = await Post.countDocuments();
 
-    res.json(posts);
+    res.json({posts, total});
   } catch (err) {
     res.status(500).json({ message: "Не удалось загрузить статьи" });
   }
