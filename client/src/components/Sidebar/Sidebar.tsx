@@ -2,6 +2,8 @@ import React from 'react';
 import styled from "styled-components";
 import Filters from './Filters/Filters';
 import Search from '../Search/Search';
+import { useAppDispatch, useAppSelector } from '../../store/Hooks';
+import { changeValue } from '../../store/SearchSlice';
 
 const SidebarStyled = styled.div`
   max-width: 385px;
@@ -15,9 +17,15 @@ const SidebarStyled = styled.div`
 `;
 
 function Sidebar() {
+  const dispatch = useAppDispatch();
+  const searchValue = useAppSelector((state) => state.search.searchValue);
+  const changeSearchHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch(changeValue(event.target.value));
+  }
+
   return (
     <SidebarStyled>
-      <Search width={"100%"} />
+      <Search onChange={changeSearchHandler} value={searchValue} width={"100%"} />
       <Filters />
     </SidebarStyled>
   );

@@ -3,10 +3,6 @@ import styled from "styled-components";
 import SearchImg from "../../img/search.svg";
 import ClearImg from "../../img/clear.svg";
 
-interface SearchProps {
-  width: string
-}
-
 const SearchWrapper = styled.div`
   width: ${(props: SearchProps) => props.width};
   min-height: 45px;
@@ -44,11 +40,17 @@ const ClearBtn = styled.img`
   cursor: pointer;
 `;
 
-function Search({width}: SearchProps) {
+interface SearchProps {
+  onChange?: React.ChangeEventHandler<HTMLInputElement>;
+  width: string;
+  value?: string;
+}
+
+function Search({onChange, width, value}: SearchProps) {
   return (
     <SearchWrapper width={width}>
       <Icon src={SearchImg} alt="search" />
-      <SearchInput placeholder="Поиск..." />
+      <SearchInput onChange={onChange} value={value} placeholder="Поиск..." />
       <ClearBtn src={ClearImg} alt="clear" />
     </SearchWrapper>
   );

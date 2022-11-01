@@ -8,7 +8,7 @@ import Header from "../../components/Header/Header";
 import ScrollBtn from "../../components/ScrollBtn/ScrollBtn";
 import { AuthContext } from "../../context/auth.context";
 import { useHttp } from "../../hooks/http.hook";
-import { changeInputs } from "../../store/Article";
+import { changeInputs } from "../../store/ArticleSlice";
 import { useAppDispatch, useAppSelector } from "../../store/Hooks";
 import axios from "axios";
 
