@@ -9,6 +9,7 @@ import Loader from "../../components/Loader/Loader";
 import ScrollBtn from "../../components/ScrollBtn/ScrollBtn";
 import Sidebar from "../../components/Sidebar/Sidebar";
 import BannerImg from "../../img/bannerExample.svg";
+import { useAppSelector } from "../../store/Hooks";
 
 const Container = styled.div`
   display: flex;
@@ -26,6 +27,8 @@ export const Articles = styled.div`
 `;
 
 function Main() {
+  const searchValue = useAppSelector((state) => state.search.searchValue);
+  const [allPosts, setAllPosts] = React.useState<any>([]);
   const [posts, setPosts] = React.useState<any>([]);
   const limitCount: number = 3;
   const [currentPage, setCurrentPage] = React.useState<number>(0);
@@ -57,7 +60,7 @@ function Main() {
           setTotalCount(res.data.total);
           setPosts([...posts, ...res.data.posts]);
           setCurrentPage((prev) => prev + 1);
-          
+
           setLoading(false);
         })
         .finally(() => setFetching(false));
@@ -70,6 +73,10 @@ function Main() {
       document.removeEventListener("scroll", scrollHandler);
     };
   }, [scrollHandler]);
+
+  React.useEffect(() => {
+    axios.get("/api/posts").then((res) => setAllPosts(res.data.posts));
+  }, []);
 
   interface Post {
     _id: string;
@@ -107,13 +114,52 @@ function Main() {
     );
   });
 
+  const filterPosts = allPosts.filter((post: Post) => {
+    return post.title.toLowerCase().includes(searchValue.toLowerCase());
+  });
+
   return (
     <>
       <Header />
       <Container>
         <Articles>
           <TitleFilter>Статьи</TitleFilter>
-          {resultPosts ? resultPosts : <span>Пока что постов нет...</span>}
+
+          {
+            searchValue.length > 0 ? (
+              filterPosts.map((post: Post) => {
+                const text = post.text.slice(0, 100) + "...";
+                const date = new Date(post.date).toLocaleDateString();
+
+                if (!post.banner) {
+                  return (
+                    <ArticleBriefly
+                      onClick={() => navigate(`/api/posts/${post._id}`)}
+                      title={post.title}
+                      text={text}
+                      date={date}
+                      key={post._id}
+                    />
+                  );
+                }
+
+                return (
+                  <ArticleBriefly
+                    onClick={() => navigate(`/api/posts/${post._id}`)}
+                    banner={`http://localhost:3000/${post.banner}`}
+                    title={post.title}
+                    text={text}
+                    date={date}
+                    key={post._id}
+                  />
+                );
+              })
+            ) : (
+              resultPosts && resultPosts
+            )
+          }
+
+          {!resultPosts && <span>Пока что постов нет...</span>}
           {loading && <Loader />}
         </Articles>
         <Sidebar />

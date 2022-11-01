@@ -19,6 +19,7 @@ const SidebarStyled = styled.div`
 function Sidebar() {
   const dispatch = useAppDispatch();
   const searchValue = useAppSelector((state) => state.search.searchValue);
+
   const changeSearchHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     dispatch(changeValue(event.target.value));
   }
