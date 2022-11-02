@@ -153,11 +153,11 @@ function Profile() {
                 );
               })
             ) : (
-              resultPosts && resultPosts
+              resultPosts && resultPosts.reverse()
             )
           }
           
-        {!resultPosts && <span>Пока что постов нет...</span>}
+        {resultPosts.length === 0 && <span>Пока что постов нет...</span>}
         {loading && <Loader />}
       </Articles>
       <ScrollBtn />

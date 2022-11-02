@@ -3,6 +3,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 interface InputsValue {
   title: string;
   text: string;
+  tag: string;
 }
 
 interface InitialState {
@@ -12,7 +13,8 @@ interface InitialState {
 const initialState: InitialState = {
   inputsValue: {
     title: "",
-    text: ""
+    text: "",
+    tag: ""
   }
 }
 

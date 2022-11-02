@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from "styled-components";
+import { RegularExpressionLiteral } from 'typescript';
 
 const Wrapper = styled.input`
   width: 100%;
@@ -37,7 +38,7 @@ interface FormInputProps {
   placeholder: string;
   name?: string,
   onChange?: React.ChangeEventHandler,
-  value?: string;
+  value?: string | string[];
   className?: string;
 }
 

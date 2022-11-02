@@ -88,6 +88,7 @@ function AddArticle() {
     try {
       const title = inputsValue.title;
       const text = inputsValue.text;
+      const tag = inputsValue.tag;
 
       const formData = new FormData();
       if (banner) {
@@ -95,6 +96,7 @@ function AddArticle() {
       }
       formData.append("title", title);
       formData.append("text", text);
+      formData.append("tags", tag);
 
       await axios
         .post("/api/posts/newPost", formData, {
@@ -107,7 +109,7 @@ function AddArticle() {
           const errors = err.response.data.errors;
 
           setInputsErrors(errors);
-          dispatch(changeInputs({title: "", text: ""}));
+          dispatch(changeInputs({title: "", text: "", tag: ""}));
         });
     } catch (err) {
       console.log(err);
@@ -167,6 +169,13 @@ function AddArticle() {
           minHeight={"385px"}
           placeholder={errorsMsg.text === undefined ? "Текст" : errorsMsg.text}
           name="text"
+        />
+        <FormInput
+          onChange={changeHandler}
+          value={inputsValue.tag}
+          type="text"
+          placeholder={"Тег (необязательно). Ввести только одно слово."}
+          name="tag"
         />
         <FormSubmit onClick={formHandler} type="submit" title="Сохранить" />
       </Form>
