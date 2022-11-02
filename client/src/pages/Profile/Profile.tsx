@@ -8,17 +8,22 @@ import Loader from '../../components/Loader/Loader';
 import ScrollBtn from '../../components/ScrollBtn/ScrollBtn';
 import Search from '../../components/Search/Search';
 import { AuthContext } from '../../context/auth.context';
+import { useAppDispatch, useAppSelector } from '../../store/Hooks';
+import { changeValue } from '../../store/SearchSlice';
 import { Articles } from '../Main/Main';
 
 function Profile() {
+  const [allPosts, setAllPosts] = React.useState<any>([]);
   const [posts, setPosts] = React.useState<any>([]);
   const [loading, setLoading] = React.useState<boolean>(false);
   const [currentPage, setCurrentPage] = React.useState<number>(0);
   const [fetching, setFetching] = React.useState<boolean>(true);
   const [totalCount, setTotalCount] = React.useState<number>(0);
+  const searchValue = useAppSelector((state) => state.search.searchValue);
   const limitCount = 3;
   const navigate = useNavigate();
   const auth = React.useContext(AuthContext);
+  const dispatch = useAppDispatch();
 
   const scrollHandler = React.useCallback(
     (e: any) => {
@@ -33,6 +38,10 @@ function Profile() {
     },
     [posts.length, totalCount]
   );
+
+  const changeSearchHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch(changeValue(event.target.value));
+  }
 
   React.useEffect(() => {
     if(fetching) {
@@ -52,6 +61,14 @@ function Profile() {
       .finally(() => setFetching(false));
     }
   }, [auth.token, fetching]);
+
+  React.useEffect(() => {
+    axios.get("/api/posts/userPosts", {
+      headers: {
+        Authorization: `Bearer ${auth.token}`
+      }
+    }).then((res) => setAllPosts(res.data.posts));
+  }, []);
 
   React.useEffect(() => {
     document.addEventListener("scroll", scrollHandler);
@@ -96,16 +113,51 @@ function Profile() {
     );
   });
 
+  const filterPosts = allPosts.filter((post: Post) => {
+    return post.title.toLowerCase().includes(searchValue.toLowerCase());
+  }); 
+
   return (
     <>
       <Header />
       <Articles>
         <TitleFilter>Мои статьи</TitleFilter>
-        <Search width={"230px"} />
+        <Search onChange={changeSearchHandler} value={searchValue} width={"230px"} />
         {
-          resultPosts.length > 0 ? resultPosts : <span>У вас нет постов...</span>
-        }
+            searchValue.length > 0 ? (
+              filterPosts.map((post: Post) => {
+                const text = post.text.slice(0, 100) + "...";
+                const date = new Date(post.date).toLocaleDateString();
 
+                if (!post.banner) {
+                  return (
+                    <ArticleBriefly
+                      onClick={() => navigate(`/api/posts/${post._id}`)}
+                      title={post.title}
+                      text={text}
+                      date={date}
+                      key={post._id}
+                    />
+                  );
+                }
+
+                return (
+                  <ArticleBriefly
+                    onClick={() => navigate(`/api/posts/${post._id}`)}
+                    banner={`http://localhost:3000/${post.banner}`}
+                    title={post.title}
+                    text={text}
+                    date={date}
+                    key={post._id}
+                  />
+                );
+              })
+            ) : (
+              resultPosts && resultPosts
+            )
+          }
+          
+        {!resultPosts && <span>Пока что постов нет...</span>}
         {loading && <Loader />}
       </Articles>
       <ScrollBtn />
