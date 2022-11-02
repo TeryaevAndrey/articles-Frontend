@@ -15,14 +15,54 @@ const Title = styled.span`
   text-align: center;
 `;
 
-function Filters() {
+const FiltersStyled = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 15px;
+  margin-top: 15px;
+  max-height: 500px;
+`;
+
+interface FiltersProps {
+  posts: [];
+}
+
+interface Post {
+  _id: string;
+  banner?: string;
+  title: string;
+  text: string;
+  date: string;
+  tag: string;
+}
+
+function Filters({posts}: FiltersProps) {
+  const filters: string[] = [];
+
+  posts.forEach((post: Post) => {
+    if(post.tag.length !== 0) {
+      filters.push(post.tag);
+    }
+  });
+
+  const filtersWithoutDublicate = Array.from(new Set(filters));
+
+  const resultFilters = filtersWithoutDublicate.map((filter) => {
+    return <Filter title={filter} key={filter} />
+  });
+
   return (
     <Wrapper>
-      <Title>Фильтровать по:</Title>
-      <Filter title="Наука" />
-      <Filter title="Программирование" />
-      <Filter title="Искусство" />
-      <Filter title="Новости" />
+      {
+        filters.length > 0 && <Title>Фильтровать по:</Title>
+      }
+      
+      <FiltersStyled>
+        {
+          resultFilters
+        }
+      </FiltersStyled>
     </Wrapper>
   );
 }

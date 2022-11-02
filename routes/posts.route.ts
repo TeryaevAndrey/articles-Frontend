@@ -17,7 +17,7 @@ router.post(
   ],
   async (req, res) => {
     try {
-      const { title, text, tags } = req.body;
+      const { title, text, tag } = req.body;
       const file = req.file;
       const errors = validationResult(req);
 
@@ -30,7 +30,7 @@ router.post(
           banner: file.filename,
           title,
           text,
-          tags,
+          tag,
           owner: req.user.userId,
         });
 
@@ -39,7 +39,7 @@ router.post(
         const post = new Post({
           title,
           text,
-          tags,
+          tag,
           owner: req.user.userId,
         });
   

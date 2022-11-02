@@ -6,7 +6,7 @@ const schema = new Schema({
   text: {type: String, required: true}, 
   date: {type: Date, default: Date.now},
   likes: {type: Number, default: 0},
-  tag: {type: String, default: [], required: false},
+  tag: {type: String, default: "", required: false},
   owner: {type: Types.ObjectId, ref: "User"}
 });
 

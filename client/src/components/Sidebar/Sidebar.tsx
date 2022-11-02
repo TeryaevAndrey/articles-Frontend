@@ -16,7 +16,11 @@ const SidebarStyled = styled.div`
   flex-direction: column;
 `;
 
-function Sidebar() {
+interface SidebarProps {
+  posts: [];
+}
+
+function Sidebar({posts}: SidebarProps) {
   const dispatch = useAppDispatch();
   const searchValue = useAppSelector((state) => state.search.searchValue);
 
@@ -27,7 +31,7 @@ function Sidebar() {
   return (
     <SidebarStyled>
       <Search onChange={changeSearchHandler} value={searchValue} width={"100%"} />
-      <Filters />
+      <Filters posts={posts} />
     </SidebarStyled>
   );
 }

@@ -162,7 +162,7 @@ function Main() {
           {resultPosts.length === 0 && <span>Пока что постов нет...</span>}
           {loading && <Loader />}
         </Articles>
-        <Sidebar />
+        <Sidebar posts={allPosts} />
         <ScrollBtn />
       </Container>
     </>

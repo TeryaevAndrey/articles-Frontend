@@ -96,7 +96,7 @@ function AddArticle() {
       }
       formData.append("title", title);
       formData.append("text", text);
-      formData.append("tags", tag);
+      formData.append("tag", tag);
 
       await axios
         .post("/api/posts/newPost", formData, {
