@@ -16,15 +16,21 @@ const FilterBtn = styled.button`
   &:hover {
     border-bottom: 1px solid #4D3D3D;
   }
+
+  &.active {
+    border-bottom: 1px solid #4D3D3D;
+  }
 `;
 
 interface FilterProps {
   title: string;
+  onClick: React.MouseEventHandler;
+  className: string;
 }
 
-function Filter({title}: FilterProps) {
+function Filter({title, onClick, className}: FilterProps) {
   return (
-    <FilterBtn>
+    <FilterBtn onClick={onClick} className={className}>
       {title}
     </FilterBtn>
   );

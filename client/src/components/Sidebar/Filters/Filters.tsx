@@ -39,6 +39,11 @@ interface Post {
 
 function Filters({posts}: FiltersProps) {
   const filters: string[] = [];
+  const [activeFilter, setActiveFilter] = React.useState<number | undefined>(undefined);
+
+  const handleFilter = (index: number) => {
+    setActiveFilter(index);
+  }
 
   posts.forEach((post: Post) => {
     if(post.tag.length !== 0) {
@@ -48,8 +53,8 @@ function Filters({posts}: FiltersProps) {
 
   const filtersWithoutDublicate = Array.from(new Set(filters));
 
-  const resultFilters = filtersWithoutDublicate.map((filter) => {
-    return <Filter title={filter} key={filter} />
+  const resultFilters = filtersWithoutDublicate.map((filter, index) => {
+    return <Filter className={activeFilter === index ? "active" : ""} onClick={() => handleFilter(index)} title={filter} key={filter} />
   });
 
   return (

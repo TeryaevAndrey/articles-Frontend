@@ -91,4 +91,15 @@ router.get("/:id", async (req, res) => {
   }
 });
 
+router.get("/tag", async(req, res) => {
+  try {
+    const tag = req.query.tag;
+    const posts = await Post.find({tag: tag});
+
+    res.json({posts});
+  } catch(err) {
+    res.status(500).json({message: "По этому тегу ничего не найдено"});
+  }
+});
+
 module.exports = router;

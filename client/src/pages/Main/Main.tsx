@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { EventHandler } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { TitleFilter } from "../../App";
@@ -8,7 +8,6 @@ import Header from "../../components/Header/Header";
 import Loader from "../../components/Loader/Loader";
 import ScrollBtn from "../../components/ScrollBtn/ScrollBtn";
 import Sidebar from "../../components/Sidebar/Sidebar";
-import BannerImg from "../../img/bannerExample.svg";
 import { useAppSelector } from "../../store/Hooks";
 
 const Container = styled.div`

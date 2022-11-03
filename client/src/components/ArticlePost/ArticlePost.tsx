@@ -11,6 +11,14 @@ const Wrapper = styled.div`
   &:hover {
     transform: scale(1.015);
   }
+
+  &.static {
+    cursor: default;
+  }
+
+  &.static:hover {
+    transform: none;
+  }
 `;
 
 const Banner = styled.img`
@@ -66,11 +74,12 @@ interface ArticleBrieflyProps {
   title: string;
   text: string;
   date: string;
+  className?: string;
 }
 
-function ArticleBriefly({onClick, likeClick, banner, title, text, date }: ArticleBrieflyProps) {
+function ArticleBriefly({onClick, className, banner, title, text, date }: ArticleBrieflyProps) {
   return (
-    <Wrapper onClick={onClick}>
+    <Wrapper onClick={onClick} className={className}>
       {
         banner && (
           <Banner src={banner} alt={title} />

@@ -8,8 +8,9 @@ import Loader from '../../components/Loader/Loader';
 
 const Wrapper = styled.div`
   position: relative;
-  max-width: 705px;
-  min-height: 100vh;
+  width: 705px;
+  min-height: 80vh;
+  height: 100%;
   margin: 0 auto;
 `;
 
@@ -28,27 +29,27 @@ function Post() {
     text: "",
     date: "",
   });
+  const [date, setDate] = React.useState<string>("");
 
   React.useEffect(() => {
     setLoading(true);
     axios.get(`/api/posts/${id}`).then((res) => {
       setPostInfo(res.data);
+      setDate(new Date(res.data.date).toLocaleDateString());
       setLoading(false);
     }).catch(() => setLoading(false));
   }, []);
-
-  const date = new Date(postInfo.date).toLocaleDateString();
 
   return (
     <>
     <Header />
     <Wrapper>
-      {loading && <Loader style={{position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)"}} />}
+      {loading && <Loader />}
       {
         postInfo.banner ? (
-          <ArticleBriefly banner={`http://localhost:3000/${postInfo.banner}`} title={postInfo.title} text={postInfo.text} date={date} />
+          <ArticleBriefly className={"static"} banner={`http://localhost:3000/${postInfo.banner}`} title={postInfo.title} text={postInfo.text} date={date} />
         ) : (
-          <ArticleBriefly title={postInfo.title} text={postInfo.text} date={date} />
+          <ArticleBriefly className={"static"} title={postInfo.title} text={postInfo.text} date={date} />
         )
       }
     </Wrapper>
