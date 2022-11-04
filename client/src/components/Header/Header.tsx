@@ -33,19 +33,23 @@ export const WrapperBurgerMenu = styled.div`
   gap: 35px;
 
   @media(max-width: 650px) {
+    display: none;
     flex-direction: column;
     position: absolute;
-    right: -100%;
+    right: -15px;
     top: 100%;
-    height: 100%;
+    height: max-content;
     background-color: #fff;
     border-radius: 20px 0 0 20px;
     padding: 20px;
     min-height: 150px;
     transition: all 0.2s ease;
+    opacity: 0;
+    z-index: 1000;
 
     &.active {
-      right: -15px;
+      display: flex;
+      opacity: 1;
     }
   }
 `;

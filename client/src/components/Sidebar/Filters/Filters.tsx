@@ -22,7 +22,12 @@ const FiltersStyled = styled.div`
   width: 100%;
   gap: 15px;
   margin-top: 15px;
-  max-height: 500px;
+  max-height: 350px;
+  overflow-y: auto;
+
+  @media(max-width: 890px) {
+    max-height: 200px;
+  }
 `;
 
 interface FiltersProps {

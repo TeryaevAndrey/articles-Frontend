@@ -8,13 +8,7 @@ import Loader from '../../components/Loader/Loader';
 import ScrollBtn from '../../components/ScrollBtn/ScrollBtn';
 import Sidebar from '../../components/Sidebar/Sidebar';
 import { useAppSelector } from '../../store/Hooks';
-import { Articles } from '../Main/Main';
-
-const Container = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-`;
+import { Articles, Container } from '../Main/Main';
 
 function PostByTag() {
   const navigate = useNavigate();

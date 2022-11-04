@@ -10,10 +10,14 @@ import ScrollBtn from "../../components/ScrollBtn/ScrollBtn";
 import Sidebar from "../../components/Sidebar/Sidebar";
 import { useAppSelector } from "../../store/Hooks";
 
-const Container = styled.div`
+export const Container = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
+
+  @media(max-width: 890px) {
+    flex-direction: column-reverse;
+  }
 `;
 
 export const Articles = styled.div`
@@ -23,6 +27,10 @@ export const Articles = styled.div`
   flex-direction: column;
   gap: 35px;
   padding-bottom: 35px;
+
+  @media(max-width: 890px) {
+    width: 100%;
+  }
 `;
 
 function Main() {

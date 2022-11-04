@@ -23,7 +23,7 @@ const Wrapper = styled.div`
 
 const Banner = styled.img`
   width: 100%;
-  height: 405px;
+  height: auto;
   object-fit: cover;
   margin-bottom: 15px;
   border-radius: 20px;
@@ -32,12 +32,20 @@ const Banner = styled.img`
 const Title = styled.h2`
   font-size: 35px;
   font-weight: 700;
+
+  @media(max-width: 480px) {
+    font-size: 24px;
+  }
 `;
 
 const Text = styled.p`
   font-size: 25px;
   line-height: 30px;
   margin-top: 15px;
+
+  @media(max-width: 480px) {
+    font-size: 18px;
+  }
 `;
 
 const Footer = styled.div`

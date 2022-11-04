@@ -12,6 +12,10 @@ const Wrapper = styled.div`
   min-height: 80vh;
   height: 100%;
   margin: 0 auto;
+
+  @media(max-width: 800px) {
+    width: 100%;
+  }
 `;
 
 interface PostProps {

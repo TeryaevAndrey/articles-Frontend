@@ -26,6 +26,10 @@ const Title = styled.h2`
   font-size: 50px;
   font-weight: 600;
   text-align: center;
+
+  @media(max-width: 480px) {
+    font-size: 30px;
+  }
 `;
 
 const Form = styled.form`

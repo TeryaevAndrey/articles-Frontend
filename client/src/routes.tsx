@@ -29,7 +29,7 @@ export function useRoutes(isAuth: boolean) {
         <Route path="/login" element={<Auth />} />
         <Route path="/reg" element={<Reg />} />
         <Route path="/api/posts/:id" element={<Post />} />
-        <Route path="/postsByTag" element={<PostByTag />} />
+        <Route path="/postsByTag/:tag" element={<PostByTag />} />
         <Route path="*" element={<Auth />} />
       </Routes>
   );
