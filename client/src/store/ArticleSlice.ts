@@ -15,7 +15,7 @@ const initialState: InitialState = {
     title: "",
     text: "",
     tag: ""
-  }
+  },
 }
 
 export const ArticleSlice = createSlice({

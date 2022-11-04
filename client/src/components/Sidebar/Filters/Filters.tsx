@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled from "styled-components";
 import Filter from './Filter/Filter';
 
@@ -40,9 +41,12 @@ interface Post {
 function Filters({posts}: FiltersProps) {
   const filters: string[] = [];
   const [activeFilter, setActiveFilter] = React.useState<number | undefined>(undefined);
+  const navigate = useNavigate();
 
-  const handleFilter = (index: number) => {
+  const handleFilter = (index: number, tag: string) => {
     setActiveFilter(index);
+
+    navigate(`/postsByTag/${tag}`);
   }
 
   posts.forEach((post: Post) => {
@@ -54,7 +58,7 @@ function Filters({posts}: FiltersProps) {
   const filtersWithoutDublicate = Array.from(new Set(filters));
 
   const resultFilters = filtersWithoutDublicate.map((filter, index) => {
-    return <Filter className={activeFilter === index ? "active" : ""} onClick={() => handleFilter(index)} title={filter} key={filter} />
+    return <Filter className={activeFilter === index ? "active" : ""} onClick={() => handleFilter(index, filter)} title={filter} key={filter} />
   });
 
   return (

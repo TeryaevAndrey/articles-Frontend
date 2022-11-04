@@ -81,17 +81,7 @@ router.get("/userPosts", auth, async (req, res) => {
   }
 });
 
-router.get("/:id", async (req, res) => {
-  try {
-    const post = await Post.findById(req.params.id);
-
-    res.json(post);
-  } catch (err) {
-    res.status(500).json({ message: "Не удалось загрузить статью" });
-  }
-});
-
-router.get("/tag", async(req, res) => {
+router.get("/postsByTag", async(req, res) => {
   try {
     const tag = req.query.tag;
     const posts = await Post.find({tag: tag});
@@ -99,6 +89,16 @@ router.get("/tag", async(req, res) => {
     res.json({posts});
   } catch(err) {
     res.status(500).json({message: "По этому тегу ничего не найдено"});
+  }
+});
+
+router.get("/:id", async (req, res) => {
+  try {
+    const post = await Post.findById(req.params.id);
+
+    res.json(post);
+  } catch (err) {
+    res.status(500).json({ message: "Не удалось загрузить статью" });
   }
 });
 

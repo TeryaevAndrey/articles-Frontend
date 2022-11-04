@@ -11,7 +11,7 @@ const ScrollBtnImg = styled.img`
 
 function ScrollBtn() {
   return (
-    <ScrollBtnImg src={ScrollImg} alt="scroll" />
+    <ScrollBtnImg onClick={() => window.scrollTo({top: 0, behavior: "smooth"})} src={ScrollImg} alt="scroll" />
   );
 }
 
