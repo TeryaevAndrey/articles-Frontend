@@ -97,6 +97,8 @@ function Profile() {
           text={text}
           date={date}
           key={post._id}
+          isAuth={true}
+          _id={post._id}
         />
       );
     }
@@ -109,6 +111,8 @@ function Profile() {
         text={text}
         date={date}
         key={post._id}
+        isAuth={true}
+        _id={post._id}
       />
     );
   });
