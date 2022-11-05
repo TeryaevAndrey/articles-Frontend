@@ -12,7 +12,6 @@ import { changeBanner, changeInputs } from '../../store/EditSlice';
 import { useAppDispatch, useAppSelector } from '../../store/Hooks';
 import { Banner, Input, Label, Wrapper } from '../AddArticle/AddArticle';
 
-
 const Form = styled.form`
   display: flex;
   flex-direction: column;
@@ -22,8 +21,6 @@ const Form = styled.form`
   margin: 0 auto;
   gap: 20px;
 `;
-
-
 
 function Edit() {
   const [post, setPost] = React.useState<any>([]);

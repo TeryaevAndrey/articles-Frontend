@@ -46,6 +46,7 @@ export const Label = styled.label`
 
 export const Banner = styled.img`
   width: 100%;
+  border-radius: 20px;
 `;
 
 function AddArticle() {
