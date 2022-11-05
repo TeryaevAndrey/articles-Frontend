@@ -5,6 +5,7 @@ import Search from '../Search/Search';
 import { useAppDispatch, useAppSelector } from '../../store/Hooks';
 import { changeValue } from '../../store/SearchSlice';
 import ArrowBottomImg from "../../img/arrow-bottom.svg";
+import { Post } from '../../interfaces';
 
 const SidebarStyled = styled.div`
   max-width: 385px;
@@ -34,7 +35,7 @@ const FilterBtnImg = styled.img`
 `;
 
 interface SidebarProps {
-  posts: [];
+  posts: Post[];
 }
 
 function Sidebar({posts}: SidebarProps) {

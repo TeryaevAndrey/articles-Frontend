@@ -1,5 +1,5 @@
 import axios from "axios";
-import React from "react";
+import React, { ReactComponentElement } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { TitleFilter } from "../../App";
@@ -8,6 +8,7 @@ import Header from "../../components/Header/Header";
 import Loader from "../../components/Loader/Loader";
 import ScrollBtn from "../../components/ScrollBtn/ScrollBtn";
 import Sidebar from "../../components/Sidebar/Sidebar";
+import { Post } from "../../interfaces";
 import { useAppSelector } from "../../store/Hooks";
 
 export const Container = styled.div`
@@ -35,8 +36,8 @@ export const Articles = styled.div`
 
 function Main() {
   const searchValue = useAppSelector((state) => state.search.searchValue);
-  const [allPosts, setAllPosts] = React.useState<any>([]);
-  const [posts, setPosts] = React.useState<any>([]);
+  const [allPosts, setAllPosts] = React.useState<Post[]>([]);
+  const [posts, setPosts] = React.useState<Post[]>([]);
   const limitCount: number = 3;
   const [currentPage, setCurrentPage] = React.useState<number>(0);
   const [fetching, setFetching] = React.useState<boolean>(true);
@@ -84,14 +85,6 @@ function Main() {
   React.useEffect(() => {
     axios.get("/api/posts").then((res) => setAllPosts(res.data.posts));
   }, []);
-
-  interface Post {
-    _id: string;
-    banner?: string;
-    title: string;
-    text: string;
-    date: string;
-  }
 
   const resultPosts = posts.map((post: Post) => {
     const text = post.text.slice(0, 100) + "...";

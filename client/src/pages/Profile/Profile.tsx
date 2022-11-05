@@ -1,26 +1,27 @@
-import axios from 'axios';
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import { TitleFilter } from '../../App';
-import ArticleBriefly from '../../components/ArticlePost/ArticlePost';
-import Header from '../../components/Header/Header';
-import Loader from '../../components/Loader/Loader';
-import ScrollBtn from '../../components/ScrollBtn/ScrollBtn';
-import Search from '../../components/Search/Search';
-import { AuthContext } from '../../context/auth.context';
-import { useAppDispatch, useAppSelector } from '../../store/Hooks';
-import { changeValue } from '../../store/SearchSlice';
-import { Articles } from '../Main/Main';
+import axios from "axios";
+import React from "react";
+import { useNavigate } from "react-router-dom";
+import { TitleFilter } from "../../App";
+import ArticleBriefly from "../../components/ArticlePost/ArticlePost";
+import Header from "../../components/Header/Header";
+import Loader from "../../components/Loader/Loader";
+import ScrollBtn from "../../components/ScrollBtn/ScrollBtn";
+import Search from "../../components/Search/Search";
+import { AuthContext } from "../../context/auth.context";
+import { Post } from "../../interfaces";
+import { useAppDispatch, useAppSelector } from "../../store/Hooks";
+import { changeValue } from "../../store/SearchSlice";
+import { Articles } from "../Main/Main";
 
 function Profile() {
-  const [allPosts, setAllPosts] = React.useState<any>([]);
-  const [posts, setPosts] = React.useState<any>([]);
+  const [allPosts, setAllPosts] = React.useState<Post[]>([]);
+  const [posts, setPosts] = React.useState<Post[]>([]);
   const [loading, setLoading] = React.useState<boolean>(false);
   const [currentPage, setCurrentPage] = React.useState<number>(0);
   const [fetching, setFetching] = React.useState<boolean>(true);
   const [totalCount, setTotalCount] = React.useState<number>(0);
   const searchValue = useAppSelector((state) => state.search.searchValue);
-  const limitCount = 3;
+  const limitCount: number = 3;
   const navigate = useNavigate();
   const auth = React.useContext(AuthContext);
   const dispatch = useAppDispatch();
@@ -41,33 +42,40 @@ function Profile() {
 
   const changeSearchHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     dispatch(changeValue(event.target.value));
-  }
+  };
 
   React.useEffect(() => {
-    if(fetching) {
+    if (fetching) {
       setLoading(true);
 
-    axios.get(`/api/posts/userPosts?limit=${limitCount}&page=${currentPage}`, {
-      headers: {
-        Authorization: `Bearer ${auth.token}`
-      }
-    }).then((res) => {
-        setTotalCount(res.data.total);
-        setPosts([...posts, ...res.data.posts]);
-        setCurrentPage((prev) => prev + 1);
+      axios
+        .get(`/api/posts/userPosts?limit=${limitCount}&page=${currentPage}`, {
+          headers: {
+            Authorization: `Bearer ${auth.token}`,
+          },
+        })
+        .then((res) => {
+          setTotalCount(res.data.total);
+          setPosts([...posts, ...res.data.posts]);
+          setCurrentPage((prev) => prev + 1);
 
-        setLoading(false);
-      })
-      .finally(() => setFetching(false));
+          setLoading(false);
+        })
+        .finally(() => setFetching(false));
     }
   }, [auth.token, fetching]);
 
   React.useEffect(() => {
-    axios.get("/api/posts/userPosts", {
-      headers: {
-        Authorization: `Bearer ${auth.token}`
-      }
-    }).then((res) => setAllPosts(res.data.posts));
+    axios
+      .get("/api/posts/userPosts", {
+        headers: {
+          Authorization: `Bearer ${auth.token}`,
+        },
+      })
+      .then((res) => setAllPosts(res.data.posts))
+      .catch((err) =>
+        alert(err.response.data.message + " Перезайдите в аккаунт")
+      );
   }, []);
 
   React.useEffect(() => {
@@ -77,14 +85,6 @@ function Profile() {
     };
   }, [scrollHandler]);
 
-  interface Post {
-    _id: string;
-    banner?: string;
-    title: string;
-    text: string;
-    date: string;
-  }
-  
   const resultPosts = posts.map((post: Post) => {
     const text = post.text.slice(0, 100) + "...";
     const date = new Date(post.date).toLocaleDateString();
@@ -121,50 +121,43 @@ function Profile() {
 
   const filterPosts = allPosts.filter((post: Post) => {
     return post.title.toLowerCase().includes(searchValue.toLowerCase());
-  }); 
+  });
 
   const deleteHandler = (event: React.MouseEvent, id: string | undefined) => {
     event.stopPropagation();
 
-    axios.delete(`/api/posts/${id}`, {
-      headers: {
-        Authorization: `Bearer ${auth.token}`,
-        "Content-Type": "multipart/form-data",
-      },
-    }).then((res) => alert(res.data.message)).catch((err) => alert(err.response.data.message));
+    axios
+      .delete(`/api/posts/${id}`, {
+        headers: {
+          Authorization: `Bearer ${auth.token}`,
+          "Content-Type": "multipart/form-data",
+        },
+      })
+      .then((res) => alert(res.data.message))
+      .catch((err) => alert(err.response.data.message));
 
-    setPosts((prev: []) => prev.filter((post: Post) => post._id !== id))
-  }
+    setPosts((prev: Post[]) => prev.filter((post: Post) => post._id !== id));
+  };
 
   return (
     <>
       <Header />
       <Articles>
         <TitleFilter>Мои статьи</TitleFilter>
-        <Search onChange={changeSearchHandler} value={searchValue} width={"230px"} />
-        {
-            searchValue.length > 0 ? (
-              filterPosts.map((post: Post) => {
-                const text = post.text.slice(0, 100) + "...";
-                const date = new Date(post.date).toLocaleDateString();
+        <Search
+          onChange={changeSearchHandler}
+          value={searchValue}
+          width={"230px"}
+        />
+        {searchValue.length > 0
+          ? filterPosts.map((post: Post) => {
+              const text = post.text.slice(0, 100) + "...";
+              const date = new Date(post.date).toLocaleDateString();
 
-                if (!post.banner) {
-                  return (
-                    <ArticleBriefly
-                      onClick={() => navigate(`/api/posts/${post._id}`)}
-                      title={post.title}
-                      text={text}
-                      date={date}
-                      key={post._id}
-                      deleteHandler={(event) => deleteHandler(event, post._id)}
-                    />
-                  );
-                }
-
+              if (!post.banner) {
                 return (
                   <ArticleBriefly
                     onClick={() => navigate(`/api/posts/${post._id}`)}
-                    banner={`http://localhost:3000/${post.banner}`}
                     title={post.title}
                     text={text}
                     date={date}
@@ -172,12 +165,22 @@ function Profile() {
                     deleteHandler={(event) => deleteHandler(event, post._id)}
                   />
                 );
-              })
-            ) : (
-              resultPosts && resultPosts
-            )
-          }
-          
+              }
+
+              return (
+                <ArticleBriefly
+                  onClick={() => navigate(`/api/posts/${post._id}`)}
+                  banner={`http://localhost:3000/${post.banner}`}
+                  title={post.title}
+                  text={text}
+                  date={date}
+                  key={post._id}
+                  deleteHandler={(event) => deleteHandler(event, post._id)}
+                />
+              );
+            })
+          : resultPosts && resultPosts}
+
         {resultPosts.length === 0 && <span>Пока что постов нет...</span>}
         {loading && <Loader />}
       </Articles>

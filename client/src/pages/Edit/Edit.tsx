@@ -8,6 +8,7 @@ import FormSubmit from '../../components/Forms/FormSubmit/FormSubmit';
 import Textarea from '../../components/Forms/Textarea/Textarea';
 import Header from '../../components/Header/Header';
 import { useAuth } from '../../hooks/auth.hook';
+import { Post } from '../../interfaces';
 import { changeBanner, changeInputs } from '../../store/EditSlice';
 import { useAppDispatch, useAppSelector } from '../../store/Hooks';
 import { Banner, Input, Label, Wrapper } from '../AddArticle/AddArticle';
@@ -23,7 +24,16 @@ const Form = styled.form`
 `;
 
 function Edit() {
-  const [post, setPost] = React.useState<any>([]);
+  const [post, setPost] = React.useState<Post>({
+    _id: "",
+    banner: undefined,
+    title: "",
+    text: "",
+    likes: 0,
+    tag: "",
+    owner: "",
+    date: "",
+  });
   const [banner, setBanner] = React.useState<undefined | File | string>(undefined);
   const inputsValue = useAppSelector((state) => state.edit.inputsValue);
   const dispatch = useAppDispatch();

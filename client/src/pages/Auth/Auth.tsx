@@ -48,7 +48,7 @@ function Auth() {
   const auth = React.useContext(AuthContext);
   const navigate = useNavigate();
 
-  const changeHandler = (event: any) => {
+  const changeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     dispatch(changeInputs({
       ...inputsValue,
       [event.target.name]: event.target.value

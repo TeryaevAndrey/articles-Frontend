@@ -44,7 +44,7 @@ function Reg() {
   const inputsValue = useAppSelector((state) => state.reg.inputsValue);
   const message = useAppSelector((state) => state.main.message);
 
-  const changeHandler = (event: any) => {
+  const changeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     const result = {
       ...inputsValue,
       [event.target.name]: event.target.value,
@@ -82,6 +82,8 @@ function Reg() {
         dispatch(changeMessage(data.message));
       
     } catch(err: any) {
+
+      console.log(err);
       dispatch(changeMessage(err.message));
 
       dispatch(changeInputs({

@@ -31,7 +31,7 @@ const FiltersStyled = styled.div`
 `;
 
 interface FiltersProps {
-  posts: [];
+  posts: Post[];
 }
 
 interface Post {

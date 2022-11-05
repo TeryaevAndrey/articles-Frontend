@@ -1,12 +1,12 @@
 import axios from 'axios';
 import React from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import styled from "styled-components";
 import ArticleBriefly from '../../components/ArticlePost/ArticlePost';
 import Header from '../../components/Header/Header';
 import Loader from '../../components/Loader/Loader';
 import ScrollBtn from '../../components/ScrollBtn/ScrollBtn';
 import Sidebar from '../../components/Sidebar/Sidebar';
+import { Post } from '../../interfaces';
 import { useAppSelector } from '../../store/Hooks';
 import { Articles, Container } from '../Main/Main';
 
@@ -14,8 +14,8 @@ function PostByTag() {
   const navigate = useNavigate();
   const searchValue = useAppSelector((state) => state.search.searchValue);
   const {tag} = useParams();
-  const [allPosts, setAllPosts] = React.useState<any>([]);
-  const [posts, setPosts] = React.useState<any>([]);
+  const [allPosts, setAllPosts] = React.useState<Post[]>([]);
+  const [posts, setPosts] = React.useState<Post[]>([]);
   const [loading, setLoading] = React.useState<boolean>(false);
 
   React.useEffect(() => {
@@ -27,14 +27,6 @@ function PostByTag() {
   React.useEffect(() => {
     axios.get(`/api/posts`).then((res) => setAllPosts(res.data.posts));
   }, []);
-
-  interface Post {
-    _id: string;
-    banner?: string;
-    title: string;
-    text: string;
-    date: string;
-  }
 
   const filterPosts = posts.filter((post: Post) => {
     return post.title.toLowerCase().includes(searchValue.toLowerCase());
