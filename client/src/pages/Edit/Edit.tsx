@@ -84,7 +84,9 @@ function Edit() {
             "Content-Type": "multipart/form-data",
           },
         })
+        .then((res) => alert(res.data.message))
         .catch((err) => {
+          alert(err.response.data.message);
           dispatch(changeBanner(undefined));
           dispatch(changeInputs({title: "", text: "", tag: ""}));
         });

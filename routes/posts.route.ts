@@ -149,4 +149,18 @@ router.patch(
   }
 );
 
+router.delete("/:id", auth, async(req, res) => {
+  try {
+    const id = req.params.id;
+
+    Post.deleteOne({_id: id}, function(err, result){
+      if(err) return res.status(500).json({message: "Не удалось удалить статью"});
+       
+      res.json({message: "Пост удалён"});
+    });
+  } catch(err) {
+    res.status(500).json({message: "Не удалось удалить"});
+  }
+});
+  
 module.exports = router;

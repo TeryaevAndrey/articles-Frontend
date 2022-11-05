@@ -105,9 +105,10 @@ function AddArticle() {
             "Content-Type": "multipart/form-data",
           },
         })
+        .then((res) => alert(res.data.message))
         .catch((err) => {
           const errors = err.response.data.errors;
-
+          alert(err.response.data.message);
           setInputsErrors(errors);
           dispatch(changeInputs({title: "", text: "", tag: ""}));
         });

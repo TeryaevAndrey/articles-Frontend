@@ -162,7 +162,7 @@ function Main() {
                 );
               })
             ) : (
-              resultPosts && resultPosts.reverse()
+              resultPosts && resultPosts
             )
           }
 

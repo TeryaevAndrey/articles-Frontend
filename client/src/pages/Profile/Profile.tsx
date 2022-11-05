@@ -99,6 +99,7 @@ function Profile() {
           key={post._id}
           isAuth={true}
           _id={post._id}
+          deleteHandler={(event) => deleteHandler(event, post._id)}
         />
       );
     }
@@ -113,6 +114,7 @@ function Profile() {
         key={post._id}
         isAuth={true}
         _id={post._id}
+        deleteHandler={(event) => deleteHandler(event, post._id)}
       />
     );
   });
@@ -120,6 +122,19 @@ function Profile() {
   const filterPosts = allPosts.filter((post: Post) => {
     return post.title.toLowerCase().includes(searchValue.toLowerCase());
   }); 
+
+  const deleteHandler = (event: React.MouseEvent, id: string | undefined) => {
+    event.stopPropagation();
+
+    axios.delete(`/api/posts/${id}`, {
+      headers: {
+        Authorization: `Bearer ${auth.token}`,
+        "Content-Type": "multipart/form-data",
+      },
+    }).then((res) => alert(res.data.message)).catch((err) => alert(err.response.data.message));
+
+    setPosts((prev: []) => prev.filter((post: Post) => post._id !== id))
+  }
 
   return (
     <>
@@ -141,6 +156,7 @@ function Profile() {
                       text={text}
                       date={date}
                       key={post._id}
+                      deleteHandler={(event) => deleteHandler(event, post._id)}
                     />
                   );
                 }
@@ -153,11 +169,12 @@ function Profile() {
                     text={text}
                     date={date}
                     key={post._id}
+                    deleteHandler={(event) => deleteHandler(event, post._id)}
                   />
                 );
               })
             ) : (
-              resultPosts && resultPosts.reverse()
+              resultPosts && resultPosts
             )
           }
           
