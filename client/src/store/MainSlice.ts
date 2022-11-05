@@ -5,7 +5,7 @@ interface InitialState {
 }
 
 const initialState: InitialState = {
-  message: ""
+  message: "",
 };
 
 export const MainSlice = createSlice({
@@ -14,8 +14,8 @@ export const MainSlice = createSlice({
   reducers: {
     changeMessage(state, action: PayloadAction<string>) {
       state.message = action.payload;
-    }
-  }
+    },
+  },
 });
 
-export const {changeMessage} = MainSlice.actions;
+export const { changeMessage } = MainSlice.actions;

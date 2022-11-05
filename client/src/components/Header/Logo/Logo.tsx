@@ -1,7 +1,7 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import React from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { AuthContext } from '../../../context/auth.context';
+import { AuthContext } from "../../../context/auth.context";
 import LogoImg from "../../../img/logo.svg";
 
 const LogoStyled = styled.img`
@@ -13,11 +13,11 @@ const LogoStyled = styled.img`
 
 function Logo() {
   const navigate = useNavigate();
-  const {isAuth} = React.useContext(AuthContext);
+  const { isAuth } = React.useContext(AuthContext);
 
   const transferToMain = () => {
     return navigate("/");
-  }
+  };
 
   return (
     <LogoStyled onClick={transferToMain} src={LogoImg} alt="Koconta-articles" />

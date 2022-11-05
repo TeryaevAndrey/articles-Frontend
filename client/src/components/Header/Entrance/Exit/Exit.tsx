@@ -5,59 +5,59 @@ import { AuthContext } from "../../../../context/auth.context";
 import ExitImg from "../../../../img/exit.svg";
 
 const Wrapper = styled.div`
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
 `;
 
 const Icon = styled.img`
-    width: 25px;
-    height: 25px;
+  width: 25px;
+  height: 25px;
 `;
 
 const ExitWrapper = styled.div`
-    display: flex;
-    align-items: center;
-    gap: 5px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
 `;
 
 const ExitText = styled.span`
-    display: inline-block;
-    font-size: 12px;
-    color: #4D3D3D;
+  display: inline-block;
+  font-size: 12px;
+  color: #4d3d3d;
 
-    &:hover {
-        border-bottom: 1px solid #4D3D3D;
-    }
+  &:hover {
+    border-bottom: 1px solid #4d3d3d;
+  }
 `;
 
 const Name = styled.span`
-    ${ExitText}
+  ${ExitText}
 `;
 
 interface ExitProps {
-    name: string | undefined;
+  name: string | undefined;
 }
 
-function Exit({name}: ExitProps) {
-    const {logout} = React.useContext(AuthContext); 
-    const navigate = useNavigate();
+function Exit({ name }: ExitProps) {
+  const { logout } = React.useContext(AuthContext);
+  const navigate = useNavigate();
 
-    const exit = () => {
-        logout();
-        navigate("/");
-    };
+  const exit = () => {
+    logout();
+    navigate("/");
+  };
 
-    return(
-        <Wrapper>
-            <Name onClick={() => navigate("/profile")}>{name}</Name>
-            <ExitWrapper onClick={exit}>
-                <Icon src={ExitImg} alt="exit" />
-                <ExitText>Выход</ExitText>
-            </ExitWrapper>
-        </Wrapper>
-    );
+  return (
+    <Wrapper>
+      <Name onClick={() => navigate("/profile")}>{name}</Name>
+      <ExitWrapper onClick={exit}>
+        <Icon src={ExitImg} alt="exit" />
+        <ExitText>Выход</ExitText>
+      </ExitWrapper>
+    </Wrapper>
+  );
 }
 
 export default Exit;

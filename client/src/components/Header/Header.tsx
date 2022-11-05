@@ -22,7 +22,7 @@ export const Burger = styled.img`
   cursor: pointer;
   display: none;
 
-  @media(max-width: 650px) {
+  @media (max-width: 650px) {
     display: block;
   }
 `;
@@ -32,7 +32,7 @@ export const WrapperBurgerMenu = styled.div`
   align-items: center;
   gap: 35px;
 
-  @media(max-width: 650px) {
+  @media (max-width: 650px) {
     display: none;
     flex-direction: column;
     position: absolute;
@@ -56,11 +56,11 @@ export const WrapperBurgerMenu = styled.div`
 
 function Header() {
   const dispatch = useAppDispatch();
-  const stateMenu = useAppSelector(state => state.header.openMenu);
+  const stateMenu = useAppSelector((state) => state.header.openMenu);
 
   const handleBurger = () => {
     dispatch(openMenuReducer(!stateMenu));
-  }
+  };
 
   return (
     <HeaderStyled>

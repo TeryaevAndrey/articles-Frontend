@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import styled from "styled-components";
 import ScrollImg from "../../img/scroll.svg";
 
@@ -11,7 +11,11 @@ const ScrollBtnImg = styled.img`
 
 function ScrollBtn() {
   return (
-    <ScrollBtnImg onClick={() => window.scrollTo({top: 0, behavior: "smooth"})} src={ScrollImg} alt="scroll" />
+    <ScrollBtnImg
+      onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+      src={ScrollImg}
+      alt="scroll"
+    />
   );
 }
 

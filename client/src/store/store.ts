@@ -16,8 +16,8 @@ export const store = configureStore({
     article: ArticleSlice.reducer,
     search: searchSlice.reducer,
     edit: EditSlice.reducer,
-  }
+  },
 });
 
-export type RootState = ReturnType<typeof store.getState>
+export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;

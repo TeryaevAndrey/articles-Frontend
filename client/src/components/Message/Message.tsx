@@ -1,6 +1,6 @@
-import React from 'react';
+import React from "react";
 import styled from "styled-components";
-import { useAppSelector } from '../../store/Hooks';
+import { useAppSelector } from "../../store/Hooks";
 
 const Wrapper = styled.div`
   display: flex;
@@ -15,7 +15,7 @@ const Wrapper = styled.div`
   min-width: 230px;
   min-height: 40px;
   padding: 15px 30px;
-  background-color: #31A54B;
+  background-color: #31a54b;
   transition: all 0.3s ease;
   opacity: 0;
   border-radius: 0 0 0 20px;
@@ -30,12 +30,12 @@ interface MessageProps {
   text: string;
 }
 
-function Message({text}: MessageProps) {
+function Message({ text }: MessageProps) {
   const [active, setActive] = React.useState<string>("");
-  const message = useAppSelector(state => state.main.message);
+  const message = useAppSelector((state) => state.main.message);
 
   const changeState = () => {
-    if(text.length > 0) {
+    if (text.length > 0) {
       setActive("active");
     }
 

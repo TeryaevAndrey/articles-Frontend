@@ -16,12 +16,12 @@ const initialState: InitialState = {
   inputsValue: {
     title: "",
     text: "",
-    tag: ""
-  }
-}
+    tag: "",
+  },
+};
 
 export const EditSlice = createSlice({
-  name: "edit", 
+  name: "edit",
   initialState,
   reducers: {
     changeBanner(state, action: PayloadAction<File | undefined>) {
@@ -29,8 +29,8 @@ export const EditSlice = createSlice({
     },
     changeInputs(state, action: PayloadAction<InputsValue>) {
       state.inputsValue = action.payload;
-    }
-  }
+    },
+  },
 });
 
-export const {changeBanner, changeInputs} = EditSlice.actions;
+export const { changeBanner, changeInputs } = EditSlice.actions;

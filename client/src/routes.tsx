@@ -23,16 +23,16 @@ export function useRoutes(isAuth: boolean) {
         <Route path="/edit/:id" element={<Edit />} />
         <Route path="*" element={<Auth />} />
       </Routes>
-    )
+    );
   }
-  return(
+  return (
     <Routes>
-        <Route path="/" element={<Main />} />
-        <Route path="/login" element={<Auth />} />
-        <Route path="/reg" element={<Reg />} />
-        <Route path="/api/posts/:id" element={<Post />} />
-        <Route path="/postsByTag/:tag" element={<PostByTag />} />
-        <Route path="*" element={<Auth />} />
-      </Routes>
+      <Route path="/" element={<Main />} />
+      <Route path="/login" element={<Auth />} />
+      <Route path="/reg" element={<Reg />} />
+      <Route path="/api/posts/:id" element={<Post />} />
+      <Route path="/postsByTag/:tag" element={<PostByTag />} />
+      <Route path="*" element={<Auth />} />
+    </Routes>
   );
 }

@@ -16,7 +16,7 @@ export const Container = styled.div`
   justify-content: space-between;
   align-items: flex-start;
 
-  @media(max-width: 890px) {
+  @media (max-width: 890px) {
     flex-direction: column-reverse;
   }
 `;
@@ -29,7 +29,7 @@ export const Articles = styled.div`
   gap: 35px;
   padding-bottom: 35px;
 
-  @media(max-width: 890px) {
+  @media (max-width: 890px) {
     width: 100%;
   }
 `;
@@ -125,9 +125,8 @@ function Main() {
         <Articles>
           <TitleFilter>Статьи</TitleFilter>
 
-          {
-            searchValue.length > 0 ? (
-              filterPosts.map((post: Post) => {
+          {searchValue.length > 0
+            ? filterPosts.map((post: Post) => {
                 const text = post.text.slice(0, 100) + "...";
                 const date = new Date(post.date).toLocaleDateString();
 
@@ -154,10 +153,7 @@ function Main() {
                   />
                 );
               })
-            ) : (
-              resultPosts && resultPosts
-            )
-          }
+            : resultPosts && resultPosts}
 
           {resultPosts.length === 0 && <span>Пока что постов нет...</span>}
           {loading && <Loader />}

@@ -1,7 +1,7 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import React from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import Filter from './Filter/Filter';
+import Filter from "./Filter/Filter";
 
 const Wrapper = styled.div`
   display: flex;
@@ -25,7 +25,7 @@ const FiltersStyled = styled.div`
   max-height: 350px;
   overflow-y: auto;
 
-  @media(max-width: 890px) {
+  @media (max-width: 890px) {
     max-height: 200px;
   }
 `;
@@ -43,19 +43,21 @@ interface Post {
   tag: string;
 }
 
-function Filters({posts}: FiltersProps) {
+function Filters({ posts }: FiltersProps) {
   const filters: string[] = [];
-  const [activeFilter, setActiveFilter] = React.useState<number | undefined>(undefined);
+  const [activeFilter, setActiveFilter] = React.useState<number | undefined>(
+    undefined
+  );
   const navigate = useNavigate();
 
   const handleFilter = (index: number, tag: string) => {
     setActiveFilter(index);
 
     navigate(`/postsByTag/${tag}`);
-  }
+  };
 
   posts.forEach((post: Post) => {
-    if(post.tag.length !== 0) {
+    if (post.tag.length !== 0) {
       filters.push(post.tag);
     }
   });
@@ -63,20 +65,21 @@ function Filters({posts}: FiltersProps) {
   const filtersWithoutDublicate = Array.from(new Set(filters));
 
   const resultFilters = filtersWithoutDublicate.map((filter, index) => {
-    return <Filter className={activeFilter === index ? "active" : ""} onClick={() => handleFilter(index, filter)} title={filter} key={filter} />
+    return (
+      <Filter
+        className={activeFilter === index ? "active" : ""}
+        onClick={() => handleFilter(index, filter)}
+        title={filter}
+        key={filter}
+      />
+    );
   });
 
   return (
     <Wrapper>
-      {
-        filters.length > 0 && <Title>Фильтровать по:</Title>
-      }
-      
-      <FiltersStyled>
-        {
-          resultFilters
-        }
-      </FiltersStyled>
+      {filters.length > 0 && <Title>Фильтровать по:</Title>}
+
+      <FiltersStyled>{resultFilters}</FiltersStyled>
     </Wrapper>
   );
 }

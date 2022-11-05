@@ -1,6 +1,6 @@
-import React from 'react';
+import React from "react";
 import styled from "styled-components";
-import {NavLink} from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 const EntranceLink = styled.a`
   display: flex;
@@ -19,7 +19,7 @@ export const Title = styled.span`
   font-size: 12px;
 
   &:hover {
-    border-bottom: 1px solid #4D3D3D;
+    border-bottom: 1px solid #4d3d3d;
   }
 `;
 
@@ -29,7 +29,7 @@ interface EntranceItemProps {
   title: string;
 }
 
-function EntranceItem({to, icon, title}: EntranceItemProps) {
+function EntranceItem({ to, icon, title }: EntranceItemProps) {
   return (
     <EntranceLink as={NavLink} to={to}>
       <Icon src={icon} alt={title} />

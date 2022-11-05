@@ -14,18 +14,18 @@ const initialState: InitialState = {
   inputsValue: {
     title: "",
     text: "",
-    tag: ""
+    tag: "",
   },
-}
+};
 
 export const ArticleSlice = createSlice({
-  name: "article", 
+  name: "article",
   initialState,
   reducers: {
     changeInputs(state, action: PayloadAction<InputsValue>) {
       state.inputsValue = action.payload;
-    }
-  }
+    },
+  },
 });
 
-export const {changeInputs} = ArticleSlice.actions;
+export const { changeInputs } = ArticleSlice.actions;

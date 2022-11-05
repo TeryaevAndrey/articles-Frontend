@@ -6,25 +6,24 @@ interface InputsValue {
 }
 
 interface InitialState {
-  inputsValue: InputsValue
+  inputsValue: InputsValue;
 }
 
 const initialState: InitialState = {
   inputsValue: {
     name: "",
-    password: ""
-  }
-}
+    password: "",
+  },
+};
 
 export const LoginSlice = createSlice({
   name: "login",
-  initialState, 
+  initialState,
   reducers: {
     changeInputs(state, action: PayloadAction<InputsValue>) {
       state.inputsValue = action.payload;
-    }
-  }
+    },
+  },
 });
 
-export const {changeInputs} = LoginSlice.actions;
-
+export const { changeInputs } = LoginSlice.actions;

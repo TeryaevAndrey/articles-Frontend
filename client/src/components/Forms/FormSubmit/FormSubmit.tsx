@@ -1,12 +1,12 @@
-import React from 'react';
+import React from "react";
 import styled from "styled-components";
 
 const Btn = styled.button`
   width: 100%;
   min-height: 70px;
   background-color: #fff;
-  border: 1px solid #4D3D3D;
-  color: #4D3D3D;
+  border: 1px solid #4d3d3d;
+  color: #4d3d3d;
   text-transform: uppercase;
   border-radius: 10px;
   font-size: 18px;
@@ -26,10 +26,10 @@ interface FormSubmitProps {
   type: string;
   title: string;
   onClick?: React.MouseEventHandler;
-  disabled?: boolean
+  disabled?: boolean;
 }
 
-function FormSubmit({type, title, onClick, disabled}: FormSubmitProps) {
+function FormSubmit({ type, title, onClick, disabled }: FormSubmitProps) {
   return (
     <Btn onClick={onClick} disabled={disabled}>
       {title}

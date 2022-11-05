@@ -6,7 +6,7 @@ const LoaderStyled = styled.div`
   aspect-ratio: 1;
   border-radius: 50%;
   border: 8px solid;
-  border-color: #C95514 #0000;
+  border-color: #c95514 #0000;
   animation: s1 1s infinite;
   margin: 30px auto 0 auto;
 
@@ -21,7 +21,7 @@ interface LoaderProps {
   style?: object;
 }
 
-function Loader({style}: LoaderProps) {
+function Loader({ style }: LoaderProps) {
   return <LoaderStyled style={style} />;
 }
 

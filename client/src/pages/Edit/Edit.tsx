@@ -1,17 +1,17 @@
-import axios from 'axios';
-import React from 'react';
-import { useParams } from 'react-router-dom';
+import axios from "axios";
+import React from "react";
+import { useParams } from "react-router-dom";
 import styled from "styled-components";
-import { TitleFilter } from '../../App';
-import FormInput from '../../components/Forms/FormInput/FormInput';
-import FormSubmit from '../../components/Forms/FormSubmit/FormSubmit';
-import Textarea from '../../components/Forms/Textarea/Textarea';
-import Header from '../../components/Header/Header';
-import { useAuth } from '../../hooks/auth.hook';
-import { Post } from '../../interfaces';
-import { changeBanner, changeInputs } from '../../store/EditSlice';
-import { useAppDispatch, useAppSelector } from '../../store/Hooks';
-import { Banner, Input, Label, Wrapper } from '../AddArticle/AddArticle';
+import { TitleFilter } from "../../App";
+import FormInput from "../../components/Forms/FormInput/FormInput";
+import FormSubmit from "../../components/Forms/FormSubmit/FormSubmit";
+import Textarea from "../../components/Forms/Textarea/Textarea";
+import Header from "../../components/Header/Header";
+import { useAuth } from "../../hooks/auth.hook";
+import { Post } from "../../interfaces";
+import { changeBanner, changeInputs } from "../../store/EditSlice";
+import { useAppDispatch, useAppSelector } from "../../store/Hooks";
+import { Banner, Input, Label, Wrapper } from "../AddArticle/AddArticle";
 
 const Form = styled.form`
   display: flex;
@@ -34,10 +34,12 @@ function Edit() {
     owner: "",
     date: "",
   });
-  const [banner, setBanner] = React.useState<undefined | File | string>(undefined);
+  const [banner, setBanner] = React.useState<undefined | File | string>(
+    undefined
+  );
   const inputsValue = useAppSelector((state) => state.edit.inputsValue);
   const dispatch = useAppDispatch();
-  const {id} = useParams();
+  const { id } = useParams();
   const auth = useAuth();
 
   React.useEffect(() => {
@@ -56,11 +58,13 @@ function Edit() {
 
   React.useEffect(() => {
     setBanner(post.banner);
-    dispatch(changeInputs({
-      title: post.title,
-      text: post.text,
-      tag: post.tag
-    })); 
+    dispatch(
+      changeInputs({
+        title: post.title,
+        text: post.text,
+        tag: post.tag,
+      })
+    );
   }, [post]);
 
   const changeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -95,7 +99,7 @@ function Edit() {
         .catch((err) => {
           alert(err.response.data.message);
           dispatch(changeBanner(undefined));
-          dispatch(changeInputs({title: "", text: "", tag: ""}));
+          dispatch(changeInputs({ title: "", text: "", tag: "" }));
         });
     } catch (err) {
       console.log(err);
@@ -116,9 +120,16 @@ function Edit() {
           />
           <Label htmlFor="downloadBanner">Загрузить баннер</Label>
         </Wrapper>
-        {
-          banner && <Banner src={(typeof banner !== "string") ? URL.createObjectURL((banner)) : `http://localhost:3000/${banner}`} alt="banner"/>
-        }
+        {banner && (
+          <Banner
+            src={
+              typeof banner !== "string"
+                ? URL.createObjectURL(banner)
+                : `http://localhost:3000/${banner}`
+            }
+            alt="banner"
+          />
+        )}
         <FormInput
           onChange={changeHandler}
           value={inputsValue.title}

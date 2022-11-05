@@ -71,7 +71,10 @@ router.post(
       if (!errors.isEmpty()) {
         return res
           .status(400)
-          .json({ message: "Некорректные данные при входе.", errors: errors.array() });
+          .json({
+            message: "Некорректные данные при входе.",
+            errors: errors.array(),
+          });
       }
 
       const { name, password } = req.body;
@@ -90,9 +93,16 @@ router.post(
 
       const secretKey = config.get("secretKey");
 
-      const token = jwt.sign({userId: user.id}, secretKey, {expiresIn: "1h"});
+      const token = jwt.sign({ userId: user.id }, secretKey, {
+        expiresIn: "1h",
+      });
 
-      res.json({ message: "Успешно!", token, userId: user.id, name: user.name });
+      res.json({
+        message: "Успешно!",
+        token,
+        userId: user.id,
+        name: user.name,
+      });
     } catch (err) {
       res
         .status(500)

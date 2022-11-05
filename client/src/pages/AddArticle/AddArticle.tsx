@@ -61,7 +61,9 @@ function AddArticle() {
     location: string;
   }
 
-  const [inputsErrors, setInputsErrors] = React.useState<undefined | InputsErrors[]>(undefined);
+  const [inputsErrors, setInputsErrors] = React.useState<
+    undefined | InputsErrors[]
+  >(undefined);
 
   const changeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     dispatch(
@@ -110,7 +112,7 @@ function AddArticle() {
           const errors = err.response.data.errors;
           alert(err.response.data.message);
           setInputsErrors(errors);
-          dispatch(changeInputs({title: "", text: "", tag: ""}));
+          dispatch(changeInputs({ title: "", text: "", tag: "" }));
         });
     } catch (err) {
       console.log(err);
@@ -122,18 +124,18 @@ function AddArticle() {
     text: undefined | string;
   } = {
     title: undefined,
-    text: undefined
-  }
+    text: undefined,
+  };
 
-  if(inputsErrors) {
+  if (inputsErrors) {
     inputsErrors.forEach((el: InputsErrors) => {
-      switch(el.param) {
-        case "title": 
+      switch (el.param) {
+        case "title":
           errorsMsg.title = el.msg;
           break;
-        case "text": 
+        case "text":
           errorsMsg.text = el.msg;
-          break
+          break;
       }
     });
   }
@@ -152,19 +154,27 @@ function AddArticle() {
           />
           <Label htmlFor="downloadBanner">Загрузить баннер</Label>
         </Wrapper>
-        {
-          banner && <Banner src={URL.createObjectURL(banner)} alt="banner"/>
-        }
+        {banner && <Banner src={URL.createObjectURL(banner)} alt="banner" />}
         <FormInput
-          className={(errorsMsg.title !== undefined && inputsValue.title.length === 0) ? "error" : ""}
+          className={
+            errorsMsg.title !== undefined && inputsValue.title.length === 0
+              ? "error"
+              : ""
+          }
           onChange={changeHandler}
           value={inputsValue.title}
           type="text"
-          placeholder={errorsMsg.title === undefined ? "Название" : errorsMsg.title}
+          placeholder={
+            errorsMsg.title === undefined ? "Название" : errorsMsg.title
+          }
           name="title"
         />
         <Textarea
-          className={(errorsMsg.text !== undefined && inputsValue.text.length === 0) ? "error" : ""}
+          className={
+            errorsMsg.text !== undefined && inputsValue.text.length === 0
+              ? "error"
+              : ""
+          }
           onChange={changeHandler}
           value={inputsValue.text}
           minHeight={"385px"}

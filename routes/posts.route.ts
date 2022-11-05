@@ -127,40 +127,41 @@ router.patch(
   async (req, res) => {
     try {
       const id = req.params.id;
-      const {title, text, tag} = req.body;
+      const { title, text, tag } = req.body;
       const file = req.file;
 
       await Post.updateOne(
         {
-          _id: id
+          _id: id,
         },
         {
           banner: file && file.filename,
           title,
           text,
-          tag
+          tag,
         }
-      )
+      );
 
-      res.json({message: "Изменения сохранены"});
+      res.json({ message: "Изменения сохранены" });
     } catch (err) {
       res.status(500).json({ message: "Не удалось отредактировать статью" });
     }
   }
 );
 
-router.delete("/:id", auth, async(req, res) => {
+router.delete("/:id", auth, async (req, res) => {
   try {
     const id = req.params.id;
 
-    Post.deleteOne({_id: id}, function(err, result){
-      if(err) return res.status(500).json({message: "Не удалось удалить статью"});
-       
-      res.json({message: "Пост удалён"});
+    Post.deleteOne({ _id: id }, function (err, result) {
+      if (err)
+        return res.status(500).json({ message: "Не удалось удалить статью" });
+
+      res.json({ message: "Пост удалён" });
     });
-  } catch(err) {
-    res.status(500).json({message: "Не удалось удалить"});
+  } catch (err) {
+    res.status(500).json({ message: "Не удалось удалить" });
   }
 });
-  
+
 module.exports = router;

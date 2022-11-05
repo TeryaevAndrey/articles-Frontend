@@ -5,7 +5,7 @@ import FormInput from "../../components/Forms/FormInput/FormInput";
 import FormSubmit from "../../components/Forms/FormSubmit/FormSubmit";
 import { useAppDispatch, useAppSelector } from "../../store/Hooks";
 import { changeInputs } from "../../store/RegSlice";
-import {useHttp} from "../../hooks/http.hook";
+import { useHttp } from "../../hooks/http.hook";
 import Message from "../../components/Message/Message";
 import { changeMessage } from "../../store/MainSlice";
 
@@ -25,7 +25,7 @@ const Title = styled.h2`
   font-weight: 600;
   text-align: center;
 
-  @media(max-width: 480px) {
+  @media (max-width: 480px) {
     font-size: 30px;
   }
 `;
@@ -39,7 +39,7 @@ const Form = styled.form`
 `;
 
 function Reg() {
-  const {request, error, loading, inputsErrors} = useHttp();
+  const { request, error, loading, inputsErrors } = useHttp();
   const dispatch = useAppDispatch();
   const inputsValue = useAppSelector((state) => state.reg.inputsValue);
   const message = useAppSelector((state) => state.main.message);
@@ -60,40 +60,38 @@ function Reg() {
   const regHandler = async (event: React.MouseEvent<HTMLInputElement>) => {
     event.preventDefault();
     dispatch(changeMessage(""));
-    
+
     try {
+      interface ReadyData {
+        name: string;
+        email: string;
+        password: string;
+        passwordRepeat: string;
+      }
 
+      const readyData: ReadyData = {
+        name: inputsValue.name,
+        email: inputsValue.email,
+        password: inputsValue.password,
+        passwordRepeat: inputsValue.passwordRepeat,
+      };
 
-        interface ReadyData {
-          name: string;
-          email: string;
-          password: string;
-          passwordRepeat: string;
-        }
-
-        const readyData: ReadyData = {
-          name: inputsValue.name,
-          email: inputsValue.email,
-          password: inputsValue.password,
-          passwordRepeat: inputsValue.passwordRepeat
-        };
-
-        const data = await request("/api/auth/reg", "POST", readyData);
-        dispatch(changeMessage(data.message));
-      
-    } catch(err: any) {
-
+      const data = await request("/api/auth/reg", "POST", readyData);
+      dispatch(changeMessage(data.message));
+    } catch (err: any) {
       console.log(err);
       dispatch(changeMessage(err.message));
 
-      dispatch(changeInputs({
-        name: "",
-        email: "",
-        password: "",
-        passwordRepeat: ""
-      }));
+      dispatch(
+        changeInputs({
+          name: "",
+          email: "",
+          password: "",
+          passwordRepeat: "",
+        })
+      );
     }
-  }
+  };
 
   interface InputsErrors {
     name: string | undefined;
@@ -108,7 +106,7 @@ function Reg() {
   };
 
   inputsErrors.forEach((el) => {
-    switch(el.param) {
+    switch (el.param) {
       case "name":
         errors.name = el.msg;
         break;
@@ -118,27 +116,36 @@ function Reg() {
       case "password":
         errors.password = el.msg;
         break;
-    };
+    }
   });
 
   return (
     <RegStyled>
-
       <Message text={message} />
 
       <BackBtn />
       <Title>Регистрация</Title>
       <Form>
         <FormInput
-          className={(errors.name !== undefined && inputsValue.name.length === 0) ? "error" : ""}
+          className={
+            errors.name !== undefined && inputsValue.name.length === 0
+              ? "error"
+              : ""
+          }
           onChange={changeHandler}
           value={inputsValue.name}
           type="text"
-          placeholder={errors.name === undefined ? "Имя пользователя" : errors.name}
+          placeholder={
+            errors.name === undefined ? "Имя пользователя" : errors.name
+          }
           name="name"
         />
         <FormInput
-          className={(errors.email !== undefined && inputsValue.email.length === 0) ? "error" : ""}
+          className={
+            errors.email !== undefined && inputsValue.email.length === 0
+              ? "error"
+              : ""
+          }
           onChange={changeHandler}
           value={inputsValue.email}
           type="email"
@@ -146,22 +153,37 @@ function Reg() {
           name="email"
         />
         <FormInput
-          className={(errors.password !== undefined && inputsValue.password.length === 0) ? "error" : ""}
+          className={
+            errors.password !== undefined && inputsValue.password.length === 0
+              ? "error"
+              : ""
+          }
           onChange={changeHandler}
           value={inputsValue.password}
           type="password"
-          placeholder={errors.password === undefined ? "Пароль" : errors.password}
+          placeholder={
+            errors.password === undefined ? "Пароль" : errors.password
+          }
           name="password"
         />
         <FormInput
-          className={(errors.password !== undefined && inputsValue.password.length === 0) ? "error" : ""}
+          className={
+            errors.password !== undefined && inputsValue.password.length === 0
+              ? "error"
+              : ""
+          }
           onChange={changeHandler}
           value={inputsValue.passwordRepeat}
           type="password"
           placeholder="Повтор пароля"
           name="passwordRepeat"
         />
-        <FormSubmit disabled={loading} onClick={regHandler} type="submit" title="Зарегистрироваться" />
+        <FormSubmit
+          disabled={loading}
+          onClick={regHandler}
+          type="submit"
+          title="Зарегистрироваться"
+        />
       </Form>
     </RegStyled>
   );

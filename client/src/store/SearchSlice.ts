@@ -5,17 +5,17 @@ interface SearchValue {
 }
 
 const initialState: SearchValue = {
-  searchValue: ""
-}
+  searchValue: "",
+};
 
 export const searchSlice = createSlice({
-  name: "search", 
+  name: "search",
   initialState,
   reducers: {
     changeValue(state, action: PayloadAction<string>) {
       state.searchValue = action.payload;
-    }
-  }
+    },
+  },
 });
 
-export const {changeValue} = searchSlice.actions;
+export const { changeValue } = searchSlice.actions;

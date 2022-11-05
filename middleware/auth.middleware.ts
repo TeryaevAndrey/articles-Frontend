@@ -17,6 +17,6 @@ module.exports = (req, res, next) => {
     req.user = decoded;
     next();
   } catch (err) {
-    res.status(500).json({ message: "Нет авторизации"});
+    res.status(500).json({ message: "Нет авторизации" });
   }
 };

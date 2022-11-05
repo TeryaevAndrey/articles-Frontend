@@ -1,9 +1,9 @@
-import React from 'react';
+import React from "react";
 import styled from "styled-components";
 import SearchImg from "../../img/search.svg";
 import ClearImg from "../../img/clear.svg";
-import { useAppDispatch } from '../../store/Hooks';
-import { changeValue } from '../../store/SearchSlice';
+import { useAppDispatch } from "../../store/Hooks";
+import { changeValue } from "../../store/SearchSlice";
 
 const SearchWrapper = styled.div`
   width: ${(props: SearchProps) => props.width};
@@ -24,14 +24,14 @@ const Icon = styled.img`
 const SearchInput = styled.input`
   font-size: 13px;
   font-weight: 600;
-  color: #4D3D3D;
+  color: #4d3d3d;
   border: none;
   outline: none;
   margin-right: 10px;
   width: 100%;
 
   &::placeholder {
-    color: #4D3D3D;
+    color: #4d3d3d;
   }
 `;
 
@@ -48,12 +48,12 @@ interface SearchProps {
   value?: string;
 }
 
-function Search({onChange, width, value}: SearchProps) {
+function Search({ onChange, width, value }: SearchProps) {
   const dispatch = useAppDispatch();
-  
+
   const clearSearchValue = () => {
     dispatch(changeValue(""));
-  }
+  };
 
   return (
     <SearchWrapper width={width}>

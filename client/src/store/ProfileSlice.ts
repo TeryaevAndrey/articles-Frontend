@@ -7,7 +7,7 @@ interface InitialState {
 
 const initialState: InitialState = {
   openMenu: false,
-}
+};
 
 const ProfileSlice = createSlice({
   name: "profile",
@@ -15,8 +15,8 @@ const ProfileSlice = createSlice({
   reducers: {
     openMenuReducer(state, action: PayloadAction<boolean>) {
       state.openMenu = action.payload;
-    }
-  }
+    },
+  },
 });
 
-export const {openMenuReducer} = ProfileSlice.actions;
+export const { openMenuReducer } = ProfileSlice.actions;

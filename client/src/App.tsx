@@ -48,19 +48,26 @@ export const TitleFilter = styled.h2`
 `;
 
 function App() {
-  const {token, userId, login, logout, name} = useAuth();
+  const { token, userId, login, logout, name } = useAuth();
 
   const isAuth = !!token;
   const routes = useRoutes(isAuth);
 
   return (
-    <AuthContext.Provider value={{
-      token, userId, login, logout, isAuth, name
-    }}>
+    <AuthContext.Provider
+      value={{
+        token,
+        userId,
+        login,
+        logout,
+        isAuth,
+        name,
+      }}
+    >
       <AppStyled>
-      {routes}
-      <GlobalStyled />
-    </AppStyled>
+        {routes}
+        <GlobalStyled />
+      </AppStyled>
     </AuthContext.Provider>
   );
 }

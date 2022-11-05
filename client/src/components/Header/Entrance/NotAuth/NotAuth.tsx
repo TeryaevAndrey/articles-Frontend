@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import EntranceItem from '../EntranceItem/EntranceItem';
+import EntranceItem from "../EntranceItem/EntranceItem";
 import UserImg from "../../../../img/user.svg";
 import UserAddImg from "../../../../img/userAdd.svg";
 
@@ -14,7 +14,7 @@ const Line = styled.div`
   display: block;
   width: 1px;
   height: 20px;
-  background-color: #4D3D3D;
+  background-color: #4d3d3d;
 `;
 
 function NotAuth() {
