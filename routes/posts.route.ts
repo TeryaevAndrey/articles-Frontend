@@ -135,7 +135,7 @@ router.patch(
           _id: id
         },
         {
-          banner: file.filename,
+          banner: file && file.filename,
           title,
           text,
           tag

@@ -72,9 +72,10 @@ function Edit() {
       if (banner) {
         formData.append("banner", banner);
       }
+
       formData.append("title", inputsValue.title);
       formData.append("text", inputsValue.text);
-      formData.append("tag", inputsValue.tag);
+      formData.append("tag", inputsValue.tag.toLowerCase());
 
       await axios
         .patch(`/api/posts/${id}`, formData, {
