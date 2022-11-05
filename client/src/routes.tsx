@@ -7,6 +7,7 @@ import Profile from "./pages/Profile/Profile";
 import AddArticle from "./pages/AddArticle/AddArticle";
 import PostByTag from "./pages/PostByTag/PostByTag";
 import Post from "./pages/Post/Post";
+import Edit from "./pages/Edit/Edit";
 
 export function useRoutes(isAuth: boolean) {
   if (isAuth) {
@@ -19,6 +20,7 @@ export function useRoutes(isAuth: boolean) {
         <Route path="/add" element={<AddArticle />} />
         <Route path="/api/posts/:id" element={<Post />} />
         <Route path="/postsByTag/:tag" element={<PostByTag />} />
+        <Route path="/edit/:id" element={<Edit />} />
         <Route path="*" element={<Auth />} />
       </Routes>
     )

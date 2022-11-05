@@ -5,6 +5,7 @@ import { HeaderSlice } from "./HeaderSlice";
 import { configureStore } from "@reduxjs/toolkit";
 import { LoginSlice } from "./LoginSlice";
 import { searchSlice } from "./SearchSlice";
+import { EditSlice } from "./EditSlice";
 
 export const store = configureStore({
   reducer: {
@@ -13,7 +14,8 @@ export const store = configureStore({
     reg: RegSlice.reducer,
     login: LoginSlice.reducer,
     article: ArticleSlice.reducer,
-    search: searchSlice.reducer
+    search: searchSlice.reducer,
+    edit: EditSlice.reducer,
   }
 });
 

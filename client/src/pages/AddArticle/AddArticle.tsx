@@ -20,18 +20,18 @@ const Form = styled.form`
   padding-bottom: 50px;
 `;
 
-const Wrapper = styled.div`
+export const Wrapper = styled.div`
   width: 350px;
   position: relative;
 `;
 
-const Input = styled.input`
+export const Input = styled.input`
   opacity: 0;
   visibility: hidden;
   position: absolute;
 `;
 
-const Label = styled.label`
+export const Label = styled.label`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -44,7 +44,7 @@ const Label = styled.label`
   cursor: pointer;
 `;
 
-const Banner = styled.img`
+export const Banner = styled.img`
   width: 100%;
 `;
 
