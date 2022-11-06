@@ -1,11 +1,9 @@
-import React from 'react';
+import React from "react";
 import styled from "styled-components";
 import SearchImg from "../../img/search.svg";
 import ClearImg from "../../img/clear.svg";
-
-interface SearchProps {
-  width: string
-}
+import { useAppDispatch } from "../../store/Hooks";
+import { changeValue } from "../../store/SearchSlice";
 
 const SearchWrapper = styled.div`
   width: ${(props: SearchProps) => props.width};
@@ -26,14 +24,14 @@ const Icon = styled.img`
 const SearchInput = styled.input`
   font-size: 13px;
   font-weight: 600;
-  color: #4D3D3D;
+  color: #4d3d3d;
   border: none;
   outline: none;
   margin-right: 10px;
   width: 100%;
 
   &::placeholder {
-    color: #4D3D3D;
+    color: #4d3d3d;
   }
 `;
 
@@ -44,12 +42,24 @@ const ClearBtn = styled.img`
   cursor: pointer;
 `;
 
-function Search({width}: SearchProps) {
+interface SearchProps {
+  onChange?: React.ChangeEventHandler<HTMLInputElement>;
+  width: string;
+  value?: string;
+}
+
+function Search({ onChange, width, value }: SearchProps) {
+  const dispatch = useAppDispatch();
+
+  const clearSearchValue = () => {
+    dispatch(changeValue(""));
+  };
+
   return (
     <SearchWrapper width={width}>
       <Icon src={SearchImg} alt="search" />
-      <SearchInput placeholder="Поиск..." />
-      <ClearBtn src={ClearImg} alt="clear" />
+      <SearchInput onChange={onChange} value={value} placeholder="Поиск..." />
+      <ClearBtn onClick={clearSearchValue} src={ClearImg} alt="clear" />
     </SearchWrapper>
   );
 }

@@ -6,6 +6,7 @@ import Logo from "./Logo/Logo";
 import BurgerImg from "../../img/burger.svg";
 import { useAppDispatch, useAppSelector } from "../../store/Hooks";
 import { openMenuReducer } from "../../store/HeaderSlice";
+import { Link } from "react-router-dom";
 
 export const HeaderStyled = styled.div`
   position: relative;
@@ -21,7 +22,7 @@ export const Burger = styled.img`
   cursor: pointer;
   display: none;
 
-  @media(max-width: 650px) {
+  @media (max-width: 650px) {
     display: block;
   }
 `;
@@ -31,36 +32,42 @@ export const WrapperBurgerMenu = styled.div`
   align-items: center;
   gap: 35px;
 
-  @media(max-width: 650px) {
+  @media (max-width: 650px) {
+    display: none;
     flex-direction: column;
     position: absolute;
-    right: -100%;
+    right: -15px;
     top: 100%;
-    height: 100%;
+    height: max-content;
     background-color: #fff;
     border-radius: 20px 0 0 20px;
     padding: 20px;
     min-height: 150px;
     transition: all 0.2s ease;
+    opacity: 0;
+    z-index: 1000;
 
     &.active {
-      right: -15px;
+      display: flex;
+      opacity: 1;
     }
   }
 `;
 
 function Header() {
   const dispatch = useAppDispatch();
-  const stateMenu = useAppSelector(state => state.header.openMenu);
+  const stateMenu = useAppSelector((state) => state.header.openMenu);
 
   const handleBurger = () => {
     dispatch(openMenuReducer(!stateMenu));
-  }
+  };
 
   return (
     <HeaderStyled>
       <Logo />
       <WrapperBurgerMenu className={stateMenu ? "active" : ""}>
+        <Link to="/">На главную</Link>
+        {/* <Link to="/favourites">Избранное</Link> */}
         <AddPostBtn />
         <Entrance />
       </WrapperBurgerMenu>

@@ -1,6 +1,7 @@
-import React from 'react';
+import React from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import Filter from './Filter/Filter';
+import Filter from "./Filter/Filter";
 
 const Wrapper = styled.div`
   display: flex;
@@ -15,14 +16,70 @@ const Title = styled.span`
   text-align: center;
 `;
 
-function Filters() {
+const FiltersStyled = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 15px;
+  margin-top: 15px;
+  max-height: 350px;
+  overflow-y: auto;
+
+  @media (max-width: 890px) {
+    max-height: 200px;
+  }
+`;
+
+interface FiltersProps {
+  posts: Post[];
+}
+
+interface Post {
+  _id: string;
+  banner?: string;
+  title: string;
+  text: string;
+  date: string;
+  tag: string;
+}
+
+function Filters({ posts }: FiltersProps) {
+  const filters: string[] = [];
+  const [activeFilter, setActiveFilter] = React.useState<number | undefined>(
+    undefined
+  );
+  const navigate = useNavigate();
+
+  const handleFilter = (index: number, tag: string) => {
+    setActiveFilter(index);
+
+    navigate(`/postsByTag/${tag}`);
+  };
+
+  posts.forEach((post: Post) => {
+    if (post.tag.length !== 0) {
+      filters.push(post.tag);
+    }
+  });
+
+  const filtersWithoutDublicate = Array.from(new Set(filters));
+
+  const resultFilters = filtersWithoutDublicate.map((filter, index) => {
+    return (
+      <Filter
+        className={activeFilter === index ? "active" : ""}
+        onClick={() => handleFilter(index, filter)}
+        title={filter}
+        key={filter}
+      />
+    );
+  });
+
   return (
     <Wrapper>
-      <Title>Фильтровать по:</Title>
-      <Filter title="Наука" />
-      <Filter title="Программирование" />
-      <Filter title="Искусство" />
-      <Filter title="Новости" />
+      {filters.length > 0 && <Title>Фильтровать по:</Title>}
+
+      <FiltersStyled>{resultFilters}</FiltersStyled>
     </Wrapper>
   );
 }

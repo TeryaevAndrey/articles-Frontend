@@ -1,5 +1,5 @@
-import React from 'react';
-import { NavLink } from 'react-router-dom';
+import React from "react";
+import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import BackImg from "../../../img/back.svg";
 

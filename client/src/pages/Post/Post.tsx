@@ -1,19 +1,75 @@
-import React from 'react';
+import React from "react";
+import { useParams } from "react-router-dom";
 import styled from "styled-components";
-import ArticleBriefly from '../../components/ArticlePost/ArticlePost';
-import BannerImg from "../../img/bannerExample.svg";
+import ArticleBriefly from "../../components/ArticlePost/ArticlePost";
+import axios from "axios";
+import Header from "../../components/Header/Header";
+import Loader from "../../components/Loader/Loader";
 
 const Wrapper = styled.div`
-  max-width: 705px;
-  min-height: 100vh;
+  position: relative;
+  width: 705px;
+  min-height: 80vh;
+  height: 100%;
   margin: 0 auto;
+
+  @media (max-width: 800px) {
+    width: 100%;
+  }
 `;
 
+interface PostProps {
+  banner?: string;
+  title: string;
+  text: string;
+  date: string;
+}
+
 function Post() {
+  const [loading, setLoading] = React.useState<boolean>(false);
+  const { id } = useParams();
+  const [postInfo, setPostInfo] = React.useState<PostProps>({
+    title: "",
+    text: "",
+    date: "",
+  });
+  const [date, setDate] = React.useState<string>("");
+
+  React.useEffect(() => {
+    setLoading(true);
+    axios
+      .get(`/api/posts/${id}`)
+      .then((res) => {
+        setPostInfo(res.data);
+        setDate(new Date(res.data.date).toLocaleDateString());
+        setLoading(false);
+      })
+      .catch(() => setLoading(false));
+  }, []);
+
   return (
-    <Wrapper>
-      <ArticleBriefly img={BannerImg} title="Title" text="Lörem ipsum pens lyktiga, diligt inklusive autoråktigt. Intryckssanera råskade, lysade ena. Manga digyn inte lans. Mism juskap, därför att intrasm presat. Dide telefili fotosion. " date="25.09.22" />
-    </Wrapper>
+    <>
+      <Header />
+      <Wrapper>
+        {loading && <Loader />}
+        {postInfo.banner ? (
+          <ArticleBriefly
+            className={"static"}
+            banner={`http://localhost:3000/${postInfo.banner}`}
+            title={postInfo.title}
+            text={postInfo.text}
+            date={date}
+          />
+        ) : (
+          <ArticleBriefly
+            className={"static"}
+            title={postInfo.title}
+            text={postInfo.text}
+            date={date}
+          />
+        )}
+      </Wrapper>
+    </>
   );
 }
 

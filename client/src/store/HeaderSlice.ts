@@ -5,17 +5,17 @@ interface InitialState {
 }
 
 const initialState: InitialState = {
-  openMenu: false
-}
+  openMenu: false,
+};
 
 export const HeaderSlice = createSlice({
   name: "header",
   initialState,
   reducers: {
-    openMenuReducer (state, action: PayloadAction<boolean>) {
+    openMenuReducer(state, action: PayloadAction<boolean>) {
       state.openMenu = action.payload;
-    }
-  }
+    },
+  },
 });
 
-export const {openMenuReducer} = HeaderSlice.actions;
+export const { openMenuReducer } = HeaderSlice.actions;

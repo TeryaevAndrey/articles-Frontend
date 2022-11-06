@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import styled from "styled-components";
 
 const FilterBtn = styled.button`
@@ -8,23 +8,29 @@ const FilterBtn = styled.button`
   padding: 15px 40px;
   font-size: 13px;
   font-weight: 600;
-  color: #4D3D3D;
+  color: #4d3d3d;
   border-radius: 10px;
   border: none;
   border-bottom: 1px solid transparent;
 
   &:hover {
-    border-bottom: 1px solid #4D3D3D;
+    border-bottom: 1px solid #4d3d3d;
+  }
+
+  &.active {
+    border-bottom: 1px solid #4d3d3d;
   }
 `;
 
 interface FilterProps {
   title: string;
+  onClick: React.MouseEventHandler;
+  className: string;
 }
 
-function Filter({title}: FilterProps) {
+function Filter({ title, onClick, className }: FilterProps) {
   return (
-    <FilterBtn>
+    <FilterBtn onClick={onClick} className={className}>
       {title}
     </FilterBtn>
   );
