@@ -1,5 +1,5 @@
 import { check, validationResult } from "express-validator";
-import { json, Router } from "express";
+import { json, Router, Request } from "express";
 
 const auth = require("../middleware/auth.middleware");
 const Post = require("../models/Post");
@@ -63,8 +63,8 @@ router.post(
 
 router.get("/", async (req, res) => {
   try {
-    const limit = req.query.limit;
-    const page = req.query.page;
+    const limit: number = Number(req.query.limit);
+    const page: number = Number(req.query.page);
     const posts = await Post.find()
       .limit(limit)
       .skip(limit * page);
@@ -76,10 +76,16 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.get("/userPosts", auth, async (req, res) => {
+export interface IGetUserAuthInfoRequest extends Request {
+  user: {
+    userId: string
+  } // or any other type
+}
+
+router.get("/userPosts", auth, async (req: IGetUserAuthInfoRequest, res) => {
   try {
-    const limit = req.query.limit;
-    const page = req.query.page;
+    const limit: number = Number(req.query.limit);
+    const page: number = Number(req.query.page);
     const posts = await Post.find({ owner: req.user.userId })
       .limit(limit)
       .skip(limit * page);

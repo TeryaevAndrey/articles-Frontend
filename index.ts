@@ -2,8 +2,8 @@ const express = require("express");
 const mongoose = require("mongoose");
 const config = require("config");
 
-const mongoUrl = config.get("mongoUrl");
-const PORT = config.get("port") || 5000;
+const mongoUrl: string = config.get("mongoUrl");
+const PORT: number = config.get("port") || 5000;
 
 const app = express();
 
