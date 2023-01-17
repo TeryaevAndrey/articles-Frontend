@@ -46,6 +46,7 @@ const Text = styled.p`
   font-size: 25px;
   line-height: 30px;
   margin-top: 15px;
+  white-space: pre-line;
 
   @media (max-width: 480px) {
     font-size: 18px;

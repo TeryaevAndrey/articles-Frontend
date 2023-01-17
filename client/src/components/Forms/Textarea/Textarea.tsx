@@ -11,7 +11,7 @@ const TextareaStyled = styled.textarea`
   font-size: 16px;
   color: #4d3d3d;
   min-height: ${(props: { minHeight: string }) => props.minHeight};
-  white-space: pre-wrap;
+  white-space: pre-line;
 
   &::placeholder {
     color: #4d3d3d;
