@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 
-const Auth: FC = () => {
+const AuthPage: FC = () => {
   return <div></div>;
 };
 
-export default Auth;
+export default AuthPage;
