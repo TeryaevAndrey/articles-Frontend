@@ -16,19 +16,19 @@ const ArticlePage: FC = () => {
           />
         </div>
 
-        <div className="flex flex-col lg:flex-row-reverse gap-3 lg:gap-10 mt-1.5 lg:mt-3">
-          <div className="mt-5 lg:w-[35%]">
+        <div className="flex flex-col lg:flex-row-reverse gap-3 lg:gap-10 mt-1.5 lg:mt-3 w-full">
+          <div className="mt-5 lg:w-[30%]">
             <ArticleSidebar />
           </div>
 
-          <div>
+          <div className="lg:w-[70%]">
             <h1 className="text-lg font-medium">
               Lorem ipsum dolor sit amet consectetur.
             </h1>
 
             <div className="mt-3">
               <img
-                className="max-w-full w-full h-auto object-cover"
+                className="lg:max-w-[75%] w-full h-auto object-cover"
                 src="https://img2.fonwall.ru/o/pp/vodopad-skaly-potok.jpg?route=mid&amp;h=750"
                 alt="image"
               />
@@ -47,11 +47,11 @@ const ArticlePage: FC = () => {
                 alias exercitationem veritatis minima facilis a.
               </p>
 
-                <img
-                  className="max-w-full w-full h-auto object-cover mt-3"
-                  src="https://img2.fonwall.ru/o/pp/vodopad-skaly-potok.jpg?route=mid&amp;h=750"
-                  alt="image"
-                />
+              <img
+                className="lg:max-w-[75%] w-full h-auto object-cover mt-3"
+                src="https://img2.fonwall.ru/o/pp/vodopad-skaly-potok.jpg?route=mid&amp;h=750"
+                alt="image"
+              />
             </div>
           </div>
         </div>
