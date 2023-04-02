@@ -14,7 +14,7 @@ const Search: FC = () => {
 
   return (
     <form className="w-full">
-      <div className="w-full rounded bg-slate-100 px-4 py-3 flex items-center gap-3">
+      <div className="w-full rounded bg-slate-100 px-4 py-3 flex items-center gap-3 max-h-[49px]">
         <AiOutlineSearch
           className={`opacity-[0.5]`}
           size={25}
@@ -23,7 +23,7 @@ const Search: FC = () => {
         <input
           className="w-full bg-transparent text-gray-600"
           type="text"
-          placeholder="Поиск..."
+          placeholder="Введите запрос..."
           onChange={onSearchChange}
           value={searchValue}
         />
@@ -35,6 +35,8 @@ const Search: FC = () => {
             onClick={() => dispatch(setSearchValue(""))}
           />
         )}
+        
+        <button className="bg-blue-500 rounded px-4 py-2 text-white">Найти</button>
       </div>
     </form>
   );

@@ -9,7 +9,7 @@ const MenuMob: FC = () => {
     <div
       className={`flex md:hidden fixed ${
         isOpenMenu ? "top-[77px] opacity-1" : "-top-full opacity-0"
-      } w-screen h-[calc(100vh-77px)] ease-linear duration-100 bg-slate-100`}
+      } w-screen h-[calc(100vh-77px)] ease-linear duration-100 bg-slate-100 z-10`}
     >
       <div className="container mx-auto px-4">
         <div className="py-6">

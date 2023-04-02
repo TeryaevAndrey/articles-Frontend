@@ -32,7 +32,7 @@ const Article: FC = () => {
             </div>
             <Link
               className="px-2 py-1 text-sm bg-blue-500 text-white rounded"
-              to="/"
+              to="/articles/asdsa;d"
             >
               Посетить
             </Link>
