@@ -3,7 +3,7 @@ import PopularLink from "./PopularLink";
 
 const Popular: FC = () => {
   return (
-    <div className="flex bg-slate-100 rounded w-full shadow py-4 mt-4">
+    <div className="flex bg-slate-100 rounded w-full h-max lg:gap-x-10 shadow py-4">
       <div className="w-full">
         <h2 className="text-center font-medium">Популярные темы</h2>
 

@@ -6,9 +6,9 @@ const Article: FC = () => {
   return (
     <div className="w-full rounded overflow-hidden">
       <div className="flex flex-col gap-3">
-        <div className="w-full max-h-[210px] h-full">
+        <div className="relative w-full h-52">
           <img
-            className="w-full h-full object-cover"
+            className="absolute left-0 top-0 object-cover w-full h-full"
             src="https://img2.fonwall.ru/o/pp/vodopad-skaly-potok.jpg?route=mid&amp;h=750"
             alt="image"
           />
@@ -28,7 +28,7 @@ const Article: FC = () => {
           <div className="flex justify-between items-center">
             <div className="flex items-center gap-2">
               <AiOutlineEye size={15} />
-              <p className="text-sm text-gray-300 font-light">просмотров</p>
+              <p className="text-sm text-gray-300 font-light">10 просмотров</p>
             </div>
             <Link
               className="px-2 py-1 text-sm bg-blue-500 text-white rounded"
