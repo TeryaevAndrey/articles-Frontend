@@ -7,7 +7,7 @@ const MainPage: FC = () => {
   return (
     <div>
       <div className="container mx-auto px-4">
-        <div className="flex flex-col lg:flex-row-reverse lg:justify-start lg:gap-10 lg:mt-5">
+        <div className="flex flex-col lg:flex-row-reverse lg:justify-start lg:gap-10 py-5">
           <div className="mt-4 lg:mt-0 w-full lg:w-[35%]">
             <Popular />
           </div>

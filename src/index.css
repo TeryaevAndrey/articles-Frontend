@@ -25,6 +25,10 @@ input {
   transition: all 0.2s ease;
 }
 
+textarea {
+  outline: none;
+}
+
 a {
   text-decoration: none;
 }
