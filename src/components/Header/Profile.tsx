@@ -31,6 +31,12 @@ const Profile: FC = () => {
             Добавить статью
           </Link>
           <Link
+            className="p-2 border-b border-gray-300 border-solid w-full"
+            to="/add-article"
+          >
+            Избранное
+          </Link>
+          <Link
             className="p-2 border-b border-gray-300 border-solid w-full text-red-400"
             to="/add-article"
           >

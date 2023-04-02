@@ -1,9 +1,11 @@
 import React, { FC } from "react";
 import { Link } from "react-router-dom";
-import { useAppSelector } from "../../../store/store";
+import { useAppDispatch, useAppSelector } from "../../../store/store";
+import { setIsOpenMenu } from "../../../store/slices/headerSlice";
 
 const MenuMob: FC = () => {
   const isOpenMenu = useAppSelector((state) => state.header.isOpenMenu);
+  const dispatch = useAppDispatch();
 
   return (
     <div
@@ -17,12 +19,14 @@ const MenuMob: FC = () => {
             <Link
               to="/auth/reg"
               className="flex justify-center items-center bg-blue-500 text-slate-100 rounded py-3 px-4 min-h-[49px] active:scale-[0.98] ease-linear duration-200"
+              onClick={() => dispatch(setIsOpenMenu(false))}
             >
               Зарегистрироваться
             </Link>
             <Link
               to="/auth/login"
               className="flex justify-center items-center bg-blue-500 text-slate-100 rounded py-3 px-4 min-h-[49px] active:scale-[0.98] ease-linear duration-200"
+              onClick={() => dispatch(setIsOpenMenu(false))}
             >
               Войти
             </Link>
