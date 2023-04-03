@@ -4,7 +4,7 @@ import Logo from "../Logo";
 import Burger from "./Burger";
 import { AiOutlineSearch } from "react-icons/ai";
 import Search from "./Search";
-import Profile from "./Profile";
+import Profile from "./Profile/Profile";
 import { useAppSelector } from "../../store/store";
 import MenuMob from "./MenuMob/MenuMob";
 
