@@ -23,9 +23,7 @@ const Profile: FC = () => {
         />
       </div>
 
-      {isOpen && (
-        <ProfileMenu />
-      )}
+      {isOpen && <ProfileMenu />}
     </div>
   );
 };

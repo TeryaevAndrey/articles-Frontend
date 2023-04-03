@@ -37,6 +37,10 @@ button:active {
   opacity: 0.7;
 }
 
+[contentEditable="true"]:empty:not(:focus):before {
+  content: attr(data-placeholder);
+}
+
 @media (min-width: 1024px) {
   button:active {
     transform: scale(0.95);
