@@ -4,7 +4,7 @@ const RegPage: FC = () => {
   return (
     <div className="mt-10">
       <div className="container mx-auto px-4">
-        <form className="w-full rounded p-3 bg-slate-100">
+        <form className="w-full rounded p-3 bg-slate-100 max-w-[400px] mx-auto">
           <h1 className="text-center font-medium">Регистрация</h1>
           <div className="mt-5 flex flex-col gap-3">
             <input
