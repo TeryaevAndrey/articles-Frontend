@@ -98,8 +98,10 @@ const AddArticlePage: FC = () => {
                   type="button"
                   className="flex justify-center items-center p-3 bg-blue-500 rounded w-11 h-11"
                   onClick={() => {
-                    dispatch(setTags([...tags, tagValue]));
-                    setTagValue("");
+                    if(tagValue.length > 0) {
+                      dispatch(setTags([...tags, tagValue]));
+                      setTagValue("");
+                    }
                   }}
                 >
                   <BsCheck size={25} color="#fff" />
