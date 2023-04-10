@@ -49,7 +49,15 @@ const AddArticlePage: FC = () => {
                 <div className="flex flex-col">
                   <div
                     onClick={() => {
-                      dispatch(setElements([...elements, "text"]));
+                      dispatch(
+                        setElements([
+                          ...elements,
+                          {
+                            type: "text",
+                            value: "",
+                          },
+                        ])
+                      );
                       dispatch(setIsOpenElements(false));
                     }}
                     className="flex items-center gap-2 px-2 py-3 cursor-pointer border-b border-gray-300 border-solid hover:bg-gray-200 ease-linear duration-200 active:bg-gray-200"
@@ -59,7 +67,15 @@ const AddArticlePage: FC = () => {
                   </div>
                   <div
                     onClick={() => {
-                      dispatch(setElements([...elements, "title"]));
+                      dispatch(
+                        setElements([
+                          ...elements,
+                          {
+                            type: "title",
+                            value: "",
+                          },
+                        ])
+                      );
                       dispatch(setIsOpenElements(false));
                     }}
                     className="flex items-center gap-2 px-2 py-3 cursor-pointer border-b border-gray-300 border-solid hover:bg-gray-200 ease-linear duration-200 active:bg-gray-200"
@@ -69,7 +85,15 @@ const AddArticlePage: FC = () => {
                   </div>
                   <div
                     onClick={() => {
-                      dispatch(setElements([...elements, "img"]));
+                      dispatch(
+                        setElements([
+                          ...elements,
+                          {
+                            type: "img",
+                            src: undefined,
+                          },
+                        ])
+                      );
                       dispatch(setIsOpenElements(false));
                     }}
                     className="flex items-center gap-2 px-2 py-3 cursor-pointer border-b border-gray-300 border-solid hover:bg-gray-200 ease-linear duration-200 active:bg-gray-200"
@@ -98,7 +122,7 @@ const AddArticlePage: FC = () => {
                   type="button"
                   className="flex justify-center items-center p-3 bg-blue-500 rounded w-11 h-11"
                   onClick={() => {
-                    if(tagValue.length > 0) {
+                    if (tagValue.length > 0) {
                       dispatch(setTags([...tags, tagValue]));
                       setTagValue("");
                     }

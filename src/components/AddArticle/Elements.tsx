@@ -11,8 +11,8 @@ const Elements: FC = () => {
 
   return (
     <>
-      {elements.map((el: string | { src: string; alt: string }, idx) => {
-        if (el === "text") {
+      {elements.map((el, idx) => {
+        if (el.type === "text") {
           return (
             <div className="flex items-start gap-5" key={uuidv4()}>
               <textarea
@@ -31,7 +31,7 @@ const Elements: FC = () => {
               />
             </div>
           );
-        } else if (el === "title") {
+        } else if (el.type === "title") {
           return (
             <div className="flex items-start gap-5" key={uuidv4()}>
               <input
@@ -50,7 +50,7 @@ const Elements: FC = () => {
               />
             </div>
           );
-        } else if (el === "img") {
+        } else if (el.type === "img") {
           let id = uuidv4();
 
           return (

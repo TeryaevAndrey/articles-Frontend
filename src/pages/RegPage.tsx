@@ -1,6 +1,22 @@
-import React, { FC } from "react";
+import React, { FC, useState } from "react";
 
 const RegPage: FC = () => {
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const [passwordRepeat, setPasswordRepeat] = useState<string>("");
+
+  const onEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setEmail(e.target.value);
+  };
+
+  const onPasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setPassword(e.target.value);
+  };
+
+  const onPasswordRepeatChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setPasswordRepeat(e.target.value);
+  };
+
   return (
     <div className="mt-10">
       <div className="container mx-auto px-4">
@@ -11,16 +27,22 @@ const RegPage: FC = () => {
               className="px-3 py-2 rounded text-sm placeholder:text-sm placeholder:font-light"
               type="text"
               placeholder="Email..."
+              onChange={onEmailChange}
+              value={email}
             />
             <input
               className="px-3 py-2 rounded text-sm placeholder:text-sm placeholder:font-light"
               type="text"
               placeholder="Пароль..."
+              onChange={onPasswordChange}
+              value={password}
             />
             <input
               className="px-3 py-2 rounded text-sm placeholder:text-sm placeholder:font-light"
               type="text"
               placeholder="Повторите пароль..."
+              onChange={onPasswordRepeatChange}
+              value={passwordRepeat}
             />
           </div>
           <button className="w-full bg-blue-500 text-white rounded px-3 py-2 mt-5">

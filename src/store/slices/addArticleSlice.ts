@@ -1,8 +1,14 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
+interface IElement {
+  type: string;
+  value?: string;
+  src?: string | undefined;
+}
+
 const initialState: {
   isOpenElements: boolean;
-  elements: string[];
+  elements: IElement[];
   tags: string[];
 } = {
   isOpenElements: false,
@@ -18,7 +24,7 @@ export const addArticleSlice = createSlice({
       state.isOpenElements = action.payload;
     },
 
-    setElements: (state, action: PayloadAction<string[]>) => {
+    setElements: (state, action: PayloadAction<IElement[]>) => {
       state.elements = action.payload;
     },
 
