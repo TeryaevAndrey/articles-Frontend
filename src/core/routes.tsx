@@ -5,6 +5,7 @@ import RegPage from "../pages/RegPage";
 import LoginPage from "../pages/LoginPage";
 import ProfilePage from "../pages/ProfilePage";
 import AddArticlePage from "../pages/AddArticlePage";
+import SearchPage from "../pages/SearchPage";
 
 export const useRoutes = (isAuth: boolean) => {
   return isAuth ? (
@@ -15,6 +16,7 @@ export const useRoutes = (isAuth: boolean) => {
       <Route path="/articles/:articleId" element={<ArticlePage />} />
       <Route path="/profile/:userId" element={<ProfilePage />} />
       <Route path="/add-article" element={<AddArticlePage />} />
+      <Route path="/search" element={<SearchPage />} />
     </Routes>
   ) : (
     <Routes>
@@ -22,6 +24,7 @@ export const useRoutes = (isAuth: boolean) => {
       <Route path="/auth/reg" element={<RegPage />} />
       <Route path="/auth/login" element={<LoginPage />} />
       <Route path="/articles/:articleId" element={<ArticlePage />} />
+      <Route path="/search" element={<SearchPage />} />
     </Routes>
   );
 };
