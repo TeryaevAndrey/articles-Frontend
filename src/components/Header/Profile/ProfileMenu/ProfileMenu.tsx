@@ -25,8 +25,8 @@ const ProfileMenu: FC = () => {
         onClick={() => dispatch(setIsOpenMenu(false))}
       />
       <ProfileLink
-        title="Настройки"
-        href="/settings/asdjkasdjk"
+        title="Редактировать профиль"
+        href="/edit-profile/asdjkasdjk"
         onClick={() => dispatch(setIsOpenMenu(false))}
       />
 

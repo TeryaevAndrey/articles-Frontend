@@ -6,6 +6,7 @@ import LoginPage from "../pages/LoginPage";
 import ProfilePage from "../pages/ProfilePage";
 import AddArticlePage from "../pages/AddArticlePage";
 import SearchPage from "../pages/SearchPage";
+import EditProfilePage from "../pages/EditProfilePage";
 
 export const useRoutes = (isAuth: boolean) => {
   return isAuth ? (
@@ -17,6 +18,7 @@ export const useRoutes = (isAuth: boolean) => {
       <Route path="/profile/:userId" element={<ProfilePage />} />
       <Route path="/add-article" element={<AddArticlePage />} />
       <Route path="/search" element={<SearchPage />} />
+      <Route path="/edit-profile/:userId" element={<EditProfilePage />} />
     </Routes>
   ) : (
     <Routes>
