@@ -6,14 +6,14 @@ import { setIsAuth } from "../store/slices/mainSlice";
 import { useNavigate } from "react-router-dom";
 
 const LoginPage: FC = () => {
-  const [emailOrUserName, setEmailOrUserName] = useState<string>("");
+  const [userName, setUserName] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  const onEmailOrUserNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setEmailOrUserName(e.target.value);
+  const onUserNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setUserName(e.target.value);
   };
 
   const onPasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -25,7 +25,7 @@ const LoginPage: FC = () => {
 
     setIsLoading(true);
 
-    axios.post(process.env.VITE_PROXY + "/auth/login", { emailOrUserName, password }).then((res) => {
+    axios.post(import.meta.env.VITE_PROXY + "/auth/login", { userName, password }).then((res) => {
       localStorage.setItem("user", JSON.stringify({ userInfo: res.data.userInfo, token: res.data.token }));
       dispatch(setIsAuth(true));
 
@@ -35,7 +35,7 @@ const LoginPage: FC = () => {
     }).catch((err) => {
       alert(err.response.data.message);
 
-      setEmailOrUserName("");
+      setUserName("");
       setPassword("");
     });
 
@@ -51,9 +51,9 @@ const LoginPage: FC = () => {
             <input
               className="px-3 py-2 rounded text-sm placeholder:text-sm placeholder:font-light"
               type="text"
-              placeholder="Email или имя пользователя"
-              onChange={onEmailOrUserNameChange}
-              value={emailOrUserName}
+              placeholder="Имя пользователя"
+              onChange={onUserNameChange}
+              value={userName}
             />
             <input
               className="px-3 py-2 rounded text-sm placeholder:text-sm placeholder:font-light"
