@@ -12,7 +12,7 @@ const ProfileMenu: FC = () => {
     localStorage.removeItem("user");
 
     dispatch(setIsAuth(false));
-  }
+  };
 
   return (
     <div className="absolute top-[130%] flex flex-col w-full max-w-[150px] bg-slate-100 truncate rounded overflow-hidden text-sm z-10">
