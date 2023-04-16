@@ -8,16 +8,17 @@ import { setIsOpenMenu } from "../../../store/slices/headerSlice";
 const Profile: FC = () => {
   const isOpenMenu = useAppSelector((state) => state.header.isOpenMenu);
   const dispatch = useAppDispatch();
+  const user = JSON.parse(localStorage.getItem("user") || "{}");
 
   return (
     <div className="relative">
       <div
-        className="flex items-center gap-2 cursor-pointer"
+        className="flex items-center gap-2 w-max cursor-pointer"
         onClick={() => dispatch(setIsOpenMenu(!isOpenMenu))}
       >
         <div className="flex items-center gap-1.5">
-          <div className="w-10 h-10 rounded-full bg-gray-300"></div>
-          <div className="text-gray-600">username</div>
+          <img className="w-10 h-10 rounded-full bg-gray-300 object-cover" src={user.userInfo.avatar} alt={user.userInfo.userName} />
+          <div className="text-gray-600">{user.userInfo.userName}</div>
         </div>
         <AiFillCaretDown
           className={`${isOpenMenu && "rotate-180"}`}

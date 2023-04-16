@@ -36,7 +36,9 @@ const App: FC = () => {
 
   return (
     <div className="App">
-      {isLoading ? <div></div> : <Layout>{useRoutes(isAuth)}</Layout>}
+      {isLoading ? (
+        <div>Загрузка, подождите...</div>
+      ) : <Layout>{useRoutes(isAuth)}</Layout>}
     </div>
   );
 };

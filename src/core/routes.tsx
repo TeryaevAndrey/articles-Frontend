@@ -18,7 +18,7 @@ export const useRoutes = (isAuth: boolean) => {
       <Route path="/profile/:userId" element={<ProfilePage />} />
       <Route path="/add-article" element={<AddArticlePage />} />
       <Route path="/search" element={<SearchPage />} />
-      <Route path="/edit-profile/:userId" element={<EditProfilePage />} />
+      <Route path="/edit-profile" element={<EditProfilePage />} />
     </Routes>
   ) : (
     <Routes>
