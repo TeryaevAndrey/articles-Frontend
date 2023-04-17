@@ -15,7 +15,7 @@ export const useRoutes = (isAuth: boolean) => {
       <Route path="/auth/reg" element={<RegPage />} />
       <Route path="/auth/login" element={<LoginPage />} />
       <Route path="/articles/:articleId" element={<ArticlePage />} />
-      <Route path="/profile/:userId" element={<ProfilePage />} />
+      <Route path="/my-articles/:userId" element={<ProfilePage />} />
       <Route path="/add-article" element={<AddArticlePage />} />
       <Route path="/search" element={<SearchPage />} />
       <Route path="/edit-profile" element={<EditProfilePage />} />

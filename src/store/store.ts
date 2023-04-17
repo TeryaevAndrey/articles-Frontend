@@ -4,12 +4,16 @@ import type { TypedUseSelectorHook } from "react-redux";
 import { mainSlice } from "./slices/mainSlice";
 import { headerSlice } from "./slices/headerSlice";
 import { addArticleSlice } from "./slices/addArticleSlice";
+import { userSlice } from "./slices/userSlice";
+import { loadersSlice } from "./slices/loadersSlice";
 
 const store = configureStore({
   reducer: {
     main: mainSlice.reducer,
+    user: userSlice.reducer,
     header: headerSlice.reducer,
     addArticle: addArticleSlice.reducer,
+    loaders: loadersSlice.reducer,
   },
 });
 

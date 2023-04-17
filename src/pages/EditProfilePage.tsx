@@ -1,6 +1,8 @@
 import React, { FC } from "react";
 import FieldEditProfile from "../components/EditProfile/FieldEditProfile";
 import axios from "axios";
+import { useAppDispatch } from "../store/store";
+import getMyData from "../utils/getMyData";
 
 const EditProfilePage: FC = () => {
   const user = JSON.parse(localStorage.getItem("user") || "{}");
@@ -8,6 +10,7 @@ const EditProfilePage: FC = () => {
   const [userName, setUserName] = React.useState<string>("");
   const [password, setPassword] = React.useState<string>("");
   const [oldPassword, setOldPassword] = React.useState<string>("");
+  const dispatch = useAppDispatch();
 
   const onAvatarChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
@@ -44,6 +47,8 @@ const EditProfilePage: FC = () => {
       }
     }).then((res) => {
       alert(res.data.message);
+
+      dispatch(getMyData());
     }).catch((err) => {
       alert(err.response.data.message);
     })
@@ -52,7 +57,7 @@ const EditProfilePage: FC = () => {
   return (
     <div className="py-5">
       <div className="container mx-auto px-4">
-        <form className="flex items-start gap-16" onSubmit={formHandler} encType="multipart/form-data">
+        <form className="flex flex-col items-center md:flex-row md:items-start gap-16" onSubmit={formHandler} encType="multipart/form-data">
           <div>
             <input className="hidden" type="file" id="avatar" onChange={onAvatarChange} />
             <label className="cursor-pointer text-center flex flex-col justify-center gap-5" htmlFor="avatar">

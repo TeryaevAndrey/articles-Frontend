@@ -4,6 +4,7 @@ import axios from "axios";
 import { useAppDispatch } from "../store/store";
 import { setIsAuth } from "../store/slices/mainSlice";
 import { useNavigate } from "react-router-dom";
+import getMyData from "../utils/getMyData";
 
 const RegPage: FC = () => {
   const [userName, setUserName] = useState<string>("");
@@ -42,6 +43,7 @@ const RegPage: FC = () => {
           JSON.stringify({ userInfo: res.data.userInfo, token: res.data.token })
         );
         dispatch(setIsAuth(true));
+        dispatch(getMyData());
 
         alert(res.data.message);
 

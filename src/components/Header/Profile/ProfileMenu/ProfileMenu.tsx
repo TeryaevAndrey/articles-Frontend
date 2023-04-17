@@ -17,8 +17,8 @@ const ProfileMenu: FC = () => {
   return (
     <div className="absolute top-[130%] right-0 flex flex-col w-50 bg-slate-100 truncate rounded overflow-hidden text-sm z-10">
       <ProfileLink
-        title="Профиль"
-        href="/profile/asdklasdk123"
+        title="Мои статьи"
+        href="/my-articles/asdklasdk123"
         onClick={() => dispatch(setIsOpenMenu(false))}
       />
       <ProfileLink

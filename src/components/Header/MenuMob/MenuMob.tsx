@@ -5,12 +5,13 @@ import { setIsOpenMenu } from "../../../store/slices/headerSlice";
 
 const MenuMob: FC = () => {
   const isOpenMenu = useAppSelector((state) => state.header.isOpenMenu);
+  const isAuth = useAppSelector((state) => state.main.isAuth);
   const dispatch = useAppDispatch();
 
   return (
     <div
       className={`flex md:hidden fixed ${
-        isOpenMenu ? "top-[77px] opacity-1" : "-top-full opacity-0"
+        (isOpenMenu && !isAuth) ? "top-[77px] opacity-1" : "-top-full opacity-0"
       } w-screen h-[calc(100vh-77px)] ease-linear duration-100 bg-slate-100 z-10`}
     >
       <div className="container mx-auto px-4">

@@ -1,5 +1,4 @@
 import React, { FC } from "react";
-import { Link } from "react-router-dom";
 import Popular from "../components/Popular/Popular";
 import Article from "../components/Article/Article";
 import Pagination from "../components/Pagination/Pagination";

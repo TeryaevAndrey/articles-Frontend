@@ -15,7 +15,7 @@ const FieldEditProfile: FC<IFieldEditProfile> = ({
 }) => {
   return (
     <input
-      className="px-3 py-2 rounded text-sm placeholder:text-sm placeholder:font-light"
+      className="w-full px-3 py-2 rounded text-sm placeholder:text-sm placeholder:font-light"
       type={type}
       placeholder={placeholder}
       onChange={onChange}
