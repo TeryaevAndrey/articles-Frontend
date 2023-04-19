@@ -4,10 +4,13 @@ import { MdDeleteForever } from "react-icons/md";
 import { v4 as uuidv4 } from "uuid";
 import { CiImport } from "react-icons/ci";
 import { setElements } from "../../store/slices/addArticleSlice";
+import axios from "axios";
 
 const Elements: FC = () => {
   const elements = useAppSelector((state) => state.addArticle.elements);
   const dispatch = useAppDispatch();
+  const [imgLoading, setImgLoading] = useState<boolean>(false);
+  const token = JSON.parse(localStorage.getItem("user") || "{}").token;
 
   const updateFieldChanged = (idx: number, type: string, value: string) => {
     let newArr = [...elements];
@@ -16,7 +19,29 @@ const Elements: FC = () => {
     dispatch(setElements(newArr));
   }
 
-  console.log(elements);
+  const exportImg = async (img: File, idx: number) => {
+    setImgLoading(true);
+
+    const formData = new FormData();
+
+    formData.append("img", img!);
+
+    await axios.post(import.meta.env.VITE_PROXY + "/img-processing", formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+        Authorization: `Bearer ${token}`
+      }
+    }).then((res) => {
+      let newElements = [...elements];
+      newElements[idx] = { type: "img", src: res.data.img };
+
+      dispatch(setElements(newElements));
+    }).catch((err) => {
+      alert(err.response.data.message);
+    });
+
+    setImgLoading(false);
+  }
 
   return (
     <>
@@ -73,14 +98,35 @@ const Elements: FC = () => {
                   className="p-3 max-w-full w-full min-h-[100px] bg-white rounded flex justify-center items-center active:bg-gray-300 cursor-pointer"
                   htmlFor={id}
                 >
-                  <CiImport size={50} />
+                  {
+                    imgLoading ? (
+                      "Загрузка..."
+                    ) : (
+                      el.src ? (
+                        <div className="flex flex-col gap-1 items-center text-center">
+                          <CiImport size={50} />
+                          <span>Изменить</span>
+                        </div>
+                      ) : <CiImport size={50} />
+                    )
+                  }
                 </label>
                 <input
                   className="hidden"
                   type="file"
                   placeholder="Загрузите изображение..."
+                  onChange={(e) => {
+                    if (e.target.files) {
+                      exportImg(e.target.files[0], idx);
+                    }
+                  }}
                   id={id}
                 />
+                {
+                  el.src && (
+                    <img src={el.src} alt="Изображение" />
+                  )
+                }
               </div>
               <MdDeleteForever
                 onClick={() =>
