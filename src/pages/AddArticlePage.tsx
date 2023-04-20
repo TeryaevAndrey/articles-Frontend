@@ -10,6 +10,7 @@ import {
 } from "../store/slices/addArticleSlice";
 import Elements from "../components/AddArticle/Elements";
 import Tags from "../components/AddArticle/Tags";
+import axios from "axios";
 
 const AddArticlePage: FC = () => {
   const isOpenElements = useAppSelector(
@@ -20,16 +21,37 @@ const AddArticlePage: FC = () => {
   const elements = useAppSelector((state) => state.addArticle.elements);
   const tags = useAppSelector((state) => state.addArticle.tags);
   const dispatch = useAppDispatch();
+  const token = JSON.parse(localStorage.getItem("user") || "{}").token;
 
   const onTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     dispatch(setTitle(e.target.value));
+  }
+
+  const formHandler = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    const data = {
+      title,
+      elements,
+      tags
+    };
+
+    await axios.post(import.meta.env.VITE_PROXY + "/add-article", data, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    }).then((res) => {
+      alert(res.data.message);
+    }).catch((err) => {
+      alert(err.response.data.message);
+    })
   }
 
   return (
     <div className="py-5">
       <div className="container mx-auto px-4">
         <h1 className="text-lg font-medium">Добавление статьи</h1>
-        <form className="mt-5">
+        <form className="mt-5" onSubmit={formHandler}>
           <div className="mb-5 flex flex-col gap-5">
             <input
               className="p-3 font-medium text-lg"
@@ -144,7 +166,7 @@ const AddArticlePage: FC = () => {
             <Tags />
           </div>
 
-          <button className="w-full p-3 bg-blue-500 text-white rounded mt-10">
+          <button className="w-full p-3 bg-blue-500 text-white rounded mt-10" type="submit">
             Сохранить
           </button>
         </form>
