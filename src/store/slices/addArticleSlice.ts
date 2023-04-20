@@ -8,10 +8,12 @@ interface IElement {
 
 const initialState: {
   isOpenElements: boolean;
+  title: string;
   elements: IElement[];
   tags: string[];
 } = {
   isOpenElements: false,
+  title: "",
   elements: [],
   tags: [],
 };
@@ -24,6 +26,10 @@ export const addArticleSlice = createSlice({
       state.isOpenElements = action.payload;
     },
 
+    setTitle: (state, action: PayloadAction<string>) => {
+      state.title = action.payload;
+    },
+
     setElements: (state, action: PayloadAction<IElement[]>) => {
       state.elements = action.payload;
     },
@@ -34,5 +40,5 @@ export const addArticleSlice = createSlice({
   },
 });
 
-export const { setIsOpenElements, setElements, setTags } =
+export const { setIsOpenElements, setTitle, setElements, setTags } =
   addArticleSlice.actions;

@@ -6,6 +6,7 @@ import {
   setElements,
   setIsOpenElements,
   setTags,
+  setTitle,
 } from "../store/slices/addArticleSlice";
 import Elements from "../components/AddArticle/Elements";
 import Tags from "../components/AddArticle/Tags";
@@ -15,9 +16,14 @@ const AddArticlePage: FC = () => {
     (state) => state.addArticle.isOpenElements
   );
   const [tagValue, setTagValue] = React.useState<string>("");
+  const title = useAppSelector((state) => state.addArticle.title);
   const elements = useAppSelector((state) => state.addArticle.elements);
   const tags = useAppSelector((state) => state.addArticle.tags);
   const dispatch = useAppDispatch();
+
+  const onTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch(setTitle(e.target.value));
+  }
 
   return (
     <div className="py-5">
@@ -29,6 +35,8 @@ const AddArticlePage: FC = () => {
               className="p-3 font-medium text-lg"
               type="text"
               placeholder="Введите заголовок..."
+              onChange={onTitleChange}
+              value={title}
             />
 
             <Elements />
