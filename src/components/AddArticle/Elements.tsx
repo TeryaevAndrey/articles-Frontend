@@ -3,14 +3,15 @@ import { useAppDispatch, useAppSelector } from "../../store/store";
 import { MdDeleteForever } from "react-icons/md";
 import { v4 as uuidv4 } from "uuid";
 import { CiImport } from "react-icons/ci";
-import { setElements } from "../../store/slices/addArticleSlice";
-import axios from "axios";
+import { setElements, setTitle } from "../../store/slices/addArticleSlice";
+import exportImg from "../../utils/exportImg";
 
 const Elements: FC = () => {
+  const title = useAppSelector((state) => state.addArticle.title);
   const elements = useAppSelector((state) => state.addArticle.elements);
+  const banner = useAppSelector((state) => state.addArticle.banner);
   const dispatch = useAppDispatch();
   const [imgLoading, setImgLoading] = useState<boolean>(false);
-  const token = JSON.parse(localStorage.getItem("user") || "{}").token;
 
   const updateFieldChanged = (idx: number, type: string, value: string) => {
     let newArr = [...elements];
@@ -19,32 +20,60 @@ const Elements: FC = () => {
     dispatch(setElements(newArr));
   }
 
-  const exportImg = async (img: File, idx: number) => {
-    setImgLoading(true);
-
-    const formData = new FormData();
-
-    formData.append("img", img!);
-
-    await axios.post(import.meta.env.VITE_PROXY + "/img-processing", formData, {
-      headers: {
-        "Content-Type": "multipart/form-data",
-        Authorization: `Bearer ${token}`
-      }
-    }).then((res) => {
-      let newElements = [...elements];
-      newElements[idx] = { type: "img", src: res.data.img };
-
-      dispatch(setElements(newElements));
-    }).catch((err) => {
-      alert(err.response.data.message);
-    });
-
-    setImgLoading(false);
+  const onTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch(setTitle(e.target.value));
   }
 
   return (
     <>
+      <input
+        className="p-3 font-medium text-lg"
+        type="text"
+        placeholder="Введите заголовок..."
+        onChange={onTitleChange}
+        value={title}
+      />
+      <div className="flex items-start gap-5">
+        <div className="w-full">
+          <label
+            className="p-3 max-w-full w-full min-h-[100px] bg-white rounded flex justify-center items-center active:bg-gray-300 cursor-pointer"
+            htmlFor={"banner"}
+          >
+            {
+              imgLoading ? (
+                "Загрузка..."
+              ) : (
+                banner ? (
+                  <div className="flex flex-col gap-1 items-center text-center">
+                    <CiImport size={50} />
+                    <span>Изменить</span>
+                  </div>
+                ) : (
+                  <div className="flex flex-col gap-1 items-center text-center">
+                    <CiImport size={50} />
+                    <span>Загрузить баннер</span>
+                  </div>)
+              )
+            }
+          </label>
+          <input
+            className="hidden"
+            type="file"
+            placeholder="Загрузите изображение..."
+            onChange={(e) => {
+              if (e.target.files) {
+                exportImg(e.target.files[0], undefined, dispatch, elements, setImgLoading);
+              }
+            }}
+            id="banner"
+          />
+          {
+            banner && (
+              <img className="w-full lg:w-7/12" src={banner} alt="Изображение" />
+            )
+          }
+        </div>
+      </div>
       {elements.map((el, idx) => {
         if (el.type === "text") {
           return (
@@ -117,7 +146,7 @@ const Elements: FC = () => {
                   placeholder="Загрузите изображение..."
                   onChange={(e) => {
                     if (e.target.files) {
-                      exportImg(e.target.files[0], idx);
+                      exportImg(e.target.files[0], idx, dispatch, elements, setImgLoading);
                     }
                   }}
                   id={id}

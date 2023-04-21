@@ -3,6 +3,7 @@ import { AiOutlinePlus } from "react-icons/ai";
 import { BsCardText, BsCheck, BsImage } from "react-icons/bs";
 import { useAppDispatch, useAppSelector } from "../store/store";
 import {
+  setBanner,
   setElements,
   setIsOpenElements,
   setTags,
@@ -18,20 +19,18 @@ const AddArticlePage: FC = () => {
   );
   const [tagValue, setTagValue] = React.useState<string>("");
   const title = useAppSelector((state) => state.addArticle.title);
+  const banner = useAppSelector((state) => state.addArticle.banner);
   const elements = useAppSelector((state) => state.addArticle.elements);
   const tags = useAppSelector((state) => state.addArticle.tags);
   const dispatch = useAppDispatch();
   const token = JSON.parse(localStorage.getItem("user") || "{}").token;
-
-  const onTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    dispatch(setTitle(e.target.value));
-  }
 
   const formHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const data = {
       title,
+      banner,
       elements,
       tags
     };
@@ -44,7 +43,12 @@ const AddArticlePage: FC = () => {
       alert(res.data.message);
     }).catch((err) => {
       alert(err.response.data.message);
-    })
+    });
+
+    dispatch(setTitle(""));
+    dispatch(setBanner(undefined));
+    dispatch(setElements([]));
+    dispatch(setTags([]));
   }
 
   return (
@@ -53,14 +57,6 @@ const AddArticlePage: FC = () => {
         <h1 className="text-lg font-medium">Добавление статьи</h1>
         <form className="mt-5" onSubmit={formHandler}>
           <div className="mb-5 flex flex-col gap-5">
-            <input
-              className="p-3 font-medium text-lg"
-              type="text"
-              placeholder="Введите заголовок..."
-              onChange={onTitleChange}
-              value={title}
-            />
-
             <Elements />
           </div>
 

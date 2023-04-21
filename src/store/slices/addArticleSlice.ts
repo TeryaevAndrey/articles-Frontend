@@ -1,19 +1,16 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-
-interface IElement {
-  type: string;
-  value?: string;
-  src?: string | undefined;
-}
+import { IElement } from "../../types";
 
 const initialState: {
   isOpenElements: boolean;
   title: string;
+  banner: string | undefined;
   elements: IElement[];
   tags: string[];
 } = {
   isOpenElements: false,
   title: "",
+  banner: undefined,
   elements: [],
   tags: [],
 };
@@ -30,6 +27,10 @@ export const addArticleSlice = createSlice({
       state.title = action.payload;
     },
 
+    setBanner: (state, action: PayloadAction<string | undefined>) => {
+      state.banner = action.payload;
+    },
+
     setElements: (state, action: PayloadAction<IElement[]>) => {
       state.elements = action.payload;
     },
@@ -40,5 +41,5 @@ export const addArticleSlice = createSlice({
   },
 });
 
-export const { setIsOpenElements, setTitle, setElements, setTags } =
+export const { setIsOpenElements, setTitle, setBanner, setElements, setTags } =
   addArticleSlice.actions;
