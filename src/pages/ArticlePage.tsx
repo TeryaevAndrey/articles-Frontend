@@ -4,20 +4,31 @@ import { useParams } from "react-router-dom";
 import ArticleSidebar from "../components/Article/ArticleSidebar/ArticleSidebar";
 import Comments from "../components/Article/Comments/Comments";
 import { IArticle } from "../types";
+import { useAppDispatch, useAppSelector } from "../store/store";
+import getOpenedArticle from "../utils/getOpenedArticle";
 
 interface IArticlePage {
   way: { title: string; href: string }[]
 }
 
-const ArticlePage: FC<IArticlePage> = ({ way }) => {
+const ArticlePage: FC<IArticlePage> = () => {
   const { articleId } = useParams();
+  const articleData = useAppSelector((state) => state.openedArticle.article);
+  const loading = useAppSelector((state) => state.loaders.loadingOpenedArticle);
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(getOpenedArticle(articleId!));
+  }, []);
+
+  console.log(articleData);
 
   return (
     <div className="py-5">
       <div className="container mx-auto px-4">
         <div className="py-1.5 md:py-3">
           <Crumbs
-            way={way}
+            way={[]}
           />
         </div>
 

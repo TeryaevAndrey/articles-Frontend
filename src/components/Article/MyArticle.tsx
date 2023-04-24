@@ -33,7 +33,7 @@ const MyArticle: FC<IArticle> = ({ _id, title, banner, elements, tags, views, fr
           <div className="flex justify-between items-center">
             <div className="flex items-center gap-2">
               <AiOutlineEye size={15} />
-              <p className="text-sm text-gray-300 font-light">10 просмотров</p>
+              <p className="text-sm text-gray-300 font-light">{views} просмотров</p>
             </div>
             <Link
               to="/edit-article/asdasd"
@@ -43,7 +43,7 @@ const MyArticle: FC<IArticle> = ({ _id, title, banner, elements, tags, views, fr
             </Link>
             <Link
               className="px-2 py-1 text-sm bg-blue-500 text-white rounded"
-              to="/articles/asdsa;d"
+              to={`/articles/${_id}`}
             >
               Посетить
             </Link>
