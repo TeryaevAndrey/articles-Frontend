@@ -1,29 +1,34 @@
 import React, { FC } from "react";
 import { AiOutlineEdit, AiOutlineEye } from "react-icons/ai";
 import { Link } from "react-router-dom";
+import { IArticle } from "../../types";
 
-const MyArticle: FC = () => {
+const MyArticle: FC<IArticle> = ({ _id, title, banner, elements, tags, views, from, createdAt, updatedAt }) => {
+  const text = elements.find((el) => el.type === "text");
+
   return (
     <div className="w-full rounded overflow-hidden">
       <div className="flex flex-col gap-3">
-        <div className="relative w-full h-52">
-          <img
-            className="absolute left-0 top-0 object-cover w-full h-full"
-            src="https://img2.fonwall.ru/o/pp/vodopad-skaly-potok.jpg?route=mid&amp;h=750"
-            alt="image"
-          />
-        </div>
+        {banner && (
+          <div className="relative w-full h-52">
+            <img
+              className="absolute left-0 top-0 object-cover w-full h-full"
+              src={banner}
+              alt="image"
+            />
+          </div>
+        )}
         <div className="flex flex-col gap-3">
           <h2 className="font-medium leading-5">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae,
-            perferendis.
+            {title}
           </h2>
 
           <p className="text-sm font-light text-gray-500">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus
-            aspernatur aut, dolorum harum, quae omnis illo veniam nihil
-            consequatur repellendus, pariatur voluptatibus sapiente perferendis
-            facere...
+            {
+              (text && text.value) && (
+                text.value.slice(0, 200) + " ..."
+              )
+            }
           </p>
           <div className="flex justify-between items-center">
             <div className="flex items-center gap-2">

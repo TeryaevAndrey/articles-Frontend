@@ -6,6 +6,8 @@ import { headerSlice } from "./slices/headerSlice";
 import { addArticleSlice } from "./slices/addArticleSlice";
 import { userSlice } from "./slices/userSlice";
 import { loadersSlice } from "./slices/loadersSlice";
+import { myArticlesSlice } from "./slices/myArticlesSlice";
+import { openedArticleSlice } from "./slices/openedArticleSlice";
 
 const store = configureStore({
   reducer: {
@@ -14,6 +16,8 @@ const store = configureStore({
     header: headerSlice.reducer,
     addArticle: addArticleSlice.reducer,
     loaders: loadersSlice.reducer,
+    myArticles: myArticlesSlice.reducer,
+    openedArticle: openedArticleSlice.reducer,
   },
 });
 

@@ -1,10 +1,15 @@
-import React, { FC } from "react";
+import React, { FC, useEffect } from "react";
 import Crumbs from "../components/Crumbs/Crumbs";
 import { useParams } from "react-router-dom";
 import ArticleSidebar from "../components/Article/ArticleSidebar/ArticleSidebar";
 import Comments from "../components/Article/Comments/Comments";
+import { IArticle } from "../types";
 
-const ArticlePage: FC = () => {
+interface IArticlePage {
+  way: { title: string; href: string }[]
+}
+
+const ArticlePage: FC<IArticlePage> = ({ way }) => {
   const { articleId } = useParams();
 
   return (
@@ -12,7 +17,7 @@ const ArticlePage: FC = () => {
       <div className="container mx-auto px-4">
         <div className="py-1.5 md:py-3">
           <Crumbs
-            way={[{ title: `${articleId}`, href: `/articles/${articleId}` }]}
+            way={way}
           />
         </div>
 
