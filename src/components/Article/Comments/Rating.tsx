@@ -1,19 +1,22 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import { AiFillStar } from "react-icons/ai";
 import { useAppDispatch, useAppSelector } from '../../../store/store';
 import { setRating } from '../../../store/slices/CommentSlice';
+import { useLocation } from 'react-router-dom';
 
 const Rating: FC = () => {
   const [hoveredRating, setHoveredRating] = useState<number>(0);
   const rating = useAppSelector((state) => state.comment.rating);
   const dispatch = useAppDispatch();
-  const stars = [];
+  const location = useLocation();
+
+  useEffect(() => {
+    dispatch(setRating(0));
+  }, [location]);
 
   const onStarFocus = (rating: number) => {
     setHoveredRating(rating)
   }
-
-  console.log(rating);
 
   return (
     <div className="flex items-center gap-2">
