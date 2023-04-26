@@ -3,18 +3,17 @@ import Pagination from "../components/Pagination/Pagination";
 import MyArticle from "../components/Article/MyArticle";
 import { useAppDispatch, useAppSelector } from "../store/store";
 import getMyArticles from "../utils/getMyArticles";
-import { setCurrentPage } from "../store/slices/myArticlesSlice";
+import { useParams } from "react-router-dom";
 
 const ProfilePage: FC = () => {
   const dispatch = useAppDispatch();
+  const limit = 10;
+  const { page } = useParams();
   const articles = useAppSelector((state) => state.myArticles.articles);
-  const page = useAppSelector((state) => state.myArticles.page);
-  const currentPage = useAppSelector((state) => state.myArticles.currentPage);
   const total = useAppSelector((state) => state.myArticles.total);
-  const limit = useAppSelector((state) => state.myArticles.limit);
 
   React.useEffect(() => {
-    dispatch(getMyArticles(10, page));
+    dispatch(getMyArticles(10, page ? Number(page.slice(4)) : 1));
   }, [page]);
 
   return (
@@ -30,9 +29,9 @@ const ProfilePage: FC = () => {
             }
           </div>
           {
-            articles.length > 0 && (
+            articles.length > 0 && (  
               <div className="mt-12 flex justify-center">
-                <Pagination total={total} limit={limit} currentPage={currentPage} setCurrentPage={setCurrentPage} />
+                <Pagination total={total} limit={limit} currentPage={page ? Number(page?.slice(4)) : 1} />
               </div>
             )
           }

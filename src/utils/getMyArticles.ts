@@ -3,7 +3,6 @@ import axios, { AxiosResponse } from "axios";
 import {
   setMyArticles,
   setMyArticlesTotal,
-  setPage,
 } from "../store/slices/myArticlesSlice";
 
 const getMyArticles =

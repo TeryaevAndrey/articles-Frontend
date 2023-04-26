@@ -14,9 +14,7 @@ const MainPage: FC = () => {
   const total = useAppSelector((state) => state.allArticles.total);
 
   React.useEffect(() => {
-    if (page) {
-      dispatch(getAllArticles(10, Number(page.slice(4))));
-    }
+    dispatch(getAllArticles(10, page ? Number(page.slice(4)) : 1));
   }, [page]);
 
   return (
@@ -38,7 +36,7 @@ const MainPage: FC = () => {
             {
               articles.length > 0 && (
                 <div className="mt-12 flex justify-center">
-                  <Pagination total={total} limit={limit} currentPage={Number(page?.slice(4))} />
+                  <Pagination total={total} limit={limit} currentPage={page ? Number(page?.slice(4)) : 1} />
                 </div>
               )
             }
