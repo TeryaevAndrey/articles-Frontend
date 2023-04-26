@@ -4,10 +4,12 @@ const initialState: {
   loadingProfileHeader: boolean;
   loadingOpenedArticle: boolean;
   loadingAddComment: boolean;
+  loadingGetComments: boolean;
 } = {
   loadingProfileHeader: false,
   loadingOpenedArticle: false,
   loadingAddComment: false,
+  loadingGetComments: false,
 };
 
 export const loadersSlice = createSlice({
@@ -25,6 +27,10 @@ export const loadersSlice = createSlice({
     setLoadingAddComment: (state, action: PayloadAction<boolean>) => {
       state.loadingAddComment = !state.loadingAddComment;
     },
+
+    setLoadingGetComments: (state, action: PayloadAction<boolean>) => {
+      state.loadingGetComments = !state.loadingGetComments;
+    },
   },
 });
 
@@ -32,4 +38,5 @@ export const {
   setLoadingProfileHeader,
   setLoadingOpenedArticle,
   setLoadingAddComment,
+  setLoadingGetComments,
 } = loadersSlice.actions;

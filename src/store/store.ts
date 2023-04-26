@@ -9,7 +9,7 @@ import { loadersSlice } from "./slices/loadersSlice";
 import { myArticlesSlice } from "./slices/myArticlesSlice";
 import { openedArticleSlice } from "./slices/openedArticleSlice";
 import { allArticlesSlice } from "./slices/allArticlesSlice";
-import { CommentSlice } from "./slices/CommentSlice";
+import { addCommentSlice } from "./slices/addCommentSlice";
 
 const store = configureStore({
   reducer: {
@@ -21,7 +21,7 @@ const store = configureStore({
     myArticles: myArticlesSlice.reducer,
     allArticles: allArticlesSlice.reducer,
     openedArticle: openedArticleSlice.reducer,
-    comment: CommentSlice.reducer,
+    comment: addCommentSlice.reducer,
   },
 });
 

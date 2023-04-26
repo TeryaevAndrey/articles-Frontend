@@ -6,16 +6,23 @@ import Comments from "../components/Article/Comments/Comments";
 import { IElement } from "../types";
 import { useAppDispatch, useAppSelector } from "../store/store";
 import getOpenedArticle from "../utils/getOpenedArticle";
+import getComments from "../utils/getComments";
 
 const ArticlePage: FC = () => {
   const { articleId } = useParams();
   const articleData = useAppSelector((state) => state.openedArticle.article);
   const loading = useAppSelector((state) => state.loaders.loadingOpenedArticle);
+  const comments = useAppSelector((state) => state.openedArticle.comments);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(getOpenedArticle(articleId!));
+    if (articleId) {
+      dispatch(getOpenedArticle(articleId));
+      dispatch(getComments(articleId));
+    }
   }, []);
+
+  console.log(comments);
 
   return (
     <div className="py-5">
@@ -71,7 +78,7 @@ const ArticlePage: FC = () => {
                   }
                 </div>
                 <div className="mt-7">
-                  <Comments />
+                  <Comments comments={comments} />
                 </div>
               </div>
             </div>

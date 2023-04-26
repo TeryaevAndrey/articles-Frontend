@@ -1,7 +1,7 @@
 import React, { FC, useEffect, useState } from 'react';
 import { AiFillStar } from "react-icons/ai";
 import { useAppDispatch, useAppSelector } from '../../../store/store';
-import { setRating } from '../../../store/slices/CommentSlice';
+import { setRating } from '../../../store/slices/addCommentSlice';
 import { useLocation } from 'react-router-dom';
 
 const Rating: FC = () => {

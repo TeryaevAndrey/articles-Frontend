@@ -1,11 +1,12 @@
 import React, { FC, useEffect } from "react";
 import Rating from "./Rating";
 import { useAppDispatch, useAppSelector } from "../../../store/store";
-import { setRating, setText } from "../../../store/slices/CommentSlice";
+import { setRating, setText } from "../../../store/slices/addCommentSlice";
 import { useLocation } from "react-router-dom";
 import axios, { AxiosResponse } from "axios";
 import { setLoadingAddComment } from "../../../store/slices/loadersSlice";
 import Loader from "../../Loader";
+import { setOpenedArticleComments } from "../../../store/slices/openedArticleSlice";
 
 const AddComment: FC = () => {
   const token = JSON.parse(localStorage.getItem("user") || "{}").token;
@@ -13,6 +14,7 @@ const AddComment: FC = () => {
   const rating = useAppSelector((state) => state.comment.rating);
   const text = useAppSelector((state) => state.comment.text);
   const loading = useAppSelector((state) => state.loaders.loadingAddComment);
+  const comments = useAppSelector((state) => state.openedArticle.comments);
   const dispatch = useAppDispatch();
   const location = useLocation();
 
@@ -39,7 +41,10 @@ const AddComment: FC = () => {
       }
     }).then((res: AxiosResponse) => {
       alert(res.data.message);
-      
+
+      dispatch(setOpenedArticleComments([res.data.comment, ...comments]));
+      console.log(res.data.comments);
+
       dispatch(setRating(0));
       dispatch(setText(""));
     }).catch((err) => {

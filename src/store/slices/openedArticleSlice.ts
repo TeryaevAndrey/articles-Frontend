@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { IUser } from "../../types";
+import { IComment, IUser } from "../../types";
 
 interface IOpenedArticle {
   _id: undefined | string;
@@ -15,6 +15,7 @@ interface IOpenedArticle {
 
 const initialState: {
   article: IOpenedArticle;
+  comments: IComment[];
 } = {
   article: {
     _id: undefined,
@@ -27,6 +28,7 @@ const initialState: {
     createdAt: undefined,
     updatedAt: undefined,
   },
+  comments: [],
 };
 
 export const openedArticleSlice = createSlice({
@@ -36,7 +38,12 @@ export const openedArticleSlice = createSlice({
     setOpenedArticleData: (state, action: PayloadAction<IOpenedArticle>) => {
       state.article = action.payload;
     },
+
+    setOpenedArticleComments: (state, action: PayloadAction<IComment[]>) => {
+      state.comments = action.payload;
+    },
   },
 });
 
-export const { setOpenedArticleData } = openedArticleSlice.actions;
+export const { setOpenedArticleData, setOpenedArticleComments } =
+  openedArticleSlice.actions;

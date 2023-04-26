@@ -20,3 +20,13 @@ export interface IArticle {
   createdAt: Date;
   updatedAt: Date;
 }
+
+export interface IComment {
+  _id: ObjectId;
+  from: IUser;
+  articleId: ObjectId;
+  rating: number;
+  text?: string;
+  createdAt: Date;
+  updatedAt: Date;
+}

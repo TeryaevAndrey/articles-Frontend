@@ -8,7 +8,7 @@ const initialState: {
   text: "",
 };
 
-export const CommentSlice = createSlice({
+export const addCommentSlice = createSlice({
   name: "comment",
   initialState,
   reducers: {
@@ -21,4 +21,4 @@ export const CommentSlice = createSlice({
   },
 });
 
-export const { setRating, setText } = CommentSlice.actions;
+export const { setRating, setText } = addCommentSlice.actions;
