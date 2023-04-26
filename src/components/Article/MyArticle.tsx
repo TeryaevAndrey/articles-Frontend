@@ -10,13 +10,11 @@ const MyArticle: FC<IArticle> = ({ _id, title, banner, elements, tags, views, fr
     <div className="w-full rounded overflow-hidden">
       <div className="flex flex-col gap-3">
         {banner && (
-          <div className="relative w-full h-52">
-            <img
-              className="absolute left-0 top-0 object-cover w-full h-full"
-              src={banner}
-              alt="image"
-            />
-          </div>
+          <img
+            className="w-full h-auto"
+            src={banner}
+            alt="image"
+          />
         )}
         <div className="flex flex-col gap-3">
           <h2 className="font-medium leading-5">
