@@ -4,7 +4,7 @@ import Comment from "./Comment";
 
 const Comments: FC = () => {
   return (
-    <div className="flex flex-col gap-3">
+    <div className="flex flex-col gap-3 w-full">
       <h3 className="text-lg font-medium">Отзывы</h3>
 
       <AddComment />

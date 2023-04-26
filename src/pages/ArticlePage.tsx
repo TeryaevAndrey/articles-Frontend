@@ -70,14 +70,13 @@ const ArticlePage: FC = () => {
                     })
                   }
                 </div>
+                <div className="mt-7">
+                  <Comments />
+                </div>
               </div>
             </div>
           )
         }
-
-        <div className="mt-7">
-          <Comments />
-        </div>
       </div >
     </div >
   );
