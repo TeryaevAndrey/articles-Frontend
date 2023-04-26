@@ -1,5 +1,5 @@
 import React, { FC, useState } from "react";
-import LoaderAuth from "../components/Auth/LoaderAuth";
+import Loader from "../components/Loader";
 import axios from "axios";
 import { useAppDispatch } from "../store/store";
 import { setIsAuth } from "../store/slices/mainSlice";
@@ -76,7 +76,7 @@ const LoginPage: FC = () => {
           </div>
           <button className="flex items-center gap-2 justify-center w-full bg-blue-500 text-white rounded px-3 py-2 mt-5">
             Авторизоваться
-            {isLoading && <LoaderAuth />}
+            {isLoading && <Loader />}
           </button>
         </form>
       </div>

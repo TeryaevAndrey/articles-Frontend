@@ -22,7 +22,7 @@ const Rating: FC = () => {
     <div className="flex items-center gap-2">
       {
         [...Array(5)].map((star, idx) => {
-          return <AiFillStar className={`${(hoveredRating >= idx + 1 || idx + 1 <= rating) ? "text-yellow-500" : "text-slate-400"} cursor-pointer ease-linear duration-200`} size={25} onMouseEnter={() => onStarFocus(idx + 1)} onMouseLeave={() => setHoveredRating(0)} onClick={() => dispatch(setRating(idx + 1))} />
+          return <AiFillStar key={idx} className={`${(hoveredRating >= idx + 1 || idx + 1 <= rating) ? "text-yellow-500" : "text-slate-400"} cursor-pointer ease-linear duration-200`} size={25} onMouseEnter={() => onStarFocus(idx + 1)} onMouseLeave={() => setHoveredRating(0)} onClick={() => dispatch(setRating(idx + 1))} />
         })
       }
     </div>
