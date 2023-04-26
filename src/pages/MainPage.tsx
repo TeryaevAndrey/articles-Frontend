@@ -3,21 +3,20 @@ import Popular from "../components/Popular/Popular";
 import Article from "../components/Article/Article";
 import Pagination from "../components/Pagination/Pagination";
 import { useAppDispatch, useAppSelector } from "../store/store";
-import getMyArticles from "../utils/getMyArticles";
-import { setCurrentPage } from "../store/slices/myArticlesSlice";
-import { setAllArticles } from "../store/slices/allArticlesSlice";
 import getAllArticles from "../utils/getAllArticles";
+import { useParams } from "react-router-dom";
 
 const MainPage: FC = () => {
   const dispatch = useAppDispatch();
+  const limit = 10;
+  const { page } = useParams();
   const articles = useAppSelector((state) => state.allArticles.articles);
-  const page = useAppSelector((state) => state.allArticles.page);
-  const currentPage = useAppSelector((state) => state.allArticles.currentPage);
   const total = useAppSelector((state) => state.allArticles.total);
-  const limit = useAppSelector((state) => state.allArticles.limit);
 
   React.useEffect(() => {
-    dispatch(getAllArticles(10, page));
+    if (page) {
+      dispatch(getAllArticles(10, Number(page.slice(4))));
+    }
   }, [page]);
 
   return (
@@ -36,9 +35,13 @@ const MainPage: FC = () => {
                 })
               }
             </div>
-            <div className="mt-12 flex justify-center">
-              <Pagination total={total} limit={limit} currentPage={currentPage} setCurrentPage={setCurrentPage} />
-            </div>
+            {
+              articles.length > 0 && (
+                <div className="mt-12 flex justify-center">
+                  <Pagination total={total} limit={limit} currentPage={Number(page?.slice(4))} />
+                </div>
+              )
+            }
           </div>
         </div>
       </div>

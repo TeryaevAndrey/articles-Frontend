@@ -1,18 +1,22 @@
 import React, { FC } from "react";
 import { AiOutlineLeft, AiOutlineRight } from "react-icons/ai";
 import { useAppDispatch } from "../../store/store";
+import { useLocation, useNavigate } from "react-router-dom";
 
 interface IPagination {
   total: number;
   limit: number;
   currentPage: number;
-  setCurrentPage: Function;
 }
 
-const Pagination: FC<IPagination> = ({ total, limit, currentPage, setCurrentPage }) => {
+const Pagination: FC<IPagination> = ({ total, limit, currentPage }) => {
   const dispatch = useAppDispatch();
   const totalPages = Math.ceil(total / limit);
   const pages = Array.from({ length: totalPages }, (_, i) => i + 1);
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  console.log(location.pathname.split("/")[1]);
 
   return (
     <div className="flex items-center gap-5">
@@ -25,7 +29,7 @@ const Pagination: FC<IPagination> = ({ total, limit, currentPage, setCurrentPage
               <button
                 key={idx}
                 className={`flex justify-center items-center rounded ${currentPage === page ? "bg-blue-500" : "bg-blue-300"} text-white w-10 h-10`}
-                onClick={() => dispatch(setCurrentPage(page))}
+                onClick={() => navigate("/" + location.pathname.split("/")[1] + "/page" + page)}
               >
                 {page}
               </button>

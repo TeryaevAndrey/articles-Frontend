@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import MainPage from "../pages/MainPage";
 import ArticlePage from "../pages/ArticlePage";
 import RegPage from "../pages/RegPage";
@@ -11,7 +11,8 @@ import EditProfilePage from "../pages/EditProfilePage";
 export const useRoutes = (isAuth: boolean) => {
   return isAuth ? (
     <Routes>
-      <Route path="/" element={<MainPage />} />
+      <Route path="/all?/:page" index element={<MainPage />} />
+      <Route path="*" element={<Navigate to="/all" replace />} />
       <Route path="/auth/reg" element={<RegPage />} />
       <Route path="/auth/login" element={<LoginPage />} />
       <Route path="/articles/:articleId" element={<ArticlePage />} />

@@ -29,9 +29,13 @@ const ProfilePage: FC = () => {
               })
             }
           </div>
-          <div className="mt-12 flex justify-center">
-            <Pagination total={total} limit={limit} currentPage={currentPage} setCurrentPage={setCurrentPage} />
-          </div>
+          {
+            articles.length > 0 && (
+              <div className="mt-12 flex justify-center">
+                <Pagination total={total} limit={limit} currentPage={currentPage} setCurrentPage={setCurrentPage} />
+              </div>
+            )
+          }
         </div>
       </div>
     </div>
