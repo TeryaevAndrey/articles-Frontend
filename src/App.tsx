@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, useState, useEffect } from "react";
 import Layout from "./components/Layout";
 import { useRoutes } from "./core/routes";
 import { useAppDispatch, useAppSelector } from "./store/store";
@@ -11,10 +11,9 @@ const App: FC = () => {
   const isAuth = useAppSelector((state) => state.main.isAuth);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const [isLoading, setIsLoading] = React.useState<boolean>(true);
-  const myData = useAppSelector((state) => state.user.myData);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
-  React.useEffect(() => {
+  useEffect(() => {
     const check = async () => {
       const isDeadToken = await checkToken();
 
@@ -37,7 +36,7 @@ const App: FC = () => {
     setIsLoading(false);
   }, []);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (isAuth) {
       dispatch(getMyData());
     }

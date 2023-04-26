@@ -8,6 +8,7 @@ import { userSlice } from "./slices/userSlice";
 import { loadersSlice } from "./slices/loadersSlice";
 import { myArticlesSlice } from "./slices/myArticlesSlice";
 import { openedArticleSlice } from "./slices/openedArticleSlice";
+import { allArticlesSlice } from "./slices/allArticlesSlice";
 
 const store = configureStore({
   reducer: {
@@ -17,6 +18,7 @@ const store = configureStore({
     addArticle: addArticleSlice.reducer,
     loaders: loadersSlice.reducer,
     myArticles: myArticlesSlice.reducer,
+    allArticles: allArticlesSlice.reducer,
     openedArticle: openedArticleSlice.reducer,
   },
 });

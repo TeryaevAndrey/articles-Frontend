@@ -2,8 +2,24 @@ import React, { FC } from "react";
 import Popular from "../components/Popular/Popular";
 import Article from "../components/Article/Article";
 import Pagination from "../components/Pagination/Pagination";
+import { useAppDispatch, useAppSelector } from "../store/store";
+import getMyArticles from "../utils/getMyArticles";
+import { setCurrentPage } from "../store/slices/myArticlesSlice";
+import { setAllArticles } from "../store/slices/allArticlesSlice";
+import getAllArticles from "../utils/getAllArticles";
 
 const MainPage: FC = () => {
+  const dispatch = useAppDispatch();
+  const articles = useAppSelector((state) => state.allArticles.articles);
+  const page = useAppSelector((state) => state.allArticles.page);
+  const currentPage = useAppSelector((state) => state.allArticles.currentPage);
+  const total = useAppSelector((state) => state.allArticles.total);
+  const limit = useAppSelector((state) => state.allArticles.limit);
+
+  React.useEffect(() => {
+    dispatch(getAllArticles(10, page));
+  }, [page]);
+
   return (
     <div>
       <div className="container mx-auto px-4">
@@ -14,12 +30,14 @@ const MainPage: FC = () => {
 
           <div className="lg:w-[70%]">
             <div className="w-full grid grid-cols-1 sm:grid-cols-2 gap-5 mt-5 lg:mt-0">
-              <Article />
-              <Article />
-              <Article />
+              {
+                articles.map((el) => {
+                  return <Article key={el._id} _id={el._id} title={el.title} banner={el.banner} elements={el.elements} tags={el.tags} views={el.views} from={el.from} createdAt={el.createdAt} updatedAt={el.updatedAt} />
+                })
+              }
             </div>
             <div className="mt-12 flex justify-center">
-              <Pagination />
+              <Pagination total={total} limit={limit} currentPage={currentPage} setCurrentPage={setCurrentPage} />
             </div>
           </div>
         </div>
