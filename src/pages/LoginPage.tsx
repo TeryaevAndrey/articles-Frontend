@@ -68,7 +68,7 @@ const LoginPage: FC = () => {
             />
             <input
               className="px-3 py-2 rounded text-sm placeholder:text-sm placeholder:font-light"
-              type="text"
+              type="password"
               placeholder="Пароль..."
               onChange={onPasswordChange}
               value={password}
