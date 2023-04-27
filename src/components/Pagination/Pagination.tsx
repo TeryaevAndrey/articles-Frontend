@@ -10,7 +10,6 @@ interface IPagination {
 }
 
 const Pagination: FC<IPagination> = ({ total, limit, currentPage }) => {
-  const dispatch = useAppDispatch();
   const totalPages = Math.ceil(total / limit);
   const pages = Array.from({ length: totalPages }, (_, i) => i + 1);
   const navigate = useNavigate();

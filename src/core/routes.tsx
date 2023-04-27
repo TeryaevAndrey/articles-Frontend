@@ -23,7 +23,8 @@ export const useRoutes = (isAuth: boolean) => {
     </Routes>
   ) : (
     <Routes>
-      <Route path="/" element={<MainPage />} />
+      <Route path="/all/:page?" element={<MainPage />} />
+      <Route path="*" element={<Navigate to="/all" replace />} />
       <Route path="/auth/reg" element={<RegPage />} />
       <Route path="/auth/login" element={<LoginPage />} />
       <Route path="/articles/:articleId" element={<ArticlePage />} />
