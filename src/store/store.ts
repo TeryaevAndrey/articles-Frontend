@@ -10,7 +10,6 @@ import { myArticlesSlice } from "./slices/myArticlesSlice";
 import { openedArticleSlice } from "./slices/openedArticleSlice";
 import { allArticlesSlice } from "./slices/allArticlesSlice";
 import { addCommentSlice } from "./slices/addCommentSlice";
-import { favouriteArticlesSlice } from "./slices/favouriteArticlesSlice";
 
 const store = configureStore({
   reducer: {
@@ -23,7 +22,6 @@ const store = configureStore({
     allArticles: allArticlesSlice.reducer,
     openedArticle: openedArticleSlice.reducer,
     comment: addCommentSlice.reducer,
-    favourite: favouriteArticlesSlice.reducer,
   },
 });
 
