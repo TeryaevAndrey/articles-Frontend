@@ -10,30 +10,42 @@ interface IPagination {
 }
 
 const Pagination: FC<IPagination> = ({ total, limit, currentPage }) => {
-  const totalPages = Math.ceil(total / limit);
-  const pages = Array.from({ length: totalPages }, (_, i) => i + 1);
+  let totalPages = Math.ceil(total / limit);
+  let pages = Array.from({ length: totalPages }, (_, i) => i + 1);
   const { page } = useParams();
   const navigate = useNavigate();
   const location = useLocation();
 
-  console.log(location.pathname.split("/")[1]);
+  if (totalPages > 3) {
+    if (currentPage === 1) {
+      pages = pages.slice(0, 3);
+    } else if (currentPage === totalPages) {
+      pages = [totalPages - 2, totalPages - 1, totalPages];
+    } else {
+      pages = [currentPage - 1, currentPage, currentPage + 1]
+    }
+  }
+
+  console.log(page);
 
   return (
     <div className="flex items-center gap-5">
       <AiOutlineLeft className="cursor-pointer" size={20} color="#3b82f6" onClick={() => {
-        navigate("/" + location.pathname.split("/")[1] + "/page" + (Number(page?.slice(4)) - 1))
+        if (currentPage > 1) {
+          navigate("/" + location.pathname.split("/")[1] + "/page" + (page !== undefined ? (Number(page?.slice(4)) - 1) : 1))
+        }
       }} />
       <div className="flex items-center gap-3">
 
         {
-          pages.map((page, idx) => {
+          pages.map((pageEl, idx) => {
             return (
               <button
                 key={idx}
-                className={`flex justify-center items-center rounded ${currentPage === page ? "bg-blue-500" : "bg-blue-300"} text-white w-10 h-10`}
-                onClick={() => navigate("/" + location.pathname.split("/")[1] + "/page" + page)}
+                className={`flex justify-center items-center rounded ${currentPage === pageEl ? "bg-blue-500" : "bg-blue-300"} text-white w-10 h-10`}
+                onClick={() => navigate("/" + location.pathname.split("/")[1] + "/page" + pageEl)}
               >
-                {page}
+                {pageEl}
               </button>
             )
           })
@@ -41,7 +53,9 @@ const Pagination: FC<IPagination> = ({ total, limit, currentPage }) => {
 
       </div>
       <AiOutlineRight className="cursor-pointer" size={20} color="#3b82f6" onClick={() => {
-        navigate("/" + location.pathname.split("/")[1] + "/page" + (Number(page?.slice(4)) + 1));
+        if (currentPage < totalPages) {
+          navigate("/" + location.pathname.split("/")[1] + "/page" + (page !== undefined ? (Number(page?.slice(4)) + 1) : 2));
+        }
       }} />
     </div>
   );
