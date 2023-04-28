@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 import { AiOutlineLeft, AiOutlineRight } from "react-icons/ai";
 import { useAppDispatch } from "../../store/store";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 
 interface IPagination {
   total: number;
@@ -12,6 +12,7 @@ interface IPagination {
 const Pagination: FC<IPagination> = ({ total, limit, currentPage }) => {
   const totalPages = Math.ceil(total / limit);
   const pages = Array.from({ length: totalPages }, (_, i) => i + 1);
+  const { page } = useParams();
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -19,7 +20,9 @@ const Pagination: FC<IPagination> = ({ total, limit, currentPage }) => {
 
   return (
     <div className="flex items-center gap-5">
-      <AiOutlineLeft className="cursor-pointer" size={20} color="#3b82f6" />
+      <AiOutlineLeft className="cursor-pointer" size={20} color="#3b82f6" onClick={() => {
+        navigate("/" + location.pathname.split("/")[1] + "/page" + (Number(page?.slice(4)) - 1))
+      }} />
       <div className="flex items-center gap-3">
 
         {
@@ -37,7 +40,9 @@ const Pagination: FC<IPagination> = ({ total, limit, currentPage }) => {
         }
 
       </div>
-      <AiOutlineRight className="cursor-pointer" size={20} color="#3b82f6" />
+      <AiOutlineRight className="cursor-pointer" size={20} color="#3b82f6" onClick={() => {
+        navigate("/" + location.pathname.split("/")[1] + "/page" + (Number(page?.slice(4)) + 1));
+      }} />
     </div>
   );
 };

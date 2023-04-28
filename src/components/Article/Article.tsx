@@ -8,6 +8,7 @@ import { useAppSelector } from "../../store/store";
 
 const Article: FC<IArticle> = ({ _id, title, banner, elements, tags, views, from, createdAt, updatedAt }) => {
   const text = elements.find((el) => el.type === "text");
+  const favouriteArticles = useAppSelector((state) => state.favourite.articles);
   const isAuth = useAppSelector((state) => state.main.isAuth);
 
   return (
