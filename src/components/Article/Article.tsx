@@ -1,27 +1,32 @@
 import React, { FC, useEffect, useState } from "react";
 import { AiOutlineEye } from "react-icons/ai";
 import { Link } from "react-router-dom";
-import { IArticle } from "../../types";
+import { IArticle, IFavourite } from "../../types";
 import Tag from "./Tag";
 import { BsBookmark, BsBookmarkFill } from "react-icons/bs";
 import { useAppDispatch, useAppSelector } from "../../store/store";
 import getFavouriteArticle from "../../utils/getFavouriteArticle";
 import addToFavourite from "../../utils/addToFavourite";
+import deleteFavouriteArticle from "../../utils/deleteFavouriteArticle";
 
 const Article: FC<IArticle> = ({ _id, title, banner, elements, tags, views, from, createdAt, updatedAt }) => {
   const dispatch = useAppDispatch();
   const text = elements.find((el) => el.type === "text");
   const favouriteArticles = useAppSelector((state) => state.favourite.articles);
   const isAuth = useAppSelector((state) => state.main.isAuth);
-  const [isFavourite, setIsFavourite] = useState<boolean>(false);
+  const [favouriteInfo, setFavouriteInfo] = useState<{ favourite: IFavourite | undefined; result: boolean; } | undefined>(undefined);
 
   React.useEffect(() => {
     const getFavourite = async () => {
-      setIsFavourite(await getFavouriteArticle(_id));
+      const data = await getFavouriteArticle(_id);
+
+      setFavouriteInfo(data);
     }
 
     getFavourite();
   }, []);
+
+  console.log(favouriteInfo)
 
   return (
     <div className="w-full rounded overflow-hidden">
@@ -58,10 +63,33 @@ const Article: FC<IArticle> = ({ _id, title, banner, elements, tags, views, from
             </div>
             <div className="flex items-center gap-3">
               {
-                (isFavourite && isAuth) ? (
-                  <BsBookmarkFill className="text-blue-500 cursor-pointer" size={20} />
+                (favouriteInfo?.result && isAuth) ? (
+                  <BsBookmarkFill className="text-blue-500 cursor-pointer" size={20} onClick={async () => {
+                    const data: { message: string; result: boolean } | undefined = await deleteFavouriteArticle(favouriteInfo.favourite?._id);
+
+                    if (data?.result) {
+                      setFavouriteInfo(
+                        {
+                          favourite: undefined,
+                          result: false
+                        }
+                      )
+                    }
+                  }
+                  } />
                 ) : (
-                  <BsBookmark className="text-blue-500 cursor-pointer" size={20} onClick={() => addToFavourite(_id)} />
+                  <BsBookmark className="text-blue-500 cursor-pointer" size={20} onClick={async () => {
+                    const data: { favourite: IFavourite; message: string } | undefined = await addToFavourite(_id);
+
+
+                    setFavouriteInfo(
+                      {
+                        favourite: data?.favourite,
+                        result: true
+                      }
+                    )
+
+                  }} />
                 )
               }
               <Link

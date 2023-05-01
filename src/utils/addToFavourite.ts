@@ -1,7 +1,9 @@
 import axios, { AxiosResponse } from "axios";
+import { IFavourite } from "../types";
 
-const addToFavourite = async (articleId: string)  => {
+const addToFavourite = async (articleId: string): Promise<{favourite: IFavourite, message: string} | undefined> => {
   const token = JSON.parse(localStorage.getItem("user") || "{}").token;
+  let result: {favourite: IFavourite, message: string} | undefined = undefined;
 
   await axios
     .post(
@@ -14,11 +16,16 @@ const addToFavourite = async (articleId: string)  => {
       }
     )
     .then((res: AxiosResponse) => {
-      return true;
+      result = {
+        favourite: res.data.favourite,
+        message: res.data.message,
+      };
     })
     .catch((err) => {
-      alert(err.response.data.message);
+      console.log(err.response.data.message);
     });
+
+  return result;
 };
 
 export default addToFavourite;

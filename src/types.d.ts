@@ -30,3 +30,10 @@ export interface IComment {
   createdAt: Date;
   updatedAt: Date;
 }
+
+
+export interface IFavourite {
+  _id: ObjectId;
+  userId: ObjectId;
+  articleId: ObjectId;
+}
