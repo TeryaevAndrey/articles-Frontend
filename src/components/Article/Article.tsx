@@ -1,15 +1,27 @@
-import React, { FC } from "react";
+import React, { FC, useEffect, useState } from "react";
 import { AiOutlineEye } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { IArticle } from "../../types";
 import Tag from "./Tag";
-import { BsBookmark } from "react-icons/bs";
-import { useAppSelector } from "../../store/store";
+import { BsBookmark, BsBookmarkFill } from "react-icons/bs";
+import { useAppDispatch, useAppSelector } from "../../store/store";
+import getFavouriteArticle from "../../utils/getFavouriteArticle";
+import addToFavourite from "../../utils/addToFavourite";
 
 const Article: FC<IArticle> = ({ _id, title, banner, elements, tags, views, from, createdAt, updatedAt }) => {
+  const dispatch = useAppDispatch();
   const text = elements.find((el) => el.type === "text");
   const favouriteArticles = useAppSelector((state) => state.favourite.articles);
   const isAuth = useAppSelector((state) => state.main.isAuth);
+  const [isFavourite, setIsFavourite] = useState<boolean>(false);
+
+  React.useEffect(() => {
+    const getFavourite = async () => {
+      setIsFavourite(await getFavouriteArticle(_id));
+    }
+
+    getFavourite();
+  }, []);
 
   return (
     <div className="w-full rounded overflow-hidden">
@@ -45,7 +57,13 @@ const Article: FC<IArticle> = ({ _id, title, banner, elements, tags, views, from
               <p className="text-sm text-gray-300 font-light">{views} просмотров</p>
             </div>
             <div className="flex items-center gap-3">
-              <BsBookmark className="text-blue-500 cursor-pointer" size={20} />
+              {
+                (isFavourite && isAuth) ? (
+                  <BsBookmarkFill className="text-blue-500 cursor-pointer" size={20} />
+                ) : (
+                  <BsBookmark className="text-blue-500 cursor-pointer" size={20} onClick={() => addToFavourite(_id)} />
+                )
+              }
               <Link
                 className="px-2 py-1 text-sm bg-blue-500 text-white rounded"
                 to={`/articles/${_id}`}
