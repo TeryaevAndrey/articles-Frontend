@@ -7,6 +7,7 @@ import ProfilePage from "../pages/ProfilePage";
 import AddArticlePage from "../pages/AddArticlePage";
 import SearchPage from "../pages/SearchPage";
 import EditProfilePage from "../pages/EditProfilePage";
+import FavouritePage from "../pages/FavouritePage";
 
 export const useRoutes = (isAuth: boolean) => {
   return isAuth ? (
@@ -18,6 +19,7 @@ export const useRoutes = (isAuth: boolean) => {
       <Route path="/articles/:articleId" element={<ArticlePage />} />
       <Route path="/my-articles/:page?" element={<ProfilePage />} />
       <Route path="/add-article" element={<AddArticlePage />} />
+      <Route path="/favourite/:page?" element={<FavouritePage />} />
       <Route path="/search" element={<SearchPage />} />
       <Route path="/edit-profile" element={<EditProfilePage />} />
     </Routes>

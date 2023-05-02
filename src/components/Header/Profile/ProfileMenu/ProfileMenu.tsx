@@ -28,7 +28,7 @@ const ProfileMenu: FC = () => {
       />
       <ProfileLink
         title="Избранное"
-        href="/favourites"
+        href="/favourite"
         onClick={() => dispatch(setIsOpenMenu(false))}
       />
       <ProfileLink

@@ -1,6 +1,6 @@
 import { Dispatch } from "@reduxjs/toolkit";
 import axios from "axios";
-import { setFavouriteArticles } from "../store/slices/favouiriteArticlesSlice";
+import { setFavouriteArticles } from "../store/slices/favouriteSlice";
 import { IFavourite } from "../types";
 
 const getFavouriteArticle = async (articleId: string) => {

@@ -1,6 +1,6 @@
 import { Dispatch } from "@reduxjs/toolkit";
 import axios, { AxiosResponse } from "axios";
-import { addArticleToFavourite } from "../store/slices/favouiriteArticlesSlice";
+import { addArticleToFavourite } from "../store/slices/favouriteSlice";
 
 const addToFavourite = (articleId: string) => async (dispatch: Dispatch) => {
   const token = JSON.parse(localStorage.getItem("user") || "{}").token;
