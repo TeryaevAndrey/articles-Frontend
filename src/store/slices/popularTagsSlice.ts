@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState: {
-  tags: {_id: string}[];
+  tags: { _id: string }[];
 } = {
   tags: [],
 };

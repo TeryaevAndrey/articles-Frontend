@@ -1,7 +1,10 @@
 import axios from "axios";
 import { IFavourite } from "../types";
 import { Dispatch } from "@reduxjs/toolkit";
-import { setFavourite, setFavouriteTotal } from "../store/slices/favouriteSlice";
+import {
+  setFavourite,
+  setFavouriteTotal,
+} from "../store/slices/favouriteSlice";
 
 const getFavouriteArticles =
   (limit: number, page: number) => async (dispatch: Dispatch) => {

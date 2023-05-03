@@ -31,7 +31,6 @@ export interface IComment {
   updatedAt: Date;
 }
 
-
 export interface IFavourite {
   _id: ObjectId;
   userId: ObjectId;

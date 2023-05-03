@@ -18,11 +18,11 @@ const Elements: FC = () => {
     newArr[idx] = { type, value };
 
     dispatch(setElements(newArr));
-  }
+  };
 
   const onTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     dispatch(setTitle(e.target.value));
-  }
+  };
 
   return (
     <>
@@ -39,22 +39,19 @@ const Elements: FC = () => {
             className="p-3 max-w-full w-full min-h-[100px] bg-white rounded flex justify-center items-center active:bg-gray-300 cursor-pointer"
             htmlFor={"banner"}
           >
-            {
-              imgLoading ? (
-                "Загрузка..."
-              ) : (
-                banner ? (
-                  <div className="flex flex-col gap-1 items-center text-center">
-                    <CiImport size={50} />
-                    <span>Изменить</span>
-                  </div>
-                ) : (
-                  <div className="flex flex-col gap-1 items-center text-center">
-                    <CiImport size={50} />
-                    <span>Загрузить баннер</span>
-                  </div>)
-              )
-            }
+            {imgLoading ? (
+              "Загрузка..."
+            ) : banner ? (
+              <div className="flex flex-col gap-1 items-center text-center">
+                <CiImport size={50} />
+                <span>Изменить</span>
+              </div>
+            ) : (
+              <div className="flex flex-col gap-1 items-center text-center">
+                <CiImport size={50} />
+                <span>Загрузить баннер</span>
+              </div>
+            )}
           </label>
           <input
             className="hidden"
@@ -62,16 +59,20 @@ const Elements: FC = () => {
             placeholder="Загрузите изображение..."
             onChange={(e) => {
               if (e.target.files) {
-                exportImg(e.target.files[0], undefined, dispatch, elements, setImgLoading);
+                exportImg(
+                  e.target.files[0],
+                  undefined,
+                  dispatch,
+                  elements,
+                  setImgLoading
+                );
               }
             }}
             id="banner"
           />
-          {
-            banner && (
-              <img className="w-full lg:w-7/12" src={banner} alt="Изображение" />
-            )
-          }
+          {banner && (
+            <img className="w-full lg:w-7/12" src={banner} alt="Изображение" />
+          )}
         </div>
       </div>
       {elements.map((el, idx) => {
@@ -81,7 +82,9 @@ const Elements: FC = () => {
               <textarea
                 className="p-3 leading-7 resize-none w-full min-h-[200px] rounded whitespace-pre-line"
                 placeholder="Введите текст..."
-                onChange={(e) => updateFieldChanged(idx, el.type, e.target.value)}
+                onChange={(e) =>
+                  updateFieldChanged(idx, el.type, e.target.value)
+                }
                 value={el.value}
               />
               <MdDeleteForever
@@ -102,7 +105,9 @@ const Elements: FC = () => {
               <input
                 className="w-full p-3"
                 placeholder="Введите подзаголовок..."
-                onChange={(e) => updateFieldChanged(idx, el.type, e.target.value)}
+                onChange={(e) =>
+                  updateFieldChanged(idx, el.type, e.target.value)
+                }
                 value={el.value}
               />
               <MdDeleteForever
@@ -127,18 +132,16 @@ const Elements: FC = () => {
                   className="p-3 max-w-full w-full min-h-[100px] bg-white rounded flex justify-center items-center active:bg-gray-300 cursor-pointer"
                   htmlFor={id}
                 >
-                  {
-                    imgLoading ? (
-                      "Загрузка..."
-                    ) : (
-                      el.src ? (
-                        <div className="flex flex-col gap-1 items-center text-center">
-                          <CiImport size={50} />
-                          <span>Изменить</span>
-                        </div>
-                      ) : <CiImport size={50} />
-                    )
-                  }
+                  {imgLoading ? (
+                    "Загрузка..."
+                  ) : el.src ? (
+                    <div className="flex flex-col gap-1 items-center text-center">
+                      <CiImport size={50} />
+                      <span>Изменить</span>
+                    </div>
+                  ) : (
+                    <CiImport size={50} />
+                  )}
                 </label>
                 <input
                   className="hidden"
@@ -146,16 +149,18 @@ const Elements: FC = () => {
                   placeholder="Загрузите изображение..."
                   onChange={(e) => {
                     if (e.target.files) {
-                      exportImg(e.target.files[0], idx, dispatch, elements, setImgLoading);
+                      exportImg(
+                        e.target.files[0],
+                        idx,
+                        dispatch,
+                        elements,
+                        setImgLoading
+                      );
                     }
                   }}
                   id={id}
                 />
-                {
-                  el.src && (
-                    <img src={el.src} alt="Изображение" />
-                  )
-                }
+                {el.src && <img src={el.src} alt="Изображение" />}
               </div>
               <MdDeleteForever
                 onClick={() =>

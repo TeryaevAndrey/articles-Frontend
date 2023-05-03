@@ -15,7 +15,7 @@ const getAllArticles =
         params: {
           limit,
           page,
-          tag
+          tag,
         },
       })
       .then((res: AxiosResponse) => {

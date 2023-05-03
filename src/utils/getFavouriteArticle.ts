@@ -5,10 +5,12 @@ import { IFavourite } from "../types";
 
 const getFavouriteArticle = async (articleId: string) => {
   const token = JSON.parse(localStorage.getItem("user") || "{}").token;
-  let result: {
+  let result:
+    | {
         favourite: IFavourite | undefined;
         result: boolean;
-      } | undefined = undefined;
+      }
+    | undefined = undefined;
 
   await axios
     .get(import.meta.env.VITE_PROXY + `/get-favourite-article/${articleId}`, {
@@ -19,12 +21,12 @@ const getFavouriteArticle = async (articleId: string) => {
     .then((res) => {
       result = {
         favourite: res.data.favourite,
-        result: true
+        result: true,
       };
     })
     .catch((err) => {
       result = {
-        favourite: undefined, 
+        favourite: undefined,
         result: false,
       };
 

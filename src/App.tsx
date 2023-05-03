@@ -46,7 +46,9 @@ const App: FC = () => {
     <div className="App">
       {isLoading ? (
         <div>Загрузка, подождите...</div>
-      ) : <Layout>{useRoutes(isAuth)}</Layout>}
+      ) : (
+        <Layout>{useRoutes(isAuth)}</Layout>
+      )}
     </div>
   );
 };

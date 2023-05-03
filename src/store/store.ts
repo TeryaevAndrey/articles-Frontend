@@ -12,6 +12,7 @@ import { allArticlesSlice } from "./slices/allArticlesSlice";
 import { addCommentSlice } from "./slices/addCommentSlice";
 import { favouiriteSlice } from "./slices/favouriteSlice";
 import { popularTagsSlice } from "./slices/popularTagsSlice";
+import { searchedArticlesSlice } from "./slices/searchedArticlesSlice";
 
 const store = configureStore({
   reducer: {
@@ -25,7 +26,8 @@ const store = configureStore({
     openedArticle: openedArticleSlice.reducer,
     comment: addCommentSlice.reducer,
     favourite: favouiriteSlice.reducer,
-    popularTags: popularTagsSlice.reducer
+    popularTags: popularTagsSlice.reducer,
+    searchedArticles: searchedArticlesSlice.reducer
   },
 });
 

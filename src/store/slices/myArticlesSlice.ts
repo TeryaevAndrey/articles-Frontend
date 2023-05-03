@@ -23,5 +23,4 @@ export const myArticlesSlice = createSlice({
   },
 });
 
-export const { setMyArticles, setMyArticlesTotal } =
-  myArticlesSlice.actions;
+export const { setMyArticles, setMyArticlesTotal } = myArticlesSlice.actions;

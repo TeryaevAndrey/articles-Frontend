@@ -20,7 +20,7 @@ export const useRoutes = (isAuth: boolean) => {
       <Route path="/my-articles/:page?" element={<ProfilePage />} />
       <Route path="/add-article" element={<AddArticlePage />} />
       <Route path="/favourite/:page?" element={<FavouritePage />} />
-      <Route path="/search" element={<SearchPage />} />
+      <Route path="/search/:page?" element={<SearchPage />} />
       <Route path="/edit-profile" element={<EditProfilePage />} />
     </Routes>
   ) : (
@@ -29,7 +29,7 @@ export const useRoutes = (isAuth: boolean) => {
       <Route path="/auth/reg" element={<RegPage />} />
       <Route path="/auth/login" element={<LoginPage />} />
       <Route path="/articles/:articleId" element={<ArticlePage />} />
-      <Route path="/search" element={<SearchPage />} />
+      <Route path="/search/:page?" element={<SearchPage />} />
     </Routes>
   );
 };

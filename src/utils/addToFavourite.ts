@@ -1,9 +1,12 @@
 import axios, { AxiosResponse } from "axios";
 import { IFavourite } from "../types";
 
-const addToFavourite = async (articleId: string): Promise<{favourite: IFavourite, message: string} | undefined> => {
+const addToFavourite = async (
+  articleId: string
+): Promise<{ favourite: IFavourite; message: string } | undefined> => {
   const token = JSON.parse(localStorage.getItem("user") || "{}").token;
-  let result: {favourite: IFavourite, message: string} | undefined = undefined;
+  let result: { favourite: IFavourite; message: string } | undefined =
+    undefined;
 
   await axios
     .post(

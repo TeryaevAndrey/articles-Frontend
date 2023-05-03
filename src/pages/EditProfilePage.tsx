@@ -6,7 +6,9 @@ import getMyData from "../utils/getMyData";
 
 const EditProfilePage: FC = () => {
   const user = JSON.parse(localStorage.getItem("user") || "{}");
-  const [avatar, setAvatar] = React.useState<string | File>(user.userInfo.avatar);
+  const [avatar, setAvatar] = React.useState<string | File>(
+    user.userInfo.avatar
+  );
   const [userName, setUserName] = React.useState<string>("");
   const [password, setPassword] = React.useState<string>("");
   const [oldPassword, setOldPassword] = React.useState<string>("");
@@ -16,19 +18,19 @@ const EditProfilePage: FC = () => {
     if (e.target.files) {
       setAvatar(e.target.files[0]);
     }
-  }
+  };
 
   const onUserNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setUserName(e.target.value);
-  }
+  };
 
   const onPasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPassword(e.target.value);
-  }
+  };
 
   const onOldPasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setOldPassword(e.target.value);
-  }
+  };
 
   const formHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -40,28 +42,51 @@ const EditProfilePage: FC = () => {
     formData.append("password", password);
     formData.append("oldPassword", oldPassword);
 
-    await axios.post(import.meta.env.VITE_PROXY + "/edit-profile", formData, {
-      headers: {
-        "Content-Type": "multipart/form-data",
-        Authorization: `Bearer ${user.token}`
-      }
-    }).then((res) => {
-      alert(res.data.message);
+    await axios
+      .post(import.meta.env.VITE_PROXY + "/edit-profile", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${user.token}`,
+        },
+      })
+      .then((res) => {
+        alert(res.data.message);
 
-      dispatch(getMyData());
-    }).catch((err) => {
-      alert(err.response.data.message);
-    })
+        dispatch(getMyData());
+      })
+      .catch((err) => {
+        alert(err.response.data.message);
+      });
   };
 
   return (
     <div className="py-5">
       <div className="container mx-auto px-4">
-        <form className="flex flex-col items-center md:flex-row md:items-start gap-16" onSubmit={formHandler} encType="multipart/form-data">
+        <form
+          className="flex flex-col items-center md:flex-row md:items-start gap-16"
+          onSubmit={formHandler}
+          encType="multipart/form-data"
+        >
           <div>
-            <input className="hidden" type="file" id="avatar" onChange={onAvatarChange} />
-            <label className="cursor-pointer text-center flex flex-col justify-center gap-5" htmlFor="avatar">
-              <img className="max-w-[320px] w-full h-auto rounded-full bg-slate-200" src={typeof avatar === "string" ? avatar : URL.createObjectURL(avatar)} alt={user.userInfo.userName} />
+            <input
+              className="hidden"
+              type="file"
+              id="avatar"
+              onChange={onAvatarChange}
+            />
+            <label
+              className="cursor-pointer text-center flex flex-col justify-center gap-5"
+              htmlFor="avatar"
+            >
+              <img
+                className="max-w-[320px] w-full h-auto rounded-full bg-slate-200"
+                src={
+                  typeof avatar === "string"
+                    ? avatar
+                    : URL.createObjectURL(avatar)
+                }
+                alt={user.userInfo.userName}
+              />
               <span className="text-blue-600">Изменить аватар</span>
             </label>
           </div>

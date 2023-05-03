@@ -32,24 +32,27 @@ const AddArticlePage: FC = () => {
       title,
       banner,
       elements,
-      tags
+      tags,
     };
 
-    await axios.post(import.meta.env.VITE_PROXY + "/add-article", data, {
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
-    }).then((res) => {
-      alert(res.data.message);
-    }).catch((err) => {
-      alert(err.response.data.message);
-    });
+    await axios
+      .post(import.meta.env.VITE_PROXY + "/add-article", data, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((res) => {
+        alert(res.data.message);
+      })
+      .catch((err) => {
+        alert(err.response.data.message);
+      });
 
     dispatch(setTitle(""));
     dispatch(setBanner(undefined));
     dispatch(setElements([]));
     dispatch(setTags([]));
-  }
+  };
 
   return (
     <div className="py-5">
@@ -162,7 +165,10 @@ const AddArticlePage: FC = () => {
             <Tags />
           </div>
 
-          <button className="w-full p-3 bg-blue-500 text-white rounded mt-10" type="submit">
+          <button
+            className="w-full p-3 bg-blue-500 text-white rounded mt-10"
+            type="submit"
+          >
             Сохранить
           </button>
         </form>

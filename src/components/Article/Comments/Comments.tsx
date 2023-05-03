@@ -15,11 +15,20 @@ const Comments: FC<IComments> = ({ comments }) => {
       <AddComment />
 
       <div className="flex flex-col gap-3 mt-5">
-        {
-          comments.map((comment) => {
-            return <Comment key={comment._id} _id={comment._id} from={comment.from} articleId={comment.articleId} rating={comment.rating} text={comment.text} createdAt={comment.createdAt} updatedAt={comment.updatedAt} />
-          })
-        }
+        {comments.map((comment) => {
+          return (
+            <Comment
+              key={comment._id}
+              _id={comment._id}
+              from={comment.from}
+              articleId={comment.articleId}
+              rating={comment.rating}
+              text={comment.text}
+              createdAt={comment.createdAt}
+              updatedAt={comment.updatedAt}
+            />
+          );
+        })}
       </div>
     </div>
   );

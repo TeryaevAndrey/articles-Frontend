@@ -7,7 +7,7 @@ interface IPopular {
   beforeUrl: string;
 }
 
-const Popular: FC<IPopular> = ({beforeUrl}) => {
+const Popular: FC<IPopular> = ({ beforeUrl }) => {
   const dispatch = useAppDispatch();
   const popularTags = useAppSelector((state) => state.popularTags.tags);
   const [isShowMore, setIsShowMore] = useState<boolean>(false);
@@ -22,31 +22,34 @@ const Popular: FC<IPopular> = ({beforeUrl}) => {
         <h2 className="text-center font-medium">Популярные теги</h2>
 
         <div className="flex flex-col mt-3">
-          {
-            isShowMore ? (
-              popularTags.slice(0, 8).map((tag, idx) => {
+          {isShowMore
+            ? popularTags.slice(0, 8).map((tag, idx) => {
                 return (
-                  <PopularLink key={idx} title={tag._id} beforeUrl={beforeUrl} />
-                )
+                  <PopularLink
+                    key={idx}
+                    title={tag._id}
+                    beforeUrl={beforeUrl}
+                  />
+                );
               })
-            ) : (
-              popularTags.slice(0, 4).map((tag, idx) => {
+            : popularTags.slice(0, 4).map((tag, idx) => {
                 return (
-                  <PopularLink key={idx} title={tag._id} beforeUrl={beforeUrl} />
-                )
-              })
-            )
-          }
+                  <PopularLink
+                    key={idx}
+                    title={tag._id}
+                    beforeUrl={beforeUrl}
+                  />
+                );
+              })}
         </div>
-        {
-          popularTags.length > 4 && (
-            <div className="text-center font-light mt-4 text-sm cursor-pointer active:opacity-001 ease-linear duration-75" onClick={() => setIsShowMore(!isShowMore)}>
-              {
-                isShowMore ? "Свернуть" : "Показать еще"
-              }
-            </div>
-          )
-        }
+        {popularTags.length > 4 && (
+          <div
+            className="text-center font-light mt-4 text-sm cursor-pointer active:opacity-001 ease-linear duration-75"
+            onClick={() => setIsShowMore(!isShowMore)}
+          >
+            {isShowMore ? "Свернуть" : "Показать еще"}
+          </div>
+        )}
       </div>
     </div>
   );

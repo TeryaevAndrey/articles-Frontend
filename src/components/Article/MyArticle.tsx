@@ -3,35 +3,35 @@ import { AiOutlineEdit, AiOutlineEye } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { IArticle } from "../../types";
 
-const MyArticle: FC<IArticle> = ({ _id, title, banner, elements, tags, views, from, createdAt, updatedAt }) => {
+const MyArticle: FC<IArticle> = ({
+  _id,
+  title,
+  banner,
+  elements,
+  tags,
+  views,
+  from,
+  createdAt,
+  updatedAt,
+}) => {
   const text = elements.find((el) => el.type === "text");
 
   return (
     <div className="w-full rounded overflow-hidden">
       <div className="flex flex-col gap-3">
-        {banner && (
-          <img
-            className="w-full h-auto"
-            src={banner}
-            alt="image"
-          />
-        )}
+        {banner && <img className="w-full h-auto" src={banner} alt="image" />}
         <div className="flex flex-col gap-3">
-          <h2 className="font-medium leading-5">
-            {title}
-          </h2>
+          <h2 className="font-medium leading-5">{title}</h2>
 
           <p className="text-sm font-light text-gray-500">
-            {
-              (text && text.value) && (
-                text.value.slice(0, 200) + " ..."
-              )
-            }
+            {text && text.value && text.value.slice(0, 200) + " ..."}
           </p>
           <div className="flex justify-between items-center">
             <div className="flex items-center gap-2">
               <AiOutlineEye size={15} />
-              <p className="text-sm text-gray-300 font-light">{views} просмотров</p>
+              <p className="text-sm text-gray-300 font-light">
+                {views} просмотров
+              </p>
             </div>
             <Link
               to="/edit-article/asdasd"

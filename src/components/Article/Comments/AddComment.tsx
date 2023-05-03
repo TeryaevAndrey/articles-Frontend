@@ -24,35 +24,42 @@ const AddComment: FC = () => {
 
   const onTextChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     dispatch(setText(e.target.value));
-  }
+  };
 
   const formHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     dispatch(setLoadingAddComment(true));
 
-    await axios.post(import.meta.env.VITE_PROXY + "/add-comment", {
-      articleId: article._id,
-      rating,
-      text
-    }, {
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
-    }).then((res: AxiosResponse) => {
-      alert(res.data.message);
+    await axios
+      .post(
+        import.meta.env.VITE_PROXY + "/add-comment",
+        {
+          articleId: article._id,
+          rating,
+          text,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
+      .then((res: AxiosResponse) => {
+        alert(res.data.message);
 
-      dispatch(setOpenedArticleComments([res.data.comment, ...comments]));
-      console.log(res.data.comments);
+        dispatch(setOpenedArticleComments([res.data.comment, ...comments]));
+        console.log(res.data.comments);
 
-      dispatch(setRating(0));
-      dispatch(setText(""));
-    }).catch((err) => {
-      alert(err.response.data.message);
-    });
+        dispatch(setRating(0));
+        dispatch(setText(""));
+      })
+      .catch((err) => {
+        alert(err.response.data.message);
+      });
 
     dispatch(setLoadingAddComment(false));
-  }
+  };
 
   return (
     <form className="flex flex-col gap-3" onSubmit={formHandler}>
@@ -65,9 +72,7 @@ const AddComment: FC = () => {
       />
       <button className="flex justify-center items-center gap-2 w-full px-3 py-2 rounded bg-blue-500 text-white lg:py-3">
         Отправить
-        {
-          loading && <Loader />
-        }
+        {loading && <Loader />}
       </button>
     </form>
   );
