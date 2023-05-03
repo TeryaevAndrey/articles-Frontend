@@ -15,7 +15,7 @@ const MainPage: FC = () => {
 
   React.useEffect(() => {
     dispatch(getAllArticles(3, page ? Number(page.slice(4)) : 1));
-  }, [page]);
+  }, [page, window.location.search]);
 
   return (
     <div>

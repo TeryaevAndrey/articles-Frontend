@@ -7,11 +7,15 @@ import {
 
 const getAllArticles =
   (limit: number, page: number) => async (dispatch: Dispatch) => {
+    const searchParams = new URLSearchParams(window.location.search);
+    const tag = searchParams.get("tag");
+
     await axios
       .get(import.meta.env.VITE_PROXY + "/get-articles", {
         params: {
           limit,
           page,
+          tag
         },
       })
       .then((res: AxiosResponse) => {
