@@ -13,7 +13,7 @@ export const useRoutes = (isAuth: boolean) => {
   return isAuth ? (
     <Routes>
       <Route path="/all/:page?" element={<MainPage />} />
-      <Route path="*" element={<Navigate to="/all" replace />} />
+      <Route path="*" element={<MainPage />} />
       <Route path="/auth/reg" element={<RegPage />} />
       <Route path="/auth/login" element={<LoginPage />} />
       <Route path="/articles/:articleId" element={<ArticlePage />} />
@@ -26,7 +26,6 @@ export const useRoutes = (isAuth: boolean) => {
   ) : (
     <Routes>
       <Route path="/all/:page?" element={<MainPage />} />
-      <Route path="*" element={<Navigate to="/all" replace />} />
       <Route path="/auth/reg" element={<RegPage />} />
       <Route path="/auth/login" element={<LoginPage />} />
       <Route path="/articles/:articleId" element={<ArticlePage />} />
