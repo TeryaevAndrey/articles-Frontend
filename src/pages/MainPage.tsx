@@ -4,7 +4,7 @@ import Article from "../components/Article/Article";
 import Pagination from "../components/Pagination/Pagination";
 import { useAppDispatch, useAppSelector } from "../store/store";
 import getAllArticles from "../utils/getAllArticles";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const MainPage: FC = () => {
   const dispatch = useAppDispatch();
