@@ -3,7 +3,11 @@ import PopularLink from "./PopularLink";
 import { useAppDispatch, useAppSelector } from "../../store/store";
 import getPopularTags from "../../utils/getPopularTags";
 
-const Popular: FC = () => {
+interface IPopular {
+  beforeUrl: string;
+}
+
+const Popular: FC<IPopular> = ({beforeUrl}) => {
   const dispatch = useAppDispatch();
   const popularTags = useAppSelector((state) => state.popularTags.tags);
   const [isShowMore, setIsShowMore] = useState<boolean>(false);
@@ -22,13 +26,13 @@ const Popular: FC = () => {
             isShowMore ? (
               popularTags.slice(0, 8).map((tag, idx) => {
                 return (
-                  <PopularLink key={idx} title={tag._id} />
+                  <PopularLink key={idx} title={tag._id} beforeUrl={beforeUrl} />
                 )
               })
             ) : (
               popularTags.slice(0, 4).map((tag, idx) => {
                 return (
-                  <PopularLink key={idx} title={tag._id} />
+                  <PopularLink key={idx} title={tag._id} beforeUrl={beforeUrl} />
                 )
               })
             )

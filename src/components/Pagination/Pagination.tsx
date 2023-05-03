@@ -43,7 +43,7 @@ const Pagination: FC<IPagination> = ({ total, limit, currentPage }) => {
               <button
                 key={idx}
                 className={`flex justify-center items-center rounded ${currentPage === pageEl ? "bg-blue-500" : "bg-blue-300"} text-white w-10 h-10`}
-                onClick={() => navigate("/" + location.pathname.split("/")[1] + "/page" + pageEl)}
+                onClick={() => navigate("/" + location.pathname.split("/")[1] + "/page" + pageEl + `${window.location.search}`)}
               >
                 {pageEl}
               </button>

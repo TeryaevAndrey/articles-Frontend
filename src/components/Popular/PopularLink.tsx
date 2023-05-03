@@ -3,12 +3,13 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 
 interface IPopularLink {
   title: string;
+  beforeUrl: string;
 }
 
-const PopularLink: FC<IPopularLink> = ({ title }) => {
+const PopularLink: FC<IPopularLink> = ({ title, beforeUrl }) => {
   return (
     <Link
-      to={`/all/page1?tag=${title}`}
+      to={`${beforeUrl}?tag=${title}`}
       className="text-sm p-3 border-b border-gray-200 border-solid active:opacity-001 ease-linear duration-75 lg:hover:bg-slate-200"
     >
       {title}

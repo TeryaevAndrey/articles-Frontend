@@ -18,7 +18,6 @@ const FavouritePage: FC = () => {
     dispatch(getFavouriteArticles(5, page ? Number(page.slice(4)) : 1));
   }, [page]);
 
-  console.log(total);
 
   return (
     <div>
