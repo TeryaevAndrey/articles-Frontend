@@ -6,8 +6,8 @@ const initialState: {
   total: number;
 } = {
   articles: [],
-  total: 0
-}
+  total: 0,
+};
 
 export const searchedArticlesSlice = createSlice({
   name: "searched-articles",
@@ -19,8 +19,9 @@ export const searchedArticlesSlice = createSlice({
 
     setSearchedArticlesTotal: (state, action: PayloadAction<number>) => {
       state.total = action.payload;
-    }
-  }
+    },
+  },
 });
 
-export const {setSearchedArticles, setSearchedArticlesTotal} = searchedArticlesSlice.actions;
+export const { setSearchedArticles, setSearchedArticlesTotal } =
+  searchedArticlesSlice.actions;

@@ -27,7 +27,7 @@ const store = configureStore({
     comment: addCommentSlice.reducer,
     favourite: favouiriteSlice.reducer,
     popularTags: popularTagsSlice.reducer,
-    searchedArticles: searchedArticlesSlice.reducer
+    searchedArticles: searchedArticlesSlice.reducer,
   },
 });
 

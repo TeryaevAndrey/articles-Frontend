@@ -43,7 +43,7 @@ const Search: FC = () => {
           onClick={(e) => {
             e.preventDefault();
 
-            navigate(`/search?q=${searchValue}`)
+            navigate(`/search?q=${searchValue}`);
           }}
         >
           Найти

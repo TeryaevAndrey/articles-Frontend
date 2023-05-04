@@ -38,9 +38,9 @@ const Pagination: FC<IPagination> = ({ total, limit, currentPage }) => {
           if (currentPage > 1) {
             navigate(
               "/" +
-              location.pathname.split("/")[1] +
-              "/page" +
-              (page !== undefined ? Number(page?.slice(4)) - 1 : 1)
+                location.pathname.split("/")[1] +
+                "/page" +
+                (page !== undefined ? Number(page?.slice(4)) - 1 : 1)
             );
           }
         }}
@@ -50,15 +50,16 @@ const Pagination: FC<IPagination> = ({ total, limit, currentPage }) => {
           return (
             <button
               key={idx}
-              className={`flex justify-center items-center rounded ${currentPage === pageEl ? "bg-blue-500" : "bg-blue-300"
-                } text-white w-10 h-10`}
+              className={`flex justify-center items-center rounded ${
+                currentPage === pageEl ? "bg-blue-500" : "bg-blue-300"
+              } text-white w-10 h-10`}
               onClick={() =>
                 navigate(
                   "/" +
-                  location.pathname.split("/")[1] +
-                  "/page" +
-                  pageEl +
-                  `${window.location.search}`
+                    location.pathname.split("/")[1] +
+                    "/page" +
+                    pageEl +
+                    `${window.location.search}`
                 )
               }
             >
@@ -75,9 +76,9 @@ const Pagination: FC<IPagination> = ({ total, limit, currentPage }) => {
           if (currentPage < totalPages) {
             navigate(
               "/" +
-              location.pathname.split("/")[1] +
-              "/page" +
-              (page !== undefined ? Number(page?.slice(4)) + 1 : 2)
+                location.pathname.split("/")[1] +
+                "/page" +
+                (page !== undefined ? Number(page?.slice(4)) + 1 : 2)
             );
           }
         }}

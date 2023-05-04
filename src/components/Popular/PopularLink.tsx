@@ -1,5 +1,10 @@
 import React, { FC } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import {
+  Link,
+  useLocation,
+  useNavigate,
+  useSearchParams,
+} from "react-router-dom";
 
 interface IPopularLink {
   title: string;
@@ -7,9 +12,16 @@ interface IPopularLink {
 }
 
 const PopularLink: FC<IPopularLink> = ({ title, beforeUrl }) => {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const currentUrl = window.location.href;
+
   return (
     <Link
-      to={`${beforeUrl}?tag=${title}`}
+      to={
+        currentUrl.includes("?q=")
+          ? `?q=${searchParams.get("q")}&tag=${title}`
+          : `${beforeUrl}?tag=${title}`
+      }
       className="text-sm p-3 border-b border-gray-200 border-solid active:opacity-001 ease-linear duration-75 lg:hover:bg-slate-200"
     >
       {title}
