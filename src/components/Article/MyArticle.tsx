@@ -2,6 +2,7 @@ import React, { FC } from "react";
 import { AiOutlineEdit, AiOutlineEye } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { IArticle } from "../../types";
+import Tag from "./Tag";
 
 const MyArticle: FC<IArticle> = ({
   _id,
@@ -26,6 +27,12 @@ const MyArticle: FC<IArticle> = ({
           <p className="text-sm font-light text-gray-500">
             {text && text.value && text.value.slice(0, 200) + " ..."}
           </p>
+
+          <div className="flex items-center gap-2 flex-wrap">
+            {tags.map((tag, idx) => {
+              return <Tag key={idx} tag={tag} />;
+            })}
+          </div>
           <div className="flex justify-between items-center">
             <div className="flex items-center gap-2">
               <AiOutlineEye size={15} />

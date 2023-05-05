@@ -10,7 +10,7 @@ import {
   setTitle,
 } from "../store/slices/addArticleSlice";
 import Elements from "../components/AddArticle/Elements";
-import Tags from "../components/AddArticle/Tags";
+import Tags from "../components/Tags";
 import axios from "axios";
 
 const AddArticlePage: FC = () => {
@@ -162,7 +162,7 @@ const AddArticlePage: FC = () => {
               </div>
             </div>
 
-            <Tags />
+            <Tags tags={tags} setTags={setTags} />
           </div>
 
           <button

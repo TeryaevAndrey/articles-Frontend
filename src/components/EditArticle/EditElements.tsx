@@ -5,8 +5,10 @@ import { setElements, setTitle } from "../../store/slices/editArticleSlice";
 import { CiImport } from "react-icons/ci";
 import exportImg from "../../utils/exportImg";
 import { MdDeleteForever } from "react-icons/md";
+import { useParams } from "react-router-dom";
 
 const EditElements: FC = () => {
+  const { articleId } = useParams();
   const title = useAppSelector((state) => state.editArticle.title);
   const elements = useAppSelector((state) => state.editArticle.elements);
   const banner = useAppSelector((state) => state.editArticle.banner);

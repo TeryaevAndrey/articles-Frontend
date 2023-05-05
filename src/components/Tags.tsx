@@ -1,11 +1,14 @@
 import React, { FC } from "react";
-import { useAppDispatch, useAppSelector } from "../../store/store";
+import { useAppDispatch, useAppSelector } from "../store/store";
 import { v4 as uuidv4 } from "uuid";
 import { MdDeleteForever } from "react-icons/md";
-import { setTags } from "../../store/slices/addArticleSlice";
 
-const Tags: FC = () => {
-  const tags = useAppSelector((state) => state.addArticle.tags);
+interface ITags {
+  tags: string[];
+  setTags: Function;
+}
+
+const Tags: FC<ITags> = ({ tags, setTags }) => {
   const dispatch = useAppDispatch();
 
   return (

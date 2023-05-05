@@ -1,4 +1,4 @@
-import React, { FC, useEffect } from "react";
+import React, { FC } from "react";
 import { useAppDispatch, useAppSelector } from "../store/store";
 import { BsCardText, BsCheck, BsImage } from "react-icons/bs";
 import { AiOutlinePlus } from "react-icons/ai";
@@ -12,6 +12,8 @@ import {
   setTitle,
 } from "../store/slices/editArticleSlice";
 import getEditArticle from "../utils/getEditArticle";
+import axios, { AxiosResponse } from "axios";
+import Tags from "../components/Tags";
 
 const EditArticlePage: FC = () => {
   const { articleId } = useParams();
@@ -38,14 +40,39 @@ const EditArticlePage: FC = () => {
       dispatch(setTitle(article.title));
       dispatch(setBanner(article.banner));
       dispatch(setElements(article.elements));
+      dispatch(setTags(article.tags));
     }
   }, [article]);
+
+  const formHandler = async () => {
+    await axios
+      .post(
+        import.meta.env.VITE_PROXY + `/edit-article/${articleId}`,
+        {
+          title,
+          banner,
+          elements,
+          tags,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
+      .then((res: AxiosResponse) => {
+        alert(res.data.message);
+      })
+      .catch((err) => {
+        alert(err.response.data.message);
+      });
+  };
 
   return (
     <div className="py-5">
       <div className="container mx-auto px-4">
         <h1 className="text-lg font-medium">Добавление статьи</h1>
-        <form className="mt-5">
+        <form className="mt-5" onSubmit={formHandler}>
           <div className="mb-5 flex flex-col gap-5">
             <EditElements />
           </div>
@@ -148,6 +175,8 @@ const EditArticlePage: FC = () => {
                 </button>
               </div>
             </div>
+
+            <Tags tags={tags} setTags={setTags} />
           </div>
 
           <button
