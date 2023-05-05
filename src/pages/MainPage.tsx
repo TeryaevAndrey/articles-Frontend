@@ -8,13 +8,13 @@ import { useNavigate, useParams } from "react-router-dom";
 
 const MainPage: FC = () => {
   const dispatch = useAppDispatch();
-  const limit = 3;
+  const limit = 10;
   const { page } = useParams();
   const articles = useAppSelector((state) => state.allArticles.articles);
   const total = useAppSelector((state) => state.allArticles.total);
 
   React.useEffect(() => {
-    dispatch(getAllArticles(3, page ? Number(page.slice(4)) : 1));
+    dispatch(getAllArticles(10, page ? Number(page.slice(4)) : 1));
   }, [page, window.location.search]);
 
   return (
