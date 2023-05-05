@@ -1,3 +1,4 @@
+import { editArticleSlice } from "./slices/editArticleSlice";
 import { configureStore } from "@reduxjs/toolkit";
 import { useDispatch, useSelector } from "react-redux";
 import type { TypedUseSelectorHook } from "react-redux";
@@ -28,6 +29,7 @@ const store = configureStore({
     favourite: favouiriteSlice.reducer,
     popularTags: popularTagsSlice.reducer,
     searchedArticles: searchedArticlesSlice.reducer,
+    editArticle: editArticleSlice.reducer,
   },
 });
 
