@@ -12,8 +12,6 @@ const getSearchedArticles =
     const q = searchParams.get("q");
     const tag = searchParams.get("tag");
 
-    console.log(q);
-
     await axios
       .get(import.meta.env.VITE_PROXY + "/get-articles-by-search", {
         params: {
