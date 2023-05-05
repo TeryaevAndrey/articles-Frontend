@@ -1,0 +1,48 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1;
+  background-color: #f8fafc;
+  color: #4b5563;
+  overflow-x: hidden;
+}
+
+button,
+input {
+  outline: none;
+  border: none;
+  transition: all 0.2s ease;
+}
+
+textarea {
+  outline: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+button:active {
+  opacity: 0.7;
+}
+
+[contentEditable="true"]:empty:not(:focus):before {
+  content: attr(data-placeholder);
+}
+
+@media (min-width: 1024px) {
+  button:active {
+    transform: scale(0.95);
+  }
+}
