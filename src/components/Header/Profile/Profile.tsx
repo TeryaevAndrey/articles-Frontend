@@ -25,7 +25,7 @@ const Profile: FC = () => {
           ) : (
             <>
               <img
-                className="w-10 h-10 rounded-full bg-gray-300 object-cover"
+                className="w-10 h-10 rounded-md bg-gray-300 object-cover"
                 src={myData.avatar}
                 alt={myData.userName}
               />

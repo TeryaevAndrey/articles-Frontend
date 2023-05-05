@@ -34,7 +34,7 @@ const MyArticle: FC<IArticle> = ({
               </p>
             </div>
             <Link
-              to="/edit-article/asdasd"
+              to={`/edit-article/${_id}`}
               className="rounded bg-blue-500 p-1 w-7 h-7 ml-auto mr-3 cursor-pointer"
             >
               <AiOutlineEdit size={20} color="#fff" />
