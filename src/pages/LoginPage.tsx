@@ -1,34 +1,36 @@
 import React, { FC, useState } from "react";
 import Loader from "../components/Loader";
-import axios from "axios";
+import axios, { AxiosResponse } from "axios";
 import { useAppDispatch } from "../store/store";
 import { setIsAuth } from "../store/slices/mainSlice";
 import { useNavigate } from "react-router-dom";
 import getMyData from "../utils/getMyData";
 
 const LoginPage: FC = () => {
-  const [userName, setUserName] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
-  const [isLoading, setIsLoading] = React.useState<boolean>(false);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const [userName, setUserName] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  const onUserNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const onUserNameChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setUserName(e.target.value);
   };
 
-  const onPasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const onPasswordChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setPassword(e.target.value);
   };
 
-  const formHandler = async (e: React.FormEvent<HTMLFormElement>) => {
+  const formHandler = async (
+    e: React.FormEvent<HTMLFormElement>
+  ): Promise<void> => {
     e.preventDefault();
 
     setIsLoading(true);
 
     await axios
       .post(import.meta.env.VITE_PROXY + "/auth/login", { userName, password })
-      .then((res) => {
+      .then((res: AxiosResponse) => {
         localStorage.setItem(
           "user",
           JSON.stringify({ userInfo: res.data.userInfo, token: res.data.token })

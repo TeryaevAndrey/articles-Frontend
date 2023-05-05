@@ -1,17 +1,16 @@
 import React, { FC } from "react";
 import { AiFillCaretDown } from "react-icons/ai";
-import { Link } from "react-router-dom";
 import ProfileMenu from "./ProfileMenu/ProfileMenu";
 import { useAppDispatch, useAppSelector } from "../../../store/store";
 import { setIsOpenMenu } from "../../../store/slices/headerSlice";
 
 const Profile: FC = () => {
+  const dispatch = useAppDispatch();
   const isOpenMenu = useAppSelector((state) => state.header.isOpenMenu);
   const isLoading = useAppSelector(
     (state) => state.loaders.loadingProfileHeader
   );
   const myData = useAppSelector((state) => state.user.myData);
-  const dispatch = useAppDispatch();
 
   return (
     <div className="relative">

@@ -1,20 +1,19 @@
-import React, { FC } from "react";
+import React, { FC, useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../store/store";
 import { useParams } from "react-router-dom";
 import getFavouriteArticles from "../utils/getFavouriteArticles";
 import Article from "../components/Article/Article";
 import Pagination from "../components/Pagination/Pagination";
 import { IFavourite } from "../types";
-import Popular from "../components/Popular/Popular";
 
 const FavouritePage: FC = () => {
   const dispatch = useAppDispatch();
-  const limit = 5;
   const { page } = useParams();
   const favourite = useAppSelector((state) => state.favourite.articles);
   const total = useAppSelector((state) => state.favourite.total);
+  const limit = 5;
 
-  React.useEffect(() => {
+  useEffect(() => {
     dispatch(getFavouriteArticles(5, page ? Number(page.slice(4)) : 1));
   }, [page]);
 

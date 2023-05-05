@@ -6,11 +6,11 @@ import { setSearchValue } from "../../store/slices/headerSlice";
 import { Link, useNavigate } from "react-router-dom";
 
 const Search: FC = () => {
-  const searchValue = useAppSelector((state) => state.header.searchValue);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const searchValue = useAppSelector((state) => state.header.searchValue);
 
-  const onSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const onSearchChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     dispatch(setSearchValue(e.target.value));
   };
 

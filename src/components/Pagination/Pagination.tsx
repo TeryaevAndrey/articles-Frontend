@@ -1,6 +1,5 @@
 import React, { FC } from "react";
 import { AiOutlineLeft, AiOutlineRight } from "react-icons/ai";
-import { useAppDispatch } from "../../store/store";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 
 interface IPagination {
@@ -10,11 +9,11 @@ interface IPagination {
 }
 
 const Pagination: FC<IPagination> = ({ total, limit, currentPage }) => {
-  let totalPages = Math.ceil(total / limit);
-  let pages = Array.from({ length: totalPages }, (_, i) => i + 1);
   const { page } = useParams();
   const navigate = useNavigate();
   const location = useLocation();
+  let totalPages = Math.ceil(total / limit);
+  let pages = Array.from({ length: totalPages }, (_, i) => i + 1);
 
   if (totalPages > 3) {
     if (currentPage === 1) {
@@ -25,8 +24,6 @@ const Pagination: FC<IPagination> = ({ total, limit, currentPage }) => {
       pages = [currentPage - 1, currentPage, currentPage + 1];
     }
   }
-
-  console.log(page);
 
   return (
     <div className="flex items-center gap-5">

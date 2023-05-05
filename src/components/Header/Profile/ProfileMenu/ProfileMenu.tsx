@@ -8,7 +8,7 @@ import { setIsAuth } from "../../../../store/slices/mainSlice";
 const ProfileMenu: FC = () => {
   const dispatch = useAppDispatch();
 
-  const exitFromProfile = () => {
+  const exitFromProfile = (): void => {
     localStorage.removeItem("user");
 
     dispatch(setIsAuth(false));

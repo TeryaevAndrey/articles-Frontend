@@ -1,5 +1,4 @@
 import axios from "axios";
-import { IFavourite } from "../types";
 import { Dispatch } from "@reduxjs/toolkit";
 import {
   setFavourite,
@@ -7,7 +6,8 @@ import {
 } from "../store/slices/favouriteSlice";
 
 const getFavouriteArticles =
-  (limit: number, page: number) => async (dispatch: Dispatch) => {
+  (limit: number, page: number) =>
+  async (dispatch: Dispatch): Promise<void> => {
     const token = JSON.parse(localStorage.getItem("user") || "{}").token;
 
     await axios

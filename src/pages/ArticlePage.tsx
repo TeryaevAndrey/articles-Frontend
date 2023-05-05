@@ -9,11 +9,11 @@ import getOpenedArticle from "../utils/getOpenedArticle";
 import getComments from "../utils/getComments";
 
 const ArticlePage: FC = () => {
-  const { articleId } = useParams();
+  const dispatch = useAppDispatch();
   const articleData = useAppSelector((state) => state.openedArticle.article);
   const loading = useAppSelector((state) => state.loaders.loadingOpenedArticle);
   const comments = useAppSelector((state) => state.openedArticle.comments);
-  const dispatch = useAppDispatch();
+  const { articleId } = useParams();
 
   useEffect(() => {
     if (articleId) {
@@ -21,8 +21,6 @@ const ArticlePage: FC = () => {
       dispatch(getComments(articleId));
     }
   }, []);
-
-  console.log(comments);
 
   return (
     <div className="py-5">

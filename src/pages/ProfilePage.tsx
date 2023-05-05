@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, useEffect } from "react";
 import Pagination from "../components/Pagination/Pagination";
 import MyArticle from "../components/Article/MyArticle";
 import { useAppDispatch, useAppSelector } from "../store/store";
@@ -7,12 +7,12 @@ import { useParams } from "react-router-dom";
 
 const ProfilePage: FC = () => {
   const dispatch = useAppDispatch();
-  const limit = 10;
   const { page } = useParams();
   const articles = useAppSelector((state) => state.myArticles.articles);
   const total = useAppSelector((state) => state.myArticles.total);
+  const limit = 10;
 
-  React.useEffect(() => {
+  useEffect(() => {
     dispatch(getMyArticles(10, page ? Number(page.slice(4)) : 1));
   }, [page]);
 

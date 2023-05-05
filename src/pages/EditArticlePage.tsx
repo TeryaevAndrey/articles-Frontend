@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../store/store";
 import { BsCardText, BsCheck, BsImage } from "react-icons/bs";
 import { AiOutlinePlus } from "react-icons/ai";
@@ -16,26 +16,26 @@ import axios, { AxiosResponse } from "axios";
 import Tags from "../components/Tags";
 
 const EditArticlePage: FC = () => {
+  const dispatch = useAppDispatch();
   const { articleId } = useParams();
   const isOpenElements = useAppSelector(
     (state) => state.editArticle.isOpenElements
   );
-  const [tagValue, setTagValue] = React.useState<string>("");
   const article = useAppSelector((state) => state.editArticle.article);
   const title = useAppSelector((state) => state.editArticle.title);
   const banner = useAppSelector((state) => state.editArticle.banner);
   const elements = useAppSelector((state) => state.editArticle.elements);
   const tags = useAppSelector((state) => state.editArticle.tags);
-  const dispatch = useAppDispatch();
+  const [tagValue, setTagValue] = React.useState<string>("");
   const token = JSON.parse(localStorage.getItem("user") || "{}").token;
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (articleId) {
       dispatch(getEditArticle(articleId));
     }
   }, []);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (article) {
       dispatch(setTitle(article.title));
       dispatch(setBanner(article.banner));
@@ -44,7 +44,7 @@ const EditArticlePage: FC = () => {
     }
   }, [article]);
 
-  const formHandler = async () => {
+  const formHandler = async (): Promise<void> => {
     await axios
       .post(
         import.meta.env.VITE_PROXY + `/edit-article/${articleId}`,

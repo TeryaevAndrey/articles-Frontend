@@ -8,16 +8,14 @@ import getSearchedArticles from "../utils/getSearchedArticles";
 
 const SearchPage: FC = () => {
   const dispatch = useAppDispatch();
-  const limit = 3;
+  const location = useLocation();
   const { page } = useParams();
   const articles = useAppSelector((state) => state.searchedArticles.articles);
   const total = useAppSelector((state) => state.searchedArticles.total);
-  const location = useLocation();
+  const limit = 3;
   const searchParams = new URLSearchParams(window.location.search);
   const q = searchParams.get("q");
   const tag = searchParams.get("tag");
-
-  console.log(location);
 
   useEffect(() => {
     dispatch(getSearchedArticles(3, page ? Number(page.slice(4)) : 1));

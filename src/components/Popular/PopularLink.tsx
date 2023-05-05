@@ -1,10 +1,5 @@
 import React, { FC } from "react";
-import {
-  Link,
-  useLocation,
-  useNavigate,
-  useSearchParams,
-} from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 
 interface IPopularLink {
   title: string;

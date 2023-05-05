@@ -6,7 +6,8 @@ import {
 } from "../store/slices/searchedArticlesSlice";
 
 const getSearchedArticles =
-  (limit: number, page: number) => async (dispatch: Dispatch) => {
+  (limit: number, page: number) =>
+  async (dispatch: Dispatch): Promise<void> => {
     const searchParams = new URLSearchParams(window.location.search);
     const q = searchParams.get("q");
     const tag = searchParams.get("tag");

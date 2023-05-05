@@ -1,4 +1,4 @@
-import React, { FC, useState, useEffect, useCallback } from "react";
+import React, { FC, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../store/store";
 import { MdDeleteForever } from "react-icons/md";
 import { v4 as uuidv4 } from "uuid";
@@ -7,20 +7,24 @@ import { setElements, setTitle } from "../../store/slices/addArticleSlice";
 import exportImg from "../../utils/exportImg";
 
 const Elements: FC = () => {
+  const dispatch = useAppDispatch();
   const title = useAppSelector((state) => state.addArticle.title);
   const elements = useAppSelector((state) => state.addArticle.elements);
   const banner = useAppSelector((state) => state.addArticle.banner);
-  const dispatch = useAppDispatch();
   const [imgLoading, setImgLoading] = useState<boolean>(false);
 
-  const updateFieldChanged = (idx: number, type: string, value: string) => {
+  const updateFieldChanged = (
+    idx: number,
+    type: string,
+    value: string
+  ): void => {
     let newArr = [...elements];
     newArr[idx] = { type, value };
 
     dispatch(setElements(newArr));
   };
 
-  const onTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const onTitleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     dispatch(setTitle(e.target.value));
   };
 

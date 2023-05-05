@@ -9,24 +9,26 @@ import Loader from "../../Loader";
 import { setOpenedArticleComments } from "../../../store/slices/openedArticleSlice";
 
 const AddComment: FC = () => {
-  const token = JSON.parse(localStorage.getItem("user") || "{}").token;
+  const dispatch = useAppDispatch();
+  const location = useLocation();
   const article = useAppSelector((state) => state.openedArticle.article);
   const rating = useAppSelector((state) => state.comment.rating);
   const text = useAppSelector((state) => state.comment.text);
   const loading = useAppSelector((state) => state.loaders.loadingAddComment);
   const comments = useAppSelector((state) => state.openedArticle.comments);
-  const dispatch = useAppDispatch();
-  const location = useLocation();
+  const token = JSON.parse(localStorage.getItem("user") || "{}").token;
 
   useEffect(() => {
     dispatch(setText(""));
   }, [location]);
 
-  const onTextChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+  const onTextChange = (e: React.ChangeEvent<HTMLTextAreaElement>): void => {
     dispatch(setText(e.target.value));
   };
 
-  const formHandler = async (e: React.FormEvent<HTMLFormElement>) => {
+  const formHandler = async (
+    e: React.FormEvent<HTMLFormElement>
+  ): Promise<void> => {
     e.preventDefault();
 
     dispatch(setLoadingAddComment(true));

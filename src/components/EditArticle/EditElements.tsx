@@ -5,24 +5,26 @@ import { setElements, setTitle } from "../../store/slices/editArticleSlice";
 import { CiImport } from "react-icons/ci";
 import exportImg from "../../utils/exportImg";
 import { MdDeleteForever } from "react-icons/md";
-import { useParams } from "react-router-dom";
 
 const EditElements: FC = () => {
-  const { articleId } = useParams();
+  const dispatch = useAppDispatch();
   const title = useAppSelector((state) => state.editArticle.title);
   const elements = useAppSelector((state) => state.editArticle.elements);
   const banner = useAppSelector((state) => state.editArticle.banner);
-  const dispatch = useAppDispatch();
   const [imgLoading, setImgLoading] = useState<boolean>(false);
 
-  const updateFieldChanged = (idx: number, type: string, value: string) => {
+  const updateFieldChanged = (
+    idx: number,
+    type: string,
+    value: string
+  ): void => {
     let newArr = [...elements];
     newArr[idx] = { type, value };
 
     dispatch(setElements(newArr));
   };
 
-  const onTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const onTitleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     dispatch(setTitle(e.target.value));
   };
 

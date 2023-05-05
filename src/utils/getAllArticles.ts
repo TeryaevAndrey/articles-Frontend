@@ -6,7 +6,8 @@ import {
 } from "../store/slices/allArticlesSlice";
 
 const getAllArticles =
-  (limit: number, page: number) => async (dispatch: Dispatch) => {
+  (limit: number, page: number) =>
+  async (dispatch: Dispatch): Promise<void> => {
     const searchParams = new URLSearchParams(window.location.search);
     const tag = searchParams.get("tag");
 

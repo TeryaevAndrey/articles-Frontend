@@ -5,16 +5,16 @@ import { setRating } from "../../../store/slices/addCommentSlice";
 import { useLocation } from "react-router-dom";
 
 const Rating: FC = () => {
-  const [hoveredRating, setHoveredRating] = useState<number>(0);
-  const rating = useAppSelector((state) => state.comment.rating);
   const dispatch = useAppDispatch();
   const location = useLocation();
+  const rating = useAppSelector((state) => state.comment.rating);
+  const [hoveredRating, setHoveredRating] = useState<number>(0);
 
   useEffect(() => {
     dispatch(setRating(0));
   }, [location]);
 
-  const onStarFocus = (rating: number) => {
+  const onStarFocus = (rating: number): void => {
     setHoveredRating(rating);
   };
 

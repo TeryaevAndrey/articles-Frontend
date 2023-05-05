@@ -1,6 +1,4 @@
-import { Dispatch } from "@reduxjs/toolkit";
 import axios, { AxiosResponse } from "axios";
-import { deleteArticleFromFavourite } from "../store/slices/favouriteSlice";
 
 const deleteFavouriteArticle = async (
   favouriteId: string

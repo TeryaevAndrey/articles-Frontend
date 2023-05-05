@@ -14,18 +14,20 @@ import Tags from "../components/Tags";
 import axios from "axios";
 
 const AddArticlePage: FC = () => {
+  const dispatch = useAppDispatch();
   const isOpenElements = useAppSelector(
     (state) => state.addArticle.isOpenElements
   );
-  const [tagValue, setTagValue] = React.useState<string>("");
   const title = useAppSelector((state) => state.addArticle.title);
   const banner = useAppSelector((state) => state.addArticle.banner);
   const elements = useAppSelector((state) => state.addArticle.elements);
   const tags = useAppSelector((state) => state.addArticle.tags);
-  const dispatch = useAppDispatch();
+  const [tagValue, setTagValue] = React.useState<string>("");
   const token = JSON.parse(localStorage.getItem("user") || "{}").token;
 
-  const formHandler = async (e: React.FormEvent<HTMLFormElement>) => {
+  const formHandler = async (
+    e: React.FormEvent<HTMLFormElement>
+  ): Promise<void> => {
     e.preventDefault();
 
     const data = {

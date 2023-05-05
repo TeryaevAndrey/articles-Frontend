@@ -6,7 +6,8 @@ import {
 } from "../store/slices/myArticlesSlice";
 
 const getMyArticles =
-  (limit: number, page: number) => async (dispatch: Dispatch) => {
+  (limit: number, page: number) =>
+  async (dispatch: Dispatch): Promise<void> => {
     const token = JSON.parse(localStorage.getItem("user") || "{}").token;
 
     await axios

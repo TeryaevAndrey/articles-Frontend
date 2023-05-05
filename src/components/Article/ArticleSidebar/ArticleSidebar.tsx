@@ -1,7 +1,5 @@
 import React, { FC } from "react";
 import Profile from "../Profile";
-import Popular from "../../Popular/Popular";
-import { IUser } from "../../../types";
 import { useAppSelector } from "../../../store/store";
 import Tag from "../Tag";
 

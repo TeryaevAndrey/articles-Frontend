@@ -4,9 +4,9 @@ import { useAppDispatch, useAppSelector } from "../../../store/store";
 import { setIsOpenMenu } from "../../../store/slices/headerSlice";
 
 const MenuMob: FC = () => {
+  const dispatch = useAppDispatch();
   const isOpenMenu = useAppSelector((state) => state.header.isOpenMenu);
   const isAuth = useAppSelector((state) => state.main.isAuth);
-  const dispatch = useAppDispatch();
 
   return (
     <div

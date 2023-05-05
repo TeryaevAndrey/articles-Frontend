@@ -1,9 +1,11 @@
-import { Dispatch } from "@reduxjs/toolkit";
 import axios from "axios";
-import { setFavouriteArticles } from "../store/slices/favouriteSlice";
 import { IFavourite } from "../types";
 
-const getFavouriteArticle = async (articleId: string) => {
+const getFavouriteArticle = async (
+  articleId: string
+): Promise<
+  { favourite: IFavourite | undefined; result: boolean } | undefined
+> => {
   const token = JSON.parse(localStorage.getItem("user") || "{}").token;
   let result:
     | {

@@ -9,9 +9,8 @@ const exportImg = async (
   dispatch: Dispatch,
   elements: IElement[],
   setImgLoading: Function
-) => {
+): Promise<void> => {
   const token = JSON.parse(localStorage.getItem("user") || "{}").token;
-
   const formData = new FormData();
 
   formData.append("img", img!);

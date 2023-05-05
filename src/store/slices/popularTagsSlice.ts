@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 const initialState: {
   tags: { _id: string }[];
@@ -10,7 +10,7 @@ export const popularTagsSlice = createSlice({
   name: "popular-tags",
   initialState,
   reducers: {
-    setPopularTags: (state, action) => {
+    setPopularTags: (state, action: PayloadAction<{ _id: string }[]>) => {
       state.tags = action.payload;
     },
   },

@@ -1,38 +1,40 @@
-import React, { FC } from "react";
+import React, { FC, useState } from "react";
 import FieldEditProfile from "../components/EditProfile/FieldEditProfile";
 import axios from "axios";
 import { useAppDispatch } from "../store/store";
 import getMyData from "../utils/getMyData";
 
 const EditProfilePage: FC = () => {
-  const user = JSON.parse(localStorage.getItem("user") || "{}");
-  const [avatar, setAvatar] = React.useState<string | File>(
-    user.userInfo.avatar
-  );
-  const [userName, setUserName] = React.useState<string>("");
-  const [password, setPassword] = React.useState<string>("");
-  const [oldPassword, setOldPassword] = React.useState<string>("");
   const dispatch = useAppDispatch();
+  const user = JSON.parse(localStorage.getItem("user") || "{}");
+  const [avatar, setAvatar] = useState<string | File>(user.userInfo.avatar);
+  const [userName, setUserName] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const [oldPassword, setOldPassword] = useState<string>("");
 
-  const onAvatarChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const onAvatarChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     if (e.target.files) {
       setAvatar(e.target.files[0]);
     }
   };
 
-  const onUserNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const onUserNameChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setUserName(e.target.value);
   };
 
-  const onPasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const onPasswordChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setPassword(e.target.value);
   };
 
-  const onOldPasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const onOldPasswordChange = (
+    e: React.ChangeEvent<HTMLInputElement>
+  ): void => {
     setOldPassword(e.target.value);
   };
 
-  const formHandler = async (e: React.FormEvent<HTMLFormElement>) => {
+  const formHandler = async (
+    e: React.FormEvent<HTMLFormElement>
+  ): Promise<void> => {
     e.preventDefault();
 
     const formData = new FormData();

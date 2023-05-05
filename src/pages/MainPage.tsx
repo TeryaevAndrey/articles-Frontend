@@ -1,19 +1,19 @@
-import React, { FC } from "react";
+import React, { FC, useEffect } from "react";
 import Popular from "../components/Popular/Popular";
 import Article from "../components/Article/Article";
 import Pagination from "../components/Pagination/Pagination";
 import { useAppDispatch, useAppSelector } from "../store/store";
 import getAllArticles from "../utils/getAllArticles";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 const MainPage: FC = () => {
   const dispatch = useAppDispatch();
-  const limit = 10;
   const { page } = useParams();
   const articles = useAppSelector((state) => state.allArticles.articles);
   const total = useAppSelector((state) => state.allArticles.total);
+  const limit = 10;
 
-  React.useEffect(() => {
+  useEffect(() => {
     dispatch(getAllArticles(10, page ? Number(page.slice(4)) : 1));
   }, [page, window.location.search]);
 

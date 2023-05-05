@@ -3,8 +3,8 @@ import { useAppDispatch, useAppSelector } from "../../store/store";
 import { setIsOpenMenu } from "../../store/slices/headerSlice";
 
 const Burger: FC = () => {
-  const isOpenMenu = useAppSelector((state) => state.header.isOpenMenu);
   const dispatch = useAppDispatch();
+  const isOpenMenu = useAppSelector((state) => state.header.isOpenMenu);
 
   return (
     <div

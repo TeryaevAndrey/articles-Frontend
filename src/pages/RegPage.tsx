@@ -7,26 +7,30 @@ import { useNavigate } from "react-router-dom";
 import getMyData from "../utils/getMyData";
 
 const RegPage: FC = () => {
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const [userName, setUserName] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [passwordRepeat, setPasswordRepeat] = useState<string>("");
-  const [isLoading, setIsLoading] = React.useState<boolean>(false);
-  const dispatch = useAppDispatch();
-  const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  const onUserNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const onUserNameChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setUserName(e.target.value);
   };
 
-  const onPasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const onPasswordChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setPassword(e.target.value);
   };
 
-  const onPasswordRepeatChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const onPasswordRepeatChange = (
+    e: React.ChangeEvent<HTMLInputElement>
+  ): void => {
     setPasswordRepeat(e.target.value);
   };
 
-  const formHandler = async (e: React.FormEvent<HTMLFormElement>) => {
+  const formHandler = async (
+    e: React.FormEvent<HTMLFormElement>
+  ): Promise<void> => {
     e.preventDefault();
 
     setIsLoading(true);

@@ -1,10 +1,10 @@
-import React, { FC, useEffect, useState } from "react";
+import React, { FC, useState, useEffect } from "react";
 import { AiOutlineEye } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { IArticle, IFavourite } from "../../types";
 import Tag from "./Tag";
 import { BsBookmark, BsBookmarkFill } from "react-icons/bs";
-import { useAppDispatch, useAppSelector } from "../../store/store";
+import { useAppSelector } from "../../store/store";
 import getFavouriteArticle from "../../utils/getFavouriteArticle";
 import addToFavourite from "../../utils/addToFavourite";
 import deleteFavouriteArticle from "../../utils/deleteFavouriteArticle";
@@ -20,15 +20,13 @@ const Article: FC<IArticle> = ({
   createdAt,
   updatedAt,
 }) => {
-  const dispatch = useAppDispatch();
-  const text = elements.find((el) => el.type === "text");
-  const favouriteArticles = useAppSelector((state) => state.favourite.articles);
-  const isAuth = useAppSelector((state) => state.main.isAuth);
   const [favouriteInfo, setFavouriteInfo] = useState<
     { favourite: IFavourite | undefined; result: boolean } | undefined
   >(undefined);
+  const isAuth = useAppSelector((state) => state.main.isAuth);
+  const text = elements.find((el) => el.type === "text");
 
-  React.useEffect(() => {
+  useEffect(() => {
     const getFavourite = async () => {
       const data = await getFavouriteArticle(_id);
 
@@ -37,8 +35,6 @@ const Article: FC<IArticle> = ({
 
     getFavourite();
   }, []);
-
-  console.log(favouriteInfo);
 
   return (
     <div className="w-full rounded overflow-hidden">
