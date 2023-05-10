@@ -44,7 +44,11 @@ const EditArticlePage: FC = () => {
     }
   }, [article]);
 
-  const formHandler = async (): Promise<void> => {
+  const formHandler = async (
+    e: React.FormEvent<HTMLFormElement>
+  ): Promise<void> => {
+    e.preventDefault();
+
     await axios
       .post(
         import.meta.env.VITE_PROXY + `/edit-article/${articleId}`,
