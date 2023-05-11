@@ -168,7 +168,7 @@ const EditElements: FC = () => {
                   }}
                   id={id}
                 />
-                {el.src && <img src={el.src} alt="Изображение" />}
+                {el.src && <img className="w-full lg:w-7/12" src={el.src} alt="Изображение" />}
               </div>
               <MdDeleteForever
                 onClick={() =>
