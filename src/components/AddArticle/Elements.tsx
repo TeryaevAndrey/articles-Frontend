@@ -3,7 +3,7 @@ import { useAppDispatch, useAppSelector } from "../../store/store";
 import { MdDeleteForever } from "react-icons/md";
 import { v4 as uuidv4 } from "uuid";
 import { CiImport } from "react-icons/ci";
-import { setElements, setTitle } from "../../store/slices/addArticleSlice";
+import { setBanner, setElements, setTitle } from "../../store/slices/addArticleSlice";
 import exportImg from "../../utils/exportImg";
 
 const Elements: FC = () => {
@@ -68,7 +68,9 @@ const Elements: FC = () => {
                   undefined,
                   dispatch,
                   elements,
-                  setImgLoading
+                  setImgLoading,
+                  setElements,
+                  setBanner
                 );
               }
             }}
@@ -158,13 +160,15 @@ const Elements: FC = () => {
                         idx,
                         dispatch,
                         elements,
-                        setImgLoading
+                        setImgLoading,
+                        setElements,
+                        setBanner
                       );
                     }
                   }}
                   id={id}
                 />
-                {el.src && <img src={el.src} alt="Изображение" />}
+                {el.src && <img className="w-full lg:w-7/12" src={el.src} alt="Изображение" />}
               </div>
               <MdDeleteForever
                 onClick={() =>

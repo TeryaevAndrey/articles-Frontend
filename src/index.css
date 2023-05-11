@@ -41,6 +41,12 @@ button:active {
   content: attr(data-placeholder);
 }
 
+.App {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
 @media (min-width: 1024px) {
   button:active {
     transform: scale(0.95);

@@ -1,7 +1,7 @@
 import React, { FC, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { useAppDispatch, useAppSelector } from "../../store/store";
-import { setElements, setTitle } from "../../store/slices/editArticleSlice";
+import { setBanner, setElements, setTitle } from "../../store/slices/editArticleSlice";
 import { CiImport } from "react-icons/ci";
 import exportImg from "../../utils/exportImg";
 import { MdDeleteForever } from "react-icons/md";
@@ -68,7 +68,9 @@ const EditElements: FC = () => {
                   undefined,
                   dispatch,
                   elements,
-                  setImgLoading
+                  setImgLoading,
+                  setElements,
+                  setBanner
                 );
               }
             }}
@@ -158,7 +160,9 @@ const EditElements: FC = () => {
                         idx,
                         dispatch,
                         elements,
-                        setImgLoading
+                        setImgLoading,
+                        setElements,
+                        setBanner
                       );
                     }
                   }}

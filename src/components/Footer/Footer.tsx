@@ -6,7 +6,7 @@ import { CgWebsite } from "react-icons/cg";
 
 const Footer: FC = () => {
   return (
-    <div className="border-t border-gray-200 border-solid py-10">
+    <div className="border-t border-gray-200 border-solid py-10 mt-auto">
       <div className="container mx-auto px-4">
         <div className="flex flex-col sm:flex-row gap-7 justify-between items-center">
           <p>Created by Teryaev Andrey</p>
