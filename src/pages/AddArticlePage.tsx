@@ -10,7 +10,7 @@ import {
   setTitle,
 } from "../store/slices/addArticleSlice";
 import axios from "axios";
-import {Elements, Tags} from "@/components";
+import { Elements, Tags } from "@/components";
 
 const AddArticlePage: FC = () => {
   const dispatch = useAppDispatch();
