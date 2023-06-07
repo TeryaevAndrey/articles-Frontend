@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import { FC } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 
 interface IPopularLink {
@@ -6,7 +6,7 @@ interface IPopularLink {
   beforeUrl: string;
 }
 
-const PopularLink: FC<IPopularLink> = ({ title, beforeUrl }) => {
+export const PopularLink: FC<IPopularLink> = ({ title, beforeUrl }) => {
   const [searchParams, setSearchParams] = useSearchParams();
   const currentUrl = window.location.href;
 
@@ -23,5 +23,3 @@ const PopularLink: FC<IPopularLink> = ({ title, beforeUrl }) => {
     </Link>
   );
 };
-
-export default PopularLink;

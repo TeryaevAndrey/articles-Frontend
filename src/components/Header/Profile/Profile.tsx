@@ -1,10 +1,10 @@
-import React, { FC } from "react";
+import { FC } from "react";
 import { AiFillCaretDown } from "react-icons/ai";
-import ProfileMenu from "./ProfileMenu/ProfileMenu";
 import { useAppDispatch, useAppSelector } from "../../../store/store";
 import { setIsOpenMenu } from "../../../store/slices/headerSlice";
+import { ProfileMenu } from "@/components";
 
-const Profile: FC = () => {
+export const Profile: FC = () => {
   const dispatch = useAppDispatch();
   const isOpenMenu = useAppSelector((state) => state.header.isOpenMenu);
   const isLoading = useAppSelector(
@@ -43,5 +43,3 @@ const Profile: FC = () => {
     </div>
   );
 };
-
-export default Profile;

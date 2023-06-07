@@ -1,12 +1,10 @@
-import React, { FC, useEffect } from "react";
-import Crumbs from "../components/Crumbs/Crumbs";
+import { FC, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import ArticleSidebar from "../components/Article/ArticleSidebar/ArticleSidebar";
-import Comments from "../components/Article/Comments/Comments";
 import { IElement } from "../types";
 import { useAppDispatch, useAppSelector } from "../store/store";
 import getOpenedArticle from "../utils/getOpenedArticle";
 import getComments from "../utils/getComments";
+import { Crumbs, ArticleSidebar, Comments } from "@/components";
 
 const ArticlePage: FC = () => {
   const dispatch = useAppDispatch();

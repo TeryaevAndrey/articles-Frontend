@@ -1,7 +1,7 @@
-import React, { FC } from "react";
+import { FC } from "react";
 import { Link } from "react-router-dom";
 
-const Logo: FC = () => {
+export const Logo: FC = () => {
   return (
     <Link className="font-medium text-blue-500 uppercase" to="/all">
       Koconta
@@ -12,5 +12,3 @@ const Logo: FC = () => {
     </Link>
   );
 };
-
-export default Logo;

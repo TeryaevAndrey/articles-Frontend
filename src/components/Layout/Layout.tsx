@@ -1,12 +1,11 @@
-import React, { FC } from "react";
-import Footer from "../Footer/Footer";
-import Header from "../Header/Header";
+import { FC, ReactNode } from "react";
+import { Header, Footer } from "@/components";
 
 interface ILayout {
-  children: React.ReactNode;
+  children: ReactNode;
 }
 
-const Layout: FC<ILayout> = ({ children }) => {
+export const Layout: FC<ILayout> = ({ children }) => {
   return (
     <div className="flex flex-col justify-between min-h-screen">
       <Header />
@@ -15,5 +14,3 @@ const Layout: FC<ILayout> = ({ children }) => {
     </div>
   );
 };
-
-export default Layout;

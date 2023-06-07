@@ -1,10 +1,10 @@
-import React, { FC, useEffect, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { AiFillStar } from "react-icons/ai";
 import { useAppDispatch, useAppSelector } from "../../../store/store";
 import { setRating } from "../../../store/slices/addCommentSlice";
 import { useLocation } from "react-router-dom";
 
-const Rating: FC = () => {
+export const Rating: FC = () => {
   const dispatch = useAppDispatch();
   const location = useLocation();
   const rating = useAppSelector((state) => state.comment.rating);
@@ -39,5 +39,3 @@ const Rating: FC = () => {
     </div>
   );
 };
-
-export default Rating;

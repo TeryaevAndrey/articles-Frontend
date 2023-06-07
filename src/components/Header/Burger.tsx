@@ -1,8 +1,8 @@
-import React, { FC } from "react";
+import { FC } from "react";
 import { useAppDispatch, useAppSelector } from "../../store/store";
 import { setIsOpenMenu } from "../../store/slices/headerSlice";
 
-const Burger: FC = () => {
+export const Burger: FC = () => {
   const dispatch = useAppDispatch();
   const isOpenMenu = useAppSelector((state) => state.header.isOpenMenu);
 
@@ -18,4 +18,3 @@ const Burger: FC = () => {
   );
 };
 
-export default Burger;

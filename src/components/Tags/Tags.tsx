@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import { FC } from "react";
 import { useAppDispatch } from "../../store/store";
 import { v4 as uuidv4 } from "uuid";
 import { MdDeleteForever } from "react-icons/md";
@@ -8,7 +8,7 @@ interface ITags {
   setTags: Function;
 }
 
-const Tags: FC<ITags> = ({ tags, setTags }) => {
+export const Tags: FC<ITags> = ({ tags, setTags }) => {
   const dispatch = useAppDispatch();
 
   return (
@@ -40,5 +40,3 @@ const Tags: FC<ITags> = ({ tags, setTags }) => {
     </div>
   );
 };
-
-export default Tags;

@@ -2,7 +2,6 @@ import React, { FC, useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../store/store";
 import { BsCardText, BsCheck, BsImage } from "react-icons/bs";
 import { AiOutlinePlus } from "react-icons/ai";
-import EditElements from "../components/EditArticle/EditElements";
 import { useParams } from "react-router-dom";
 import {
   setBanner,
@@ -13,7 +12,7 @@ import {
 } from "../store/slices/editArticleSlice";
 import getEditArticle from "../utils/getEditArticle";
 import axios, { AxiosResponse } from "axios";
-import Tags from "../components/Tags/Tags";
+import { EditElements, Tags } from "@/components";
 
 const EditArticlePage: FC = () => {
   const dispatch = useAppDispatch();

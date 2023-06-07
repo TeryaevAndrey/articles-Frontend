@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import { FC } from "react";
 import { AiOutlineLeft, AiOutlineRight } from "react-icons/ai";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 
@@ -8,7 +8,7 @@ interface IPagination {
   currentPage: number;
 }
 
-const Pagination: FC<IPagination> = ({ total, limit, currentPage }) => {
+export const Pagination: FC<IPagination> = ({ total, limit, currentPage }) => {
   const { page } = useParams();
   const navigate = useNavigate();
   const location = useLocation();
@@ -83,5 +83,3 @@ const Pagination: FC<IPagination> = ({ total, limit, currentPage }) => {
     </div>
   );
 };
-
-export default Pagination;

@@ -1,15 +1,15 @@
-import React, { FC, useState, useEffect } from "react";
+import { FC, useState, useEffect } from "react";
 import { AiOutlineEye } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { IArticle, IFavourite } from "../../types";
-import Tag from "./Tag";
 import { BsBookmark, BsBookmarkFill } from "react-icons/bs";
 import { useAppSelector } from "../../store/store";
 import getFavouriteArticle from "../../utils/getFavouriteArticle";
 import addToFavourite from "../../utils/addToFavourite";
 import deleteFavouriteArticle from "../../utils/deleteFavouriteArticle";
+import { Tag } from "@/components";
 
-const Article: FC<IArticle> = ({
+export const Article: FC<IArticle> = ({
   _id,
   title,
   banner,
@@ -108,5 +108,3 @@ const Article: FC<IArticle> = ({
     </div>
   );
 };
-
-export default Article;

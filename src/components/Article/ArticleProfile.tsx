@@ -1,11 +1,11 @@
-import React, { FC } from "react";
+import { FC } from "react";
 
 interface IProfile {
   avatar: string | undefined;
   userName: string;
 }
 
-const Profile: FC<IProfile> = ({ avatar, userName }) => {
+export const ArticleProfile: FC<IProfile> = ({ avatar, userName }) => {
   return (
     <div className="flex items-center gap-2">
       <img
@@ -17,5 +17,3 @@ const Profile: FC<IProfile> = ({ avatar, userName }) => {
     </div>
   );
 };
-
-export default Profile;

@@ -1,14 +1,13 @@
 import React, { FC, useEffect } from "react";
-import Rating from "./Rating";
 import { useAppDispatch, useAppSelector } from "../../../store/store";
 import { setRating, setText } from "../../../store/slices/addCommentSlice";
 import { useLocation } from "react-router-dom";
 import axios, { AxiosResponse } from "axios";
 import { setLoadingAddComment } from "../../../store/slices/loadersSlice";
-import Loader from "../../Loader/Loader";
 import { setOpenedArticleComments } from "../../../store/slices/openedArticleSlice";
+import { Rating, Loader } from "@/components";
 
-const AddComment: FC = () => {
+export const AddComment: FC = () => {
   const dispatch = useAppDispatch();
   const location = useLocation();
   const article = useAppSelector((state) => state.openedArticle.article);
@@ -79,5 +78,3 @@ const AddComment: FC = () => {
     </form>
   );
 };
-
-export default AddComment;

@@ -7,7 +7,7 @@ interface ISocial {
   Icon: IconType;
 }
 
-const Social: FC<ISocial> = ({ href, Icon }) => {
+export const Social: FC<ISocial> = ({ href, Icon }) => {
   return (
     <Link
       to={href}
@@ -17,5 +17,3 @@ const Social: FC<ISocial> = ({ href, Icon }) => {
     </Link>
   );
 };
-
-export default Social;

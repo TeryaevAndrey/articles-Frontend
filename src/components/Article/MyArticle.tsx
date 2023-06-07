@@ -2,9 +2,9 @@ import React, { FC } from "react";
 import { AiOutlineEdit, AiOutlineEye } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { IArticle } from "../../types";
-import Tag from "./Tag";
+import { Tag } from "@/components";
 
-const MyArticle: FC<IArticle> = ({
+export const MyArticle: FC<IArticle> = ({
   _id,
   title,
   banner,
@@ -58,5 +58,3 @@ const MyArticle: FC<IArticle> = ({
     </div>
   );
 };
-
-export default MyArticle;

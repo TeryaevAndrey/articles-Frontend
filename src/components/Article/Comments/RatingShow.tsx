@@ -1,11 +1,11 @@
-import React, { FC } from "react";
+import { FC } from "react";
 import { AiFillStar } from "react-icons/ai";
 
 interface IRatingShow {
   rating: number;
 }
 
-const RatingShow: FC<IRatingShow> = ({ rating }) => {
+export const RatingShow: FC<IRatingShow> = ({ rating }) => {
   return (
     <div className="flex items-center gap-2">
       {[...Array(5)].map((star, idx) => {
@@ -24,5 +24,3 @@ const RatingShow: FC<IRatingShow> = ({ rating }) => {
     </div>
   );
 };
-
-export default RatingShow;

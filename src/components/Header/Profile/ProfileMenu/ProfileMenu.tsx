@@ -1,11 +1,11 @@
-import React, { FC } from "react";
+import { FC } from "react";
 import { Link } from "react-router-dom";
-import ProfileLink from "./ProfileLink";
 import { setIsOpenMenu } from "../../../../store/slices/headerSlice";
 import { useAppDispatch } from "../../../../store/store";
 import { setIsAuth } from "../../../../store/slices/mainSlice";
+import { ProfileLink } from "@/components";
 
-const ProfileMenu: FC = () => {
+export const ProfileMenu: FC = () => {
   const dispatch = useAppDispatch();
 
   const exitFromProfile = (): void => {
@@ -47,5 +47,3 @@ const ProfileMenu: FC = () => {
     </div>
   );
 };
-
-export default ProfileMenu;

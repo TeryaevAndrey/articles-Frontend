@@ -1,13 +1,12 @@
 import React, { FC } from "react";
-import AddComment from "./AddComment";
-import Comment from "./Comment";
 import { IComment } from "../../../types";
+import { AddComment, Comment } from "@/components";
 
 interface IComments {
   comments: IComment[];
 }
 
-const Comments: FC<IComments> = ({ comments }) => {
+export const Comments: FC<IComments> = ({ comments }) => {
   return (
     <div className="flex flex-col gap-3 w-full">
       <h3 className="text-lg font-medium">Отзывы</h3>
@@ -33,5 +32,3 @@ const Comments: FC<IComments> = ({ comments }) => {
     </div>
   );
 };
-
-export default Comments;

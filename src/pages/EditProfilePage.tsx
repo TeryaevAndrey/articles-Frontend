@@ -1,8 +1,8 @@
 import React, { FC, useState } from "react";
-import FieldEditProfile from "../components/EditProfile/FieldEditProfile";
 import axios from "axios";
 import { useAppDispatch } from "../store/store";
 import getMyData from "../utils/getMyData";
+import { FieldEditProfile } from "@/components";
 
 const EditProfilePage: FC = () => {
   const dispatch = useAppDispatch();

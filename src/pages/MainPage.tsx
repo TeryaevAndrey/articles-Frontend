@@ -1,10 +1,8 @@
-import React, { FC, useEffect } from "react";
-import Popular from "../components/Popular/Popular";
-import Article from "../components/Article/Article";
-import Pagination from "../components/Pagination/Pagination";
+import { FC, useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../store/store";
 import getAllArticles from "../utils/getAllArticles";
 import { useParams } from "react-router-dom";
+import { Popular, Article, Pagination } from "@/components";
 
 const MainPage: FC = () => {
   const dispatch = useAppDispatch();

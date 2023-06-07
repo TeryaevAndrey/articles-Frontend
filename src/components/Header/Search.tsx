@@ -1,11 +1,11 @@
-import React, { FC } from "react";
+import { FC, ChangeEvent } from "react";
 import { AiOutlineSearch } from "react-icons/ai";
 import { MdClose } from "react-icons/md";
 import { useAppDispatch, useAppSelector } from "../../store/store";
 import { setSearchValue } from "../../store/slices/headerSlice";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-const Search: FC = () => {
+export const Search: FC = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const searchValue = useAppSelector((state) => state.header.searchValue);
@@ -52,5 +52,3 @@ const Search: FC = () => {
     </form>
   );
 };
-
-export default Search;

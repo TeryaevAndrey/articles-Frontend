@@ -1,9 +1,9 @@
-import React, { FC } from "react";
+import { FC } from "react";
 import { Link } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../../store/store";
 import { setIsOpenMenu } from "../../../store/slices/headerSlice";
 
-const MenuMob: FC = () => {
+export const MenuMob: FC = () => {
   const dispatch = useAppDispatch();
   const isOpenMenu = useAppSelector((state) => state.header.isOpenMenu);
   const isAuth = useAppSelector((state) => state.main.isAuth);
@@ -37,5 +37,3 @@ const MenuMob: FC = () => {
     </div>
   );
 };
-
-export default MenuMob;

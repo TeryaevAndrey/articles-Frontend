@@ -1,14 +1,10 @@
-import React, { FC } from "react";
+import { FC } from "react";
 import { Link } from "react-router-dom";
-import Logo from "../Logo/Logo";
-import Burger from "./Burger";
 import { AiOutlineSearch } from "react-icons/ai";
-import Search from "./Search";
-import Profile from "./Profile/Profile";
 import { useAppSelector } from "../../store/store";
-import MenuMob from "./MenuMob/MenuMob";
+import { Logo, Burger, Search, Profile, MenuMob } from "@/components";
 
-const Header: FC = () => {
+export const Header: FC = () => {
   const isAuth = useAppSelector((state) => state.main.isAuth);
 
   return (
@@ -65,5 +61,3 @@ const Header: FC = () => {
     </>
   );
 };
-
-export default Header;

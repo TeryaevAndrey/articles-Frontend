@@ -6,7 +6,7 @@ import { CiImport } from "react-icons/ci";
 import exportImg from "../../utils/exportImg";
 import { MdDeleteForever } from "react-icons/md";
 
-const EditElements: FC = () => {
+export const EditElements: FC = () => {
   const dispatch = useAppDispatch();
   const title = useAppSelector((state) => state.editArticle.title);
   const elements = useAppSelector((state) => state.editArticle.elements);
@@ -184,4 +184,3 @@ const EditElements: FC = () => {
   );
 };
 
-export default EditElements;

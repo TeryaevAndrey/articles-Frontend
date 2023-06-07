@@ -1,9 +1,8 @@
-import React, { FC, useEffect } from "react";
-import Pagination from "../components/Pagination/Pagination";
-import MyArticle from "../components/Article/MyArticle";
+import { FC, useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../store/store";
 import getMyArticles from "../utils/getMyArticles";
 import { useParams } from "react-router-dom";
+import { Pagination, MyArticle } from "@/components";
 
 const ProfilePage: FC = () => {
   const dispatch = useAppDispatch();

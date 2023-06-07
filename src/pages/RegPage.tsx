@@ -1,10 +1,10 @@
 import React, { FC, useState } from "react";
-import Loader from "../components/Loader/Loader";
 import axios from "axios";
 import { useAppDispatch } from "../store/store";
 import { setIsAuth } from "../store/slices/mainSlice";
 import { useNavigate } from "react-router-dom";
 import getMyData from "../utils/getMyData";
+import { Loader } from "@/components";
 
 const RegPage: FC = () => {
   const dispatch = useAppDispatch();

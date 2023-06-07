@@ -1,9 +1,8 @@
-import React, { FC } from "react";
-import Profile from "../Profile";
+import { FC } from "react";
 import { IComment } from "../../../types";
-import RatingShow from "./RatingShow";
+import { ArticleProfile, RatingShow } from "@/components";
 
-const Comment: FC<IComment> = ({
+export const Comment: FC<IComment> = ({
   _id,
   from,
   articleId,
@@ -15,7 +14,7 @@ const Comment: FC<IComment> = ({
   return (
     <div className="flex flex-col gap-3">
       <div className="flex items-center gap-2 flex-wrap">
-        <Profile avatar={from.avatar} userName={from.userName!} />
+        <ArticleProfile avatar={from.avatar} userName={from.userName!} />
         <div className="flex items-center gap-2">
           <p>{new Date(createdAt).toLocaleDateString()}</p>
           <p>{new Date(createdAt).toLocaleTimeString()}</p>
@@ -30,5 +29,3 @@ const Comment: FC<IComment> = ({
     </div>
   );
 };
-
-export default Comment;

@@ -1,10 +1,10 @@
-import React, { FC } from "react";
-import Social from "../Social/Social";
+import { FC } from "react";
 import { AiFillGithub } from "react-icons/ai";
 import { FaTelegram } from "react-icons/fa";
 import { CgWebsite } from "react-icons/cg";
+import { Social } from "@/components";
 
-const Footer: FC = () => {
+export const Footer: FC = () => {
   return (
     <div className="border-t border-gray-200 border-solid py-10">
       <div className="container mx-auto px-4">
@@ -23,5 +23,3 @@ const Footer: FC = () => {
     </div>
   );
 };
-
-export default Footer;

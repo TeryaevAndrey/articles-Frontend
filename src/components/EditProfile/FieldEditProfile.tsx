@@ -1,13 +1,13 @@
-import React, { FC } from "react";
+import { FC, ChangeEventHandler } from "react";
 
 interface IFieldEditProfile {
   type: string;
   placeholder: string;
-  onChange: React.ChangeEventHandler;
+  onChange: ChangeEventHandler;
   value: string;
 }
 
-const FieldEditProfile: FC<IFieldEditProfile> = ({
+export const FieldEditProfile: FC<IFieldEditProfile> = ({
   type,
   placeholder,
   onChange,
@@ -23,5 +23,3 @@ const FieldEditProfile: FC<IFieldEditProfile> = ({
     />
   );
 };
-
-export default FieldEditProfile;

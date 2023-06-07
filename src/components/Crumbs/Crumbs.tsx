@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import { FC } from "react";
 import { Link } from "react-router-dom";
 
 interface ICrumbs {
@@ -8,7 +8,7 @@ interface ICrumbs {
   }[];
 }
 
-const Crumbs: FC<ICrumbs> = ({ way }) => {
+export const Crumbs: FC<ICrumbs> = ({ way }) => {
   return (
     <div className="flex items-center text-gray-300 font-light">
       <Link
@@ -32,5 +32,3 @@ const Crumbs: FC<ICrumbs> = ({ way }) => {
     </div>
   );
 };
-
-export default Crumbs;

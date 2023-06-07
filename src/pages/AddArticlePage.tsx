@@ -9,9 +9,8 @@ import {
   setTags,
   setTitle,
 } from "../store/slices/addArticleSlice";
-import Elements from "../components/AddArticle/Elements";
-import Tags from "../components/Tags/Tags";
 import axios from "axios";
+import {Elements, Tags} from "@/components";
 
 const AddArticlePage: FC = () => {
   const dispatch = useAppDispatch();

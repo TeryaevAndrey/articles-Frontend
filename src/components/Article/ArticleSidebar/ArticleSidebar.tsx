@@ -1,16 +1,15 @@
 import React, { FC } from "react";
-import Profile from "../Profile";
 import { useAppSelector } from "../../../store/store";
-import Tag from "../Tag";
+import { ArticleProfile, Tag } from "@/components";
 
-const ArticleSidebar: FC = () => {
+export const ArticleSidebar: FC = () => {
   const articleData = useAppSelector((state) => state.openedArticle.article);
   const date = new Date(articleData.createdAt!);
 
   return (
     <div className="bg-slate-100 rounded w-full h-max lg:gap-x-10 shadow p-3">
       <div className="w-full flex flex-col gap-3">
-        <Profile
+        <ArticleProfile
           avatar={articleData.from?.avatar}
           userName={articleData.from?.userName!}
         />
@@ -32,5 +31,3 @@ const ArticleSidebar: FC = () => {
     </div>
   );
 };
-
-export default ArticleSidebar;

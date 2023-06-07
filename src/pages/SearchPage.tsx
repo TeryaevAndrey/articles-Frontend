@@ -1,10 +1,8 @@
-import React, { FC, useEffect } from "react";
-import Popular from "../components/Popular/Popular";
-import Article from "../components/Article/Article";
-import Pagination from "../components/Pagination/Pagination";
+import { FC, useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../store/store";
 import { useLocation, useParams } from "react-router-dom";
 import getSearchedArticles from "../utils/getSearchedArticles";
+import { Popular, Article, Pagination } from "@/components";
 
 const SearchPage: FC = () => {
   const dispatch = useAppDispatch();

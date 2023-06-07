@@ -6,7 +6,7 @@ import { CiImport } from "react-icons/ci";
 import { setElements, setTitle } from "../../store/slices/addArticleSlice";
 import exportImg from "../../utils/exportImg";
 
-const Elements: FC = () => {
+export const Elements: FC = () => {
   const dispatch = useAppDispatch();
   const title = useAppSelector((state) => state.addArticle.title);
   const elements = useAppSelector((state) => state.addArticle.elements);
@@ -183,5 +183,3 @@ const Elements: FC = () => {
     </>
   );
 };
-
-export default Elements;

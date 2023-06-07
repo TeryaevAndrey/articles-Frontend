@@ -1,13 +1,13 @@
-import React, { FC, useEffect, useState } from "react";
-import PopularLink from "./PopularLink";
+import { FC, useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../store/store";
 import getPopularTags from "../../utils/getPopularTags";
+import { PopularLink } from "@/components";
 
 interface IPopular {
   beforeUrl: string;
 }
 
-const Popular: FC<IPopular> = ({ beforeUrl }) => {
+export const Popular: FC<IPopular> = ({ beforeUrl }) => {
   const dispatch = useAppDispatch();
   const popularTags = useAppSelector((state) => state.popularTags.tags);
   const [isShowMore, setIsShowMore] = useState<boolean>(false);
@@ -54,5 +54,3 @@ const Popular: FC<IPopular> = ({ beforeUrl }) => {
     </div>
   );
 };
-
-export default Popular;

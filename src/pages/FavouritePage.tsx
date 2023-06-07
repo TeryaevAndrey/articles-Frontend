@@ -1,10 +1,9 @@
-import React, { FC, useEffect } from "react";
+import { FC, useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../store/store";
 import { useParams } from "react-router-dom";
 import getFavouriteArticles from "../utils/getFavouriteArticles";
-import Article from "../components/Article/Article";
-import Pagination from "../components/Pagination/Pagination";
 import { IFavourite } from "../types";
+import { Article, Pagination } from "@/components";
 
 const FavouritePage: FC = () => {
   const dispatch = useAppDispatch();
