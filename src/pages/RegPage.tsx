@@ -1,5 +1,5 @@
 import React, { FC, useState } from "react";
-import Loader from "../components/Loader";
+import Loader from "../components/Loader/Loader";
 import axios from "axios";
 import { useAppDispatch } from "../store/store";
 import { setIsAuth } from "../store/slices/mainSlice";

@@ -1,5 +1,5 @@
 import React, { FC, useState, useEffect } from "react";
-import Layout from "./components/Layout";
+import Layout from "./components/Layout/Layout";
 import { useRoutes } from "./core/routes";
 import { useAppDispatch, useAppSelector } from "./store/store";
 import { useNavigate } from "react-router-dom";

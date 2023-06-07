@@ -13,7 +13,7 @@ import {
 } from "../store/slices/editArticleSlice";
 import getEditArticle from "../utils/getEditArticle";
 import axios, { AxiosResponse } from "axios";
-import Tags from "../components/Tags";
+import Tags from "../components/Tags/Tags";
 
 const EditArticlePage: FC = () => {
   const dispatch = useAppDispatch();

@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { useAppDispatch } from "../store/store";
+import { useAppDispatch } from "../../store/store";
 import { v4 as uuidv4 } from "uuid";
 import { MdDeleteForever } from "react-icons/md";
 

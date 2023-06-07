@@ -1,6 +1,6 @@
 import React, { FC } from "react";
-import Footer from "./Footer/Footer";
-import Header from "./Header/Header";
+import Footer from "../Footer/Footer";
+import Header from "../Header/Header";
 
 interface ILayout {
   children: React.ReactNode;
@@ -8,11 +8,11 @@ interface ILayout {
 
 const Layout: FC<ILayout> = ({ children }) => {
   return (
-    <>
+    <div className="flex flex-col justify-between min-h-screen">
       <Header />
-      {children}
+      <div className="mb-auto">{children}</div>
       <Footer />
-    </>
+    </div>
   );
 };
 

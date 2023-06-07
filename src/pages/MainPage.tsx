@@ -26,7 +26,7 @@ const MainPage: FC = () => {
           </div>
 
           <div className="lg:w-[70%]">
-            <div className="w-full grid grid-cols-1 sm:grid-cols-2 gap-5 mt-5 lg:mt-0">
+            <div className="w-full grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-5 mt-5 lg:mt-0">
               {articles.map((el) => {
                 return (
                   <Article

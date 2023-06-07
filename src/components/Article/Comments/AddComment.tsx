@@ -5,7 +5,7 @@ import { setRating, setText } from "../../../store/slices/addCommentSlice";
 import { useLocation } from "react-router-dom";
 import axios, { AxiosResponse } from "axios";
 import { setLoadingAddComment } from "../../../store/slices/loadersSlice";
-import Loader from "../../Loader";
+import Loader from "../../Loader/Loader";
 import { setOpenedArticleComments } from "../../../store/slices/openedArticleSlice";
 
 const AddComment: FC = () => {

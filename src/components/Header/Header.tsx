@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 import { Link } from "react-router-dom";
-import Logo from "../Logo";
+import Logo from "../Logo/Logo";
 import Burger from "./Burger";
 import { AiOutlineSearch } from "react-icons/ai";
 import Search from "./Search";
