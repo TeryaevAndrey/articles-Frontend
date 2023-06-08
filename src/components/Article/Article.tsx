@@ -74,11 +74,11 @@ export const Article: FC<IProps> = ({ data, favourites }) => {
                       className="text-blue-500 cursor-pointer"
                       size={20}
                       onClick={async () => {
-                        const favouriteData:
-                          | { favourite: IFavourite; message: string }
-                          | undefined = await addToFavourite(data._id);
+                        const favouriteData = await addToFavourite(data._id);
 
-                        setIsFavourite(true);
+                        if (favouriteData) {
+                          setIsFavourite(true);
+                        }
                       }}
                     />
                   )}

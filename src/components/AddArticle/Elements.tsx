@@ -5,6 +5,7 @@ import { v4 as uuidv4 } from "uuid";
 import { CiImport } from "react-icons/ci";
 import { setElements, setTitle } from "../../store/slices/addArticleSlice";
 import exportImg from "../../utils/exportImg";
+import { deleteImg } from "@/utils";
 
 export const Elements: FC = () => {
   const dispatch = useAppDispatch();
@@ -61,9 +62,9 @@ export const Elements: FC = () => {
             className="hidden"
             type="file"
             placeholder="Загрузите изображение..."
-            onChange={(e) => {
+            onChange={async (e) => {
               if (e.target.files) {
-                exportImg(
+                await exportImg(
                   e.target.files[0],
                   undefined,
                   dispatch,
@@ -151,9 +152,9 @@ export const Elements: FC = () => {
                   className="hidden"
                   type="file"
                   placeholder="Загрузите изображение..."
-                  onChange={(e) => {
+                  onChange={async (e) => {
                     if (e.target.files) {
-                      exportImg(
+                      await exportImg(
                         e.target.files[0],
                         idx,
                         dispatch,
@@ -167,11 +168,21 @@ export const Elements: FC = () => {
                 {el.src && <img src={el.src} alt="Изображение" />}
               </div>
               <MdDeleteForever
-                onClick={() =>
+                onClick={async () => {
                   dispatch(
                     setElements(elements.filter((_, elIdx) => idx !== elIdx))
-                  )
-                }
+                  );
+
+                  if (el.src) {
+                    const data = await deleteImg(el.src);
+
+                    console.log(data);
+
+                    if (data) {
+                      alert("Изображение удалено");
+                    }
+                  }
+                }}
                 className="cursor-pointer"
                 size={25}
                 color="red"

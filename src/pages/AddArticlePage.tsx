@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, useEffect } from "react";
 import { AiOutlinePlus } from "react-icons/ai";
 import { BsCardText, BsCheck, BsImage } from "react-icons/bs";
 import { useAppDispatch, useAppSelector } from "../store/store";
@@ -114,7 +114,7 @@ const AddArticlePage: FC = () => {
                     Подзаголовок
                   </div>
                   <div
-                    onClick={() => {
+                    onClick={async () => {
                       dispatch(
                         setElements([
                           ...elements,
