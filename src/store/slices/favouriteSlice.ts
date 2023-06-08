@@ -10,10 +10,10 @@ const initialState: {
 };
 
 export const favouiriteSlice = createSlice({
-  name: "favourite",
+  name: "favourites",
   initialState,
   reducers: {
-    setFavourite: (state, action: PayloadAction<IFavourite[]>) => {
+    setFavourites: (state, action: PayloadAction<IFavourite[]>) => {
       state.articles = action.payload;
     },
 
@@ -27,15 +27,15 @@ export const favouiriteSlice = createSlice({
       });
     },
 
-    setFavouriteTotal: (state, action: PayloadAction<number>) => {
+    setFavouritesTotal: (state, action: PayloadAction<number>) => {
       state.total = action.payload;
     },
   },
 });
 
 export const {
-  setFavourite,
+  setFavourites,
   addArticleToFavourite,
   deleteArticleFromFavourite,
-  setFavouriteTotal,
+  setFavouritesTotal,
 } = favouiriteSlice.actions;

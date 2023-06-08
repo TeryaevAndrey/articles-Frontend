@@ -3,6 +3,7 @@ import { useAppDispatch, useAppSelector } from "../store/store";
 import getAllArticles from "../utils/getAllArticles";
 import { useParams } from "react-router-dom";
 import { Popular, Article, Pagination } from "@/components";
+import { getAllFavouritesArticles } from "@/utils/getAllFavouritesArticles";
 
 const MainPage: FC = () => {
   const dispatch = useAppDispatch();
@@ -10,10 +11,15 @@ const MainPage: FC = () => {
   const articles = useAppSelector((state) => state.allArticles.articles);
   const total = useAppSelector((state) => state.allArticles.total);
   const limit = 10;
+  const favourites = useAppSelector((state) => state.favourite.articles);
 
   useEffect(() => {
     dispatch(getAllArticles(10, page ? Number(page.slice(4)) : 1));
   }, [page, window.location.search]);
+
+  useEffect(() => {
+    dispatch(getAllFavouritesArticles);
+  }, []);
 
   return (
     <div>
@@ -27,18 +33,7 @@ const MainPage: FC = () => {
             <div className="w-full grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-5 mt-5 lg:mt-0">
               {articles.map((el) => {
                 return (
-                  <Article
-                    key={el._id}
-                    _id={el._id}
-                    title={el.title}
-                    banner={el.banner}
-                    elements={el.elements}
-                    tags={el.tags}
-                    views={el.views}
-                    from={el.from}
-                    createdAt={el.createdAt}
-                    updatedAt={el.updatedAt}
-                  />
+                  <Article key={el._id} data={el} favourites={favourites} />
                 );
               })}
             </div>
