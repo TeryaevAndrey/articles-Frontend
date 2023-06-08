@@ -1,17 +1,17 @@
 import axios from "axios";
 import { Dispatch } from "@reduxjs/toolkit";
 import {
-  setFavourite,
-  setFavouriteTotal,
+  setFavourites,
+  setFavouritesTotal,
 } from "../store/slices/favouriteSlice";
 
-const getFavouriteArticles =
+const getFavouritesArticles =
   (limit: number, page: number) =>
   async (dispatch: Dispatch): Promise<void> => {
     const token = JSON.parse(localStorage.getItem("user") || "{}").token;
 
     await axios
-      .get(import.meta.env.VITE_PROXY + "/get-favourite-articles", {
+      .get(import.meta.env.VITE_PROXY + "/get-favourites-articles", {
         params: {
           limit,
           page,
@@ -21,12 +21,12 @@ const getFavouriteArticles =
         },
       })
       .then((res) => {
-        dispatch(setFavourite(res.data.favourite));
-        dispatch(setFavouriteTotal(res.data.total));
+        dispatch(setFavourites(res.data.favourite));
+        dispatch(setFavouritesTotal(res.data.total));
       })
       .catch((err) => {
         console.log(err.response.data.message);
       });
   };
 
-export default getFavouriteArticles;
+export default getFavouritesArticles;

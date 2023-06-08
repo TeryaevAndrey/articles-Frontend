@@ -34,5 +34,5 @@ export interface IComment {
 export interface IFavourite {
   _id: ObjectId;
   userId: ObjectId;
-  articleId: ObjectId;
+  articleId: ObjectId | IArticle;
 }
