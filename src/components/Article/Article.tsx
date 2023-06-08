@@ -16,7 +16,7 @@ interface IProps {
 export const Article: FC<IProps> = ({ data, favourites }) => {
   const [isFavourite, setIsFavourite] = useState<boolean>(false);
   const isAuth = useAppSelector((state) => state.main.isAuth);
-  const text = data.elements.find((el) => el.type === "text");
+  const text = data && data.elements.find((el) => el.type === "text");
   const favourite = favourites?.find((el) => el.articleId === data._id);
 
   useEffect(() => {
@@ -28,67 +28,71 @@ export const Article: FC<IProps> = ({ data, favourites }) => {
   return (
     <div className="w-full rounded overflow-hidden">
       <div className="flex flex-col gap-3">
-        {data.banner && (
-          <img className="w-full h-auto" src={data.banner} alt="image" />
-        )}
-        <div className="flex flex-col gap-3">
-          <h2 className="font-medium leading-5">{data.title}</h2>
+        {data && (
+          <>
+            {data.banner && (
+              <img className="w-full h-auto" src={data.banner} alt="image" />
+            )}
+            <div className="flex flex-col gap-3">
+              <h2 className="font-medium leading-5">{data.title}</h2>
 
-          <p className="text-sm font-light text-gray-500">
-            {text && text.value && text.value.slice(0, 200) + " ..."}
-          </p>
-
-          <div className="flex items-center gap-2 flex-wrap">
-            {data.tags.map((tag, idx) => {
-              return <Tag key={idx} tag={tag} />;
-            })}
-          </div>
-          <div className="flex justify-between items-center">
-            <div className="flex items-center gap-2">
-              <AiOutlineEye size={15} />
-              <p className="text-sm text-gray-300 font-light">
-                {data.views} просмотров
+              <p className="text-sm font-light text-gray-500">
+                {text && text.value && text.value.slice(0, 200) + " ..."}
               </p>
-            </div>
-            <div className="flex items-center gap-3">
-              {isFavourite && isAuth ? (
-                <BsBookmarkFill
-                  className="text-blue-500 cursor-pointer"
-                  size={20}
-                  onClick={async () => {
-                    if (favourite) {
-                      const favouriteData = await deleteFavouriteArticle(
-                        favourite._id
-                      );
 
-                      if (favouriteData) {
-                        setIsFavourite(false);
-                      }
-                    }
-                  }}
-                />
-              ) : (
-                <BsBookmark
-                  className="text-blue-500 cursor-pointer"
-                  size={20}
-                  onClick={async () => {
-                    const favouriteData:
-                      | { favourite: IFavourite; message: string }
-                      | undefined = await addToFavourite(data._id);
+              <div className="flex items-center gap-2 flex-wrap">
+                {data.tags.map((tag, idx) => {
+                  return <Tag key={idx} tag={tag} />;
+                })}
+              </div>
+              <div className="flex justify-between items-center">
+                <div className="flex items-center gap-2">
+                  <AiOutlineEye size={15} />
+                  <p className="text-sm text-gray-300 font-light">
+                    {data.views} просмотров
+                  </p>
+                </div>
+                <div className="flex items-center gap-3">
+                  {isFavourite && isAuth ? (
+                    <BsBookmarkFill
+                      className="text-blue-500 cursor-pointer"
+                      size={20}
+                      onClick={async () => {
+                        if (favourite) {
+                          const favouriteData = await deleteFavouriteArticle(
+                            favourite._id
+                          );
 
-                    setIsFavourite(true);
-                  }}
-                />
-              )}
-              <Link
-                className="px-2 py-1 text-sm bg-blue-500 text-white rounded"
-                to={`/articles/${data._id}`}
-              >
-                Посетить
-              </Link>
+                          if (favouriteData) {
+                            setIsFavourite(false);
+                          }
+                        }
+                      }}
+                    />
+                  ) : (
+                    <BsBookmark
+                      className="text-blue-500 cursor-pointer"
+                      size={20}
+                      onClick={async () => {
+                        const favouriteData:
+                          | { favourite: IFavourite; message: string }
+                          | undefined = await addToFavourite(data._id);
+
+                        setIsFavourite(true);
+                      }}
+                    />
+                  )}
+                  <Link
+                    className="px-2 py-1 text-sm bg-blue-500 text-white rounded"
+                    to={`/articles/${data._id}`}
+                  >
+                    Посетить
+                  </Link>
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
+          </>
+        )}
       </div>
     </div>
   );

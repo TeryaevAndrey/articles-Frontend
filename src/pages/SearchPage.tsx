@@ -40,20 +40,7 @@ const SearchPage: FC = () => {
             <div className="w-full grid grid-cols-1 sm:grid-cols-2 gap-5 mt-5 lg:mt-0">
               {articles.length > 0 ? (
                 articles.map((el) => {
-                  return (
-                    <Article
-                      key={el._id}
-                      _id={el._id}
-                      title={el.title}
-                      banner={el.banner}
-                      elements={el.elements}
-                      tags={el.tags}
-                      views={el.views}
-                      from={el.from}
-                      createdAt={el.createdAt}
-                      updatedAt={el.updatedAt}
-                    />
-                  );
+                  return <Article key={el._id} data={el} />;
                 })
               ) : (
                 <p>Нет статей по этому запросу</p>

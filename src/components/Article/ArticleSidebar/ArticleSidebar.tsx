@@ -22,8 +22,8 @@ export const ArticleSidebar: FC = () => {
         <div>
           <h5 className="text-gray-600">Теги</h5>
           <div className="flex items-center gap-2 flex-wrap mt-3">
-            {articleData.tags.map((tag) => {
-              return <Tag tag={tag} />;
+            {articleData.tags.map((tag, idx) => {
+              return <Tag key={idx} tag={tag} />;
             })}
           </div>
         </div>
