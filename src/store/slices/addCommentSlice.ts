@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { RootState } from "../store";
 
 const initialState: {
   rating: number;
@@ -9,7 +10,7 @@ const initialState: {
 };
 
 export const addCommentSlice = createSlice({
-  name: "comment",
+  name: "addComment",
   initialState,
   reducers: {
     setRating: (state, action: PayloadAction<number>) => {
@@ -22,3 +23,5 @@ export const addCommentSlice = createSlice({
 });
 
 export const { setRating, setText } = addCommentSlice.actions;
+
+export const addComment = (state: RootState) => state.addComment;

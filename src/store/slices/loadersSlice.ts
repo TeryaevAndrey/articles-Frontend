@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { RootState } from "../store";
 
 const initialState: {
   loadingProfileHeader: boolean;
@@ -40,3 +41,5 @@ export const {
   setLoadingAddComment,
   setLoadingGetComments,
 } = loadersSlice.actions;
+
+export const loaders = (state: RootState) => state.loaders;

@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { RootState } from "../store";
 
 const initialState: {
   isAuth: boolean;
@@ -17,3 +18,5 @@ export const mainSlice = createSlice({
 });
 
 export const { setIsAuth } = mainSlice.actions;
+
+export const main = (state: RootState) => state.main;

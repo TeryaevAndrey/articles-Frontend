@@ -1,5 +1,6 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { IArticle, IElement } from "../../types";
+import { RootState } from "../store";
 
 const initialState: {
   isOpenElements: boolean;
@@ -18,7 +19,7 @@ const initialState: {
 };
 
 export const editArticleSlice = createSlice({
-  name: "edit-article",
+  name: "editArticle",
   initialState,
   reducers: {
     setEditArticle: (state, action: PayloadAction<IArticle>) => {
@@ -54,3 +55,5 @@ export const {
   setElements,
   setTags,
 } = editArticleSlice.actions;
+
+export const editArticle = (state: RootState) => state.editArticle;

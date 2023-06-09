@@ -1,5 +1,6 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { IArticle } from "../../types";
+import { RootState } from "../store";
 
 const initialState: {
   articles: IArticle[];
@@ -24,3 +25,5 @@ export const allArticlesSlice = createSlice({
 });
 
 export const { setAllArticles, setAllArticlesTotal } = allArticlesSlice.actions;
+
+export const allArticles = (state: RootState) => state.allArticles;

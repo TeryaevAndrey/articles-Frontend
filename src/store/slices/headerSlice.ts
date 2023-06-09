@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { RootState } from "../store";
 
 const initialState: {
   isOpenMenu: boolean;
@@ -23,3 +24,5 @@ export const headerSlice = createSlice({
 });
 
 export const { setIsOpenMenu, setSearchValue } = headerSlice.actions;
+
+export const header = (state: RootState) => state.header;

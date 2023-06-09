@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { RootState } from "../store";
 
 const initialState: {
   tags: { _id: string }[];
@@ -7,7 +8,7 @@ const initialState: {
 };
 
 export const popularTagsSlice = createSlice({
-  name: "popular-tags",
+  name: "popularTags",
   initialState,
   reducers: {
     setPopularTags: (state, action: PayloadAction<{ _id: string }[]>) => {
@@ -17,3 +18,5 @@ export const popularTagsSlice = createSlice({
 });
 
 export const { setPopularTags } = popularTagsSlice.actions;
+
+export const popularTags = (state: RootState) => state.popularTags;

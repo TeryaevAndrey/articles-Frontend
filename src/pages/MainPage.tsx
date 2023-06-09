@@ -11,7 +11,7 @@ const MainPage: FC = () => {
   const articles = useAppSelector((state) => state.allArticles.articles);
   const total = useAppSelector((state) => state.allArticles.total);
   const limit = 10;
-  const favourites = useAppSelector((state) => state.favourite.articles);
+  const favourites = useAppSelector((state) => state.favourites.articles);
 
   useEffect(() => {
     dispatch(getAllArticles(10, page ? Number(page.slice(4)) : 1));

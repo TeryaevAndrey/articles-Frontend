@@ -1,5 +1,6 @@
 import { createSlice, Dispatch, PayloadAction } from "@reduxjs/toolkit";
 import { IArticle } from "../../types";
+import { RootState } from "../store";
 
 const initialState: {
   articles: IArticle[];
@@ -24,3 +25,5 @@ export const myArticlesSlice = createSlice({
 });
 
 export const { setMyArticles, setMyArticlesTotal } = myArticlesSlice.actions;
+
+export const myArticles = (state: RootState) => state.myArticles;

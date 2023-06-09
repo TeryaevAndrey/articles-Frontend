@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { IArticle } from "../../types";
+import { RootState } from "../store";
 
 const initialState: {
   articles: IArticle[];
@@ -10,7 +11,7 @@ const initialState: {
 };
 
 export const searchedArticlesSlice = createSlice({
-  name: "searched-articles",
+  name: "searchedArticles",
   initialState,
   reducers: {
     setSearchedArticles: (state, action: PayloadAction<IArticle[]>) => {
@@ -25,3 +26,5 @@ export const searchedArticlesSlice = createSlice({
 
 export const { setSearchedArticles, setSearchedArticlesTotal } =
   searchedArticlesSlice.actions;
+
+export const searchedArticles = (state: RootState) => state.searchedArticles;

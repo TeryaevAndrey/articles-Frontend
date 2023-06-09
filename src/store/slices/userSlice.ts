@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { IUser } from "../../types";
+import { RootState } from "../store";
 
 const initialState: {
   myData: IUser;
@@ -21,3 +22,5 @@ export const userSlice = createSlice({
 });
 
 export const { setMyData } = userSlice.actions;
+
+export const user = (state: RootState) => state.user;

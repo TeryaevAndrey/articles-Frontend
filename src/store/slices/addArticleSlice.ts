@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { IElement } from "../../types";
+import { RootState } from "../store";
 
 const initialState: {
   isOpenElements: boolean;
@@ -43,3 +44,5 @@ export const addArticleSlice = createSlice({
 
 export const { setIsOpenElements, setTitle, setBanner, setElements, setTags } =
   addArticleSlice.actions;
+
+export const addArticle = (state: RootState) => state.addArticle;

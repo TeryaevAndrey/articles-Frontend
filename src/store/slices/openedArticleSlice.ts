@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { IComment, IUser } from "../../types";
+import { RootState } from "../store";
 
 interface IOpenedArticle {
   _id: undefined | string;
@@ -32,7 +33,7 @@ const initialState: {
 };
 
 export const openedArticleSlice = createSlice({
-  name: "article",
+  name: "openedArticle",
   initialState,
   reducers: {
     setOpenedArticleData: (state, action: PayloadAction<IOpenedArticle>) => {
@@ -47,3 +48,5 @@ export const openedArticleSlice = createSlice({
 
 export const { setOpenedArticleData, setOpenedArticleComments } =
   openedArticleSlice.actions;
+
+export const openedArticle = (state: RootState) => state.openedArticle;

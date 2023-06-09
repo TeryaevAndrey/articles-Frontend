@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { IArticle, IFavourite } from "../../types";
+import { IFavourite } from "../../types";
+import { RootState } from "../store";
 
 const initialState: {
   articles: IFavourite[];
@@ -9,7 +10,7 @@ const initialState: {
   total: 0,
 };
 
-export const favouiriteSlice = createSlice({
+export const favouiritesSlice = createSlice({
   name: "favourites",
   initialState,
   reducers: {
@@ -38,4 +39,6 @@ export const {
   addArticleToFavourite,
   deleteArticleFromFavourite,
   setFavouritesTotal,
-} = favouiriteSlice.actions;
+} = favouiritesSlice.actions;
+
+export const favourites = (state: RootState) => state.favourites;

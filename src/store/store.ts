@@ -11,7 +11,7 @@ import { myArticlesSlice } from "./slices/myArticlesSlice";
 import { openedArticleSlice } from "./slices/openedArticleSlice";
 import { allArticlesSlice } from "./slices/allArticlesSlice";
 import { addCommentSlice } from "./slices/addCommentSlice";
-import { favouiriteSlice } from "./slices/favouriteSlice";
+import { favouiritesSlice } from "./slices/favouriteSlice";
 import { popularTagsSlice } from "./slices/popularTagsSlice";
 import { searchedArticlesSlice } from "./slices/searchedArticlesSlice";
 
@@ -25,8 +25,8 @@ const store = configureStore({
     myArticles: myArticlesSlice.reducer,
     allArticles: allArticlesSlice.reducer,
     openedArticle: openedArticleSlice.reducer,
-    comment: addCommentSlice.reducer,
-    favourite: favouiriteSlice.reducer,
+    addComment: addCommentSlice.reducer,
+    favourites: favouiritesSlice.reducer,
     popularTags: popularTagsSlice.reducer,
     searchedArticles: searchedArticlesSlice.reducer,
     editArticle: editArticleSlice.reducer,
