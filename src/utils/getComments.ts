@@ -3,7 +3,7 @@ import axios, { AxiosResponse } from "axios";
 import { setOpenedArticleComments } from "../store/slices/openedArticleSlice";
 import { setLoadingGetComments } from "../store/slices/loadersSlice";
 
-const getComments =
+export const getComments =
   (articleId: string) =>
   async (dispatch: Dispatch): Promise<void> => {
     dispatch(setLoadingGetComments(true));
@@ -16,5 +16,3 @@ const getComments =
 
     dispatch(setLoadingGetComments(false));
   };
-
-export default getComments;

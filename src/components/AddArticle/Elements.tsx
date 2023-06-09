@@ -4,8 +4,7 @@ import { MdDeleteForever } from "react-icons/md";
 import { v4 as uuidv4 } from "uuid";
 import { CiImport } from "react-icons/ci";
 import { setElements, setTitle } from "../../store/slices/addArticleSlice";
-import exportImg from "../../utils/exportImg";
-import { deleteImg } from "@/utils";
+import { deleteImg, exportImg } from "@/utils";
 
 export const Elements: FC = () => {
   const dispatch = useAppDispatch();
@@ -177,8 +176,6 @@ export const Elements: FC = () => {
 
                   if (el.src) {
                     const data = await deleteImg(el.src);
-
-                    console.log(data);
 
                     if (data) {
                       alert("Изображение удалено");

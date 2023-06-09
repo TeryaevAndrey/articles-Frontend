@@ -3,7 +3,7 @@ import axios, { AxiosResponse } from "axios";
 import { useAppDispatch } from "../store/store";
 import { setIsAuth } from "../store/slices/mainSlice";
 import { useNavigate } from "react-router-dom";
-import getMyData from "../utils/getMyData";
+import { getMyData } from "@/utils";
 import { Loader } from "@/components";
 
 const LoginPage: FC = () => {

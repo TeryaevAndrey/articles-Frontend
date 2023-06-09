@@ -5,7 +5,7 @@ import {
   setAllArticlesTotal,
 } from "../store/slices/allArticlesSlice";
 
-const getAllArticles =
+export const getAllArticles =
   (limit: number, page: number) =>
   async (dispatch: Dispatch): Promise<void> => {
     const searchParams = new URLSearchParams(window.location.search);
@@ -27,5 +27,3 @@ const getAllArticles =
         alert(err.response.data.message);
       });
   };
-
-export default getAllArticles;

@@ -3,7 +3,7 @@ import axios, { AxiosResponse } from "axios";
 import { setOpenedArticleData } from "../store/slices/openedArticleSlice";
 import { setLoadingOpenedArticle } from "../store/slices/loadersSlice";
 
-const getOpenedArticle =
+export const getOpenedArticle =
   (articleId: string) =>
   async (dispatch: Dispatch): Promise<void> => {
     dispatch(setLoadingOpenedArticle(true));
@@ -20,4 +20,3 @@ const getOpenedArticle =
     dispatch(setLoadingOpenedArticle(false));
   };
 
-export default getOpenedArticle;

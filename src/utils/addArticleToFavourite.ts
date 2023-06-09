@@ -4,8 +4,11 @@ import { addArticleToFavourite } from "../store/slices/favouriteSlice";
 
 const addToFavourite =
   (articleId: string) =>
-  async (dispatch: Dispatch): Promise<void> => {
+  async (
+    dispatch: Dispatch
+  ): Promise<{ message: string; result: boolean } | undefined> => {
     const token = JSON.parse(localStorage.getItem("user") || "{}").token;
+    let result: { message: string; result: boolean } | undefined = undefined;
 
     await axios
       .post(
@@ -18,11 +21,23 @@ const addToFavourite =
         }
       )
       .then((res: AxiosResponse) => {
+        result = {
+          message: res.data.message,
+          result: true,
+        };
+
         dispatch(addArticleToFavourite(res.data.article));
       })
       .catch((err) => {
+        result = {
+          message: err.response.data.message,
+          result: true,
+        };
+
         alert(err.response.data.message);
       });
+
+    return result;
   };
 
 export default addToFavourite;

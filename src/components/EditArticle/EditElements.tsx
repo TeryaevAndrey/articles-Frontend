@@ -3,7 +3,7 @@ import { v4 as uuidv4 } from "uuid";
 import { useAppDispatch, useAppSelector } from "../../store/store";
 import { setElements, setTitle } from "../../store/slices/editArticleSlice";
 import { CiImport } from "react-icons/ci";
-import exportImg from "../../utils/exportImg";
+import { exportImg } from "@/utils";
 import { MdDeleteForever } from "react-icons/md";
 import { deleteImg } from "@/utils";
 
@@ -177,8 +177,6 @@ export const EditElements: FC = () => {
 
                   if (el.src) {
                     const data = await deleteImg(el.src);
-
-                    console.log(data);
 
                     if (data) {
                       alert("Изображение удалено");

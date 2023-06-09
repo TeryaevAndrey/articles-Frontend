@@ -2,9 +2,8 @@ import { FC, useState, useEffect } from "react";
 import { useRoutes } from "./core/routes";
 import { useAppDispatch, useAppSelector } from "./store/store";
 import { useNavigate } from "react-router-dom";
-import checkToken from "./utils/checkToken";
 import { setIsAuth } from "./store/slices/mainSlice";
-import getMyData from "./utils/getMyData";
+import { checkToken, getMyData } from "@/utils";
 import { Layout } from "@/components";
 
 const App: FC = () => {

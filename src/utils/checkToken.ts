@@ -1,6 +1,6 @@
 import jwtDecode from "jwt-decode";
 
-const checkToken = async (): Promise<boolean> => {
+export const checkToken = async (): Promise<boolean> => {
   const token = JSON.parse(localStorage.getItem("user") || "{}").token;
 
   if (token) {
@@ -16,5 +16,3 @@ const checkToken = async (): Promise<boolean> => {
 
   return false;
 };
-
-export default checkToken;

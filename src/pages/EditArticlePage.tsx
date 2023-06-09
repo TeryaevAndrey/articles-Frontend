@@ -10,7 +10,7 @@ import {
   setTags,
   setTitle,
 } from "../store/slices/editArticleSlice";
-import getEditArticle from "../utils/getEditArticle";
+import { getEditArticle } from "@/utils";
 import axios, { AxiosResponse } from "axios";
 import { EditElements, Tags } from "@/components";
 

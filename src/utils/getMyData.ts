@@ -3,7 +3,7 @@ import { AppDispatch } from "../store/store";
 import { setMyData } from "../store/slices/userSlice";
 import { setLoadingProfileHeader } from "../store/slices/loadersSlice";
 
-const getMyData =
+export const getMyData =
   () =>
   async (dispatch: AppDispatch): Promise<void> => {
     dispatch(setLoadingProfileHeader(true));
@@ -26,4 +26,3 @@ const getMyData =
     dispatch(setLoadingProfileHeader(false));
   };
 
-export default getMyData;

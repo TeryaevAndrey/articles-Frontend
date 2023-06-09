@@ -5,7 +5,7 @@ import {
   setMyArticlesTotal,
 } from "../store/slices/myArticlesSlice";
 
-const getMyArticles =
+export const getMyArticles =
   (limit: number, page: number) =>
   async (dispatch: Dispatch): Promise<void> => {
     const token = JSON.parse(localStorage.getItem("user") || "{}").token;
@@ -28,5 +28,3 @@ const getMyArticles =
         console.log(err.response.data.message);
       });
   };
-
-export default getMyArticles;

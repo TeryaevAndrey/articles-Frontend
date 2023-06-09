@@ -1,4 +1,4 @@
-import React, { FC, useEffect } from "react";
+import { FC, useEffect, ChangeEvent, FormEvent } from "react";
 import { useAppDispatch, useAppSelector } from "../../../store/store";
 import { setRating, setText } from "../../../store/slices/addCommentSlice";
 import { useLocation } from "react-router-dom";
@@ -21,13 +21,11 @@ export const AddComment: FC = () => {
     dispatch(setText(""));
   }, [location]);
 
-  const onTextChange = (e: React.ChangeEvent<HTMLTextAreaElement>): void => {
+  const onTextChange = (e: ChangeEvent<HTMLTextAreaElement>): void => {
     dispatch(setText(e.target.value));
   };
 
-  const formHandler = async (
-    e: React.FormEvent<HTMLFormElement>
-  ): Promise<void> => {
+  const formHandler = async (e: FormEvent<HTMLFormElement>): Promise<void> => {
     e.preventDefault();
 
     dispatch(setLoadingAddComment(true));

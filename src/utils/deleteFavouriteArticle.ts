@@ -1,6 +1,6 @@
 import axios, { AxiosResponse } from "axios";
 
-const deleteFavouriteArticle = async (
+export const deleteFavouriteArticle = async (
   favouriteId: string
 ): Promise<{ message: string; result: boolean } | undefined> => {
   const token = JSON.parse(localStorage.getItem("user") || "{}").token;
@@ -33,5 +33,3 @@ const deleteFavouriteArticle = async (
 
   return result;
 };
-
-export default deleteFavouriteArticle;

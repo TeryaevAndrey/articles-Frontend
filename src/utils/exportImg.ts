@@ -7,7 +7,7 @@ import {
 } from "../store/slices/addArticleSlice";
 import { setElements as setElementsEdit } from "@/store/slices/editArticleSlice";
 
-const exportImg = async (
+export const exportImg = async (
   img: File,
   idx: number | undefined,
   dispatch: Dispatch,
@@ -52,4 +52,3 @@ const exportImg = async (
   setImgLoading(false);
 };
 
-export default exportImg;

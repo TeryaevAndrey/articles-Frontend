@@ -2,7 +2,7 @@ import { Dispatch } from "@reduxjs/toolkit";
 import axios, { AxiosResponse } from "axios";
 import { setEditArticle } from "../store/slices/editArticleSlice";
 
-const getEditArticle =
+export const getEditArticle =
   (articleId: string) =>
   async (dispatch: Dispatch): Promise<void> => {
     await axios
@@ -14,5 +14,3 @@ const getEditArticle =
         alert(err.response.data.message);
       });
   };
-
-export default getEditArticle;

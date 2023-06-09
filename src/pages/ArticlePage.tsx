@@ -2,8 +2,7 @@ import { FC, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { IElement } from "../types";
 import { useAppDispatch, useAppSelector } from "../store/store";
-import getOpenedArticle from "../utils/getOpenedArticle";
-import getComments from "../utils/getComments";
+import {getOpenedArticle, getComments} from "@/utils";
 import { Crumbs, ArticleSidebar, Comments } from "@/components";
 
 const ArticlePage: FC = () => {

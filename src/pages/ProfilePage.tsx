@@ -1,6 +1,6 @@
 import { FC, useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../store/store";
-import getMyArticles from "../utils/getMyArticles";
+import { getMyArticles } from "@/utils";
 import { useParams } from "react-router-dom";
 import { Pagination, MyArticle } from "@/components";
 

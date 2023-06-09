@@ -1,6 +1,6 @@
 import { FC, useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../store/store";
-import getPopularTags from "../../utils/getPopularTags";
+import { getPopularTags } from "@/utils";
 import { PopularLink } from "@/components";
 
 interface IPopular {

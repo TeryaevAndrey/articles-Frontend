@@ -1,7 +1,7 @@
 import axios from "axios";
 import { IFavourite } from "../types";
 
-const getFavouriteArticle = async (
+export const getFavouriteArticle = async (
   articleId: string
 ): Promise<
   { favourite: IFavourite | undefined; result: boolean } | undefined
@@ -38,4 +38,3 @@ const getFavouriteArticle = async (
   return result;
 };
 
-export default getFavouriteArticle;

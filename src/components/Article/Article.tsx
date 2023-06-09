@@ -4,8 +4,7 @@ import { Link } from "react-router-dom";
 import { IArticle, IFavourite } from "../../types";
 import { BsBookmark, BsBookmarkFill } from "react-icons/bs";
 import { useAppSelector } from "../../store/store";
-import addToFavourite from "../../utils/addToFavourite";
-import deleteFavouriteArticle from "../../utils/deleteFavouriteArticle";
+import { addToFavourite, deleteFavouriteArticle } from "@/utils";
 import { Tag } from "@/components";
 
 interface IProps {

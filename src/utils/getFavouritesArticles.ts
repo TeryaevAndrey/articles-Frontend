@@ -5,7 +5,7 @@ import {
   setFavouritesTotal,
 } from "../store/slices/favouriteSlice";
 
-const getFavouritesArticles =
+export const getFavouritesArticles =
   (limit: number, page: number) =>
   async (dispatch: Dispatch): Promise<void> => {
     const token = JSON.parse(localStorage.getItem("user") || "{}").token;
@@ -28,5 +28,3 @@ const getFavouritesArticles =
         console.log(err.response.data.message);
       });
   };
-
-export default getFavouritesArticles;

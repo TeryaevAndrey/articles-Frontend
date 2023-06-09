@@ -1,7 +1,7 @@
 import axios, { AxiosResponse } from "axios";
 import { IFavourite } from "../types";
 
-const addToFavourite = async (
+export const addToFavourite = async (
   articleId: string
 ): Promise<{ favourite: IFavourite; message: string } | undefined> => {
   const token = JSON.parse(localStorage.getItem("user") || "{}").token;
@@ -30,5 +30,3 @@ const addToFavourite = async (
 
   return result;
 };
-
-export default addToFavourite;

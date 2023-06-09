@@ -1,4 +1,4 @@
-import React, { FC, useEffect } from "react";
+import React, { FC } from "react";
 import { AiOutlinePlus } from "react-icons/ai";
 import { BsCardText, BsCheck, BsImage } from "react-icons/bs";
 import { useAppDispatch, useAppSelector } from "../store/store";

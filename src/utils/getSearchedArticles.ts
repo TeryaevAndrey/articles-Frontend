@@ -5,7 +5,7 @@ import {
   setSearchedArticlesTotal,
 } from "../store/slices/searchedArticlesSlice";
 
-const getSearchedArticles =
+export const getSearchedArticles =
   (limit: number, page: number) =>
   async (dispatch: Dispatch): Promise<void> => {
     const searchParams = new URLSearchParams(window.location.search);
@@ -29,5 +29,3 @@ const getSearchedArticles =
         console.log(err.response.data.message);
       });
   };
-
-export default getSearchedArticles;

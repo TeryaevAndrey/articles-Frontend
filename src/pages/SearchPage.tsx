@@ -1,7 +1,7 @@
 import { FC, useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../store/store";
 import { useLocation, useParams } from "react-router-dom";
-import getSearchedArticles from "../utils/getSearchedArticles";
+import { getSearchedArticles } from "@/utils";
 import { Popular, Article, Pagination } from "@/components";
 
 const SearchPage: FC = () => {
