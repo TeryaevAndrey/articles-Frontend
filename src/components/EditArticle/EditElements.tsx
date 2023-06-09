@@ -5,6 +5,7 @@ import { setElements, setTitle } from "../../store/slices/editArticleSlice";
 import { CiImport } from "react-icons/ci";
 import exportImg from "../../utils/exportImg";
 import { MdDeleteForever } from "react-icons/md";
+import { deleteImg } from "@/utils";
 
 export const EditElements: FC = () => {
   const dispatch = useAppDispatch();
@@ -68,7 +69,8 @@ export const EditElements: FC = () => {
                   undefined,
                   dispatch,
                   elements,
-                  setImgLoading
+                  setImgLoading,
+                  "edit"
                 );
               }
             }}
@@ -158,7 +160,8 @@ export const EditElements: FC = () => {
                         idx,
                         dispatch,
                         elements,
-                        setImgLoading
+                        setImgLoading,
+                        "edit"
                       );
                     }
                   }}
@@ -167,11 +170,21 @@ export const EditElements: FC = () => {
                 {el.src && <img src={el.src} alt="Изображение" />}
               </div>
               <MdDeleteForever
-                onClick={() =>
+                onClick={async () => {
                   dispatch(
                     setElements(elements.filter((_, elIdx) => idx !== elIdx))
-                  )
-                }
+                  );
+
+                  if (el.src) {
+                    const data = await deleteImg(el.src);
+
+                    console.log(data);
+
+                    if (data) {
+                      alert("Изображение удалено");
+                    }
+                  }
+                }}
                 className="cursor-pointer"
                 size={25}
                 color="red"
@@ -183,4 +196,3 @@ export const EditElements: FC = () => {
     </>
   );
 };
-

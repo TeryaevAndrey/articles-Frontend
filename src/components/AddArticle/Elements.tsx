@@ -69,7 +69,8 @@ export const Elements: FC = () => {
                   undefined,
                   dispatch,
                   elements,
-                  setImgLoading
+                  setImgLoading,
+                  "add"
                 );
               }
             }}
@@ -159,7 +160,8 @@ export const Elements: FC = () => {
                         idx,
                         dispatch,
                         elements,
-                        setImgLoading
+                        setImgLoading,
+                        "add"
                       );
                     }
                   }}

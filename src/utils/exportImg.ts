@@ -1,14 +1,19 @@
 import axios from "axios";
 import { IElement } from "../types";
 import { Dispatch } from "@reduxjs/toolkit";
-import { setBanner, setElements } from "../store/slices/addArticleSlice";
+import {
+  setBanner,
+  setElements as setElementsAdd,
+} from "../store/slices/addArticleSlice";
+import { setElements as setElementsEdit } from "@/store/slices/editArticleSlice";
 
 const exportImg = async (
   img: File,
   idx: number | undefined,
   dispatch: Dispatch,
   elements: IElement[],
-  setImgLoading: Function
+  setImgLoading: Function,
+  addOrEdit: "add" | "edit"
 ): Promise<void> => {
   const token = JSON.parse(localStorage.getItem("user") || "{}").token;
   const formData = new FormData();
@@ -29,7 +34,13 @@ const exportImg = async (
         let newElements = [...elements];
         newElements[idx] = { type: "img", src: res.data.img };
 
-        dispatch(setElements(newElements));
+        if (addOrEdit === "add") {
+          dispatch(setElementsAdd(newElements));
+        }
+
+        if (addOrEdit === "edit") {
+          dispatch(setElementsEdit(newElements));
+        }
       } else {
         dispatch(setBanner(res.data.img));
       }
