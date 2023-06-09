@@ -3,13 +3,14 @@ import { useAppDispatch, useAppSelector } from "../store/store";
 import { useLocation, useParams } from "react-router-dom";
 import { getSearchedArticles } from "@/utils";
 import { Popular, Article, Pagination } from "@/components";
+import { searchedArticles } from "@/store/slices/searchedArticlesSlice";
 
 const SearchPage: FC = () => {
+  const articles = useAppSelector(searchedArticles).articles;
+  const total = useAppSelector(searchedArticles).total;
   const dispatch = useAppDispatch();
   const location = useLocation();
   const { page } = useParams();
-  const articles = useAppSelector((state) => state.searchedArticles.articles);
-  const total = useAppSelector((state) => state.searchedArticles.total);
   const limit = 3;
   const searchParams = new URLSearchParams(window.location.search);
   const q = searchParams.get("q");

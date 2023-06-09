@@ -10,7 +10,7 @@ const initialState: {
 };
 
 export const addCommentSlice = createSlice({
-  name: "addComment",
+  name: "comment",
   initialState,
   reducers: {
     setRating: (state, action: PayloadAction<number>) => {
@@ -24,4 +24,4 @@ export const addCommentSlice = createSlice({
 
 export const { setRating, setText } = addCommentSlice.actions;
 
-export const addComment = (state: RootState) => state.addComment;
+export const comment = (state: RootState) => state.comment;

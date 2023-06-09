@@ -4,21 +4,27 @@ import { getAllArticles } from "@/utils";
 import { useParams } from "react-router-dom";
 import { Popular, Article, Pagination } from "@/components";
 import { getAllFavouritesArticles } from "@/utils/getAllFavouritesArticles";
+import { allArticles } from "@/store/slices/allArticlesSlice";
+import { favourites } from "@/store/slices/favouritesSlice";
+import { main } from "@/store/slices/mainSlice";
 
 const MainPage: FC = () => {
+  const articles = useAppSelector(allArticles).articles;
+  const total = useAppSelector(allArticles).total;
+  const favouritesList = useAppSelector(favourites).articles;
+  const isAuth = useAppSelector(main).isAuth;
+  const limit = 10;
   const dispatch = useAppDispatch();
   const { page } = useParams();
-  const articles = useAppSelector((state) => state.allArticles.articles);
-  const total = useAppSelector((state) => state.allArticles.total);
-  const limit = 10;
-  const favourites = useAppSelector((state) => state.favourites.articles);
 
   useEffect(() => {
     dispatch(getAllArticles(10, page ? Number(page.slice(4)) : 1));
   }, [page, window.location.search]);
 
   useEffect(() => {
-    dispatch(getAllFavouritesArticles);
+    if (isAuth) {
+      dispatch(getAllFavouritesArticles);
+    }
   }, []);
 
   return (
@@ -33,7 +39,7 @@ const MainPage: FC = () => {
             <div className="w-full grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-5 mt-5 lg:mt-0">
               {articles.map((el) => {
                 return (
-                  <Article key={el._id} data={el} favourites={favourites} />
+                  <Article key={el._id} data={el} favourites={favouritesList} />
                 );
               })}
             </div>

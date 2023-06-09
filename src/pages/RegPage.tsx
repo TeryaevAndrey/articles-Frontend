@@ -7,12 +7,12 @@ import { getMyData } from "@/utils";
 import { Loader } from "@/components";
 
 const RegPage: FC = () => {
-  const dispatch = useAppDispatch();
-  const navigate = useNavigate();
   const [userName, setUserName] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [passwordRepeat, setPasswordRepeat] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const onUserNameChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setUserName(e.target.value);

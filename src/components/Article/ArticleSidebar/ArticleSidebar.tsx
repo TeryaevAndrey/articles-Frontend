@@ -19,14 +19,16 @@ export const ArticleSidebar: FC = () => {
             <p>{date.toLocaleDateString()}</p>
           </div>
         </div>
-        <div>
-          <h5 className="text-gray-600">Теги</h5>
-          <div className="flex items-center gap-2 flex-wrap mt-3">
-            {articleData.tags.map((tag, idx) => {
-              return <Tag key={idx} tag={tag} />;
-            })}
+        {articleData.tags.length > 0 && (
+          <div>
+            <h5 className="text-gray-600">Теги</h5>
+            <div className="flex items-center gap-2 flex-wrap mt-3">
+              {articleData.tags.map((tag, idx) => {
+                return <Tag key={idx} tag={tag} />;
+              })}
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </div>
   );

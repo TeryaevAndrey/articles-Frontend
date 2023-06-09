@@ -2,14 +2,16 @@ import { FC, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { IElement } from "../types";
 import { useAppDispatch, useAppSelector } from "../store/store";
-import {getOpenedArticle, getComments} from "@/utils";
+import { getOpenedArticle, getComments } from "@/utils";
 import { Crumbs, ArticleSidebar, Comments } from "@/components";
+import { openedArticle } from "@/store/slices/openedArticleSlice";
+import { loaders } from "@/store/slices/loadersSlice";
 
 const ArticlePage: FC = () => {
   const dispatch = useAppDispatch();
-  const articleData = useAppSelector((state) => state.openedArticle.article);
-  const loading = useAppSelector((state) => state.loaders.loadingOpenedArticle);
-  const comments = useAppSelector((state) => state.openedArticle.comments);
+  const articleData = useAppSelector(openedArticle).article;
+  const comments = useAppSelector(openedArticle).comments;
+  const loading = useAppSelector(loaders).loadingOpenedArticle;
   const { articleId } = useParams();
 
   useEffect(() => {

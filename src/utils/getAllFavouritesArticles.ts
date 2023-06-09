@@ -2,7 +2,7 @@ import { requests } from "@/core/requests";
 import {
   setFavourites,
   setFavouritesTotal,
-} from "@/store/slices/favouriteSlice";
+} from "@/store/slices/favouritesSlice";
 import { Dispatch } from "@reduxjs/toolkit";
 import axios, { AxiosResponse } from "axios";
 

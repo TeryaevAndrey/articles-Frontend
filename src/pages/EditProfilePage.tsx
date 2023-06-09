@@ -1,4 +1,4 @@
-import React, { FC, useState } from "react";
+import { FC, useState, ChangeEvent } from "react";
 import axios from "axios";
 import { useAppDispatch } from "../store/store";
 import { getMyData } from "@/utils";
@@ -12,17 +12,17 @@ const EditProfilePage: FC = () => {
   const [password, setPassword] = useState<string>("");
   const [oldPassword, setOldPassword] = useState<string>("");
 
-  const onAvatarChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
+  const onAvatarChange = (e: ChangeEvent<HTMLInputElement>): void => {
     if (e.target.files) {
       setAvatar(e.target.files[0]);
     }
   };
 
-  const onUserNameChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
+  const onUserNameChange = (e: ChangeEvent<HTMLInputElement>): void => {
     setUserName(e.target.value);
   };
 
-  const onPasswordChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
+  const onPasswordChange = (e: ChangeEvent<HTMLInputElement>): void => {
     setPassword(e.target.value);
   };
 

@@ -3,6 +3,7 @@ import { AiOutlinePlus } from "react-icons/ai";
 import { BsCardText, BsCheck, BsImage } from "react-icons/bs";
 import { useAppDispatch, useAppSelector } from "../store/store";
 import {
+  addArticle,
   setBanner,
   setElements,
   setIsOpenElements,
@@ -14,13 +15,11 @@ import { Elements, Tags } from "@/components";
 
 const AddArticlePage: FC = () => {
   const dispatch = useAppDispatch();
-  const isOpenElements = useAppSelector(
-    (state) => state.addArticle.isOpenElements
-  );
-  const title = useAppSelector((state) => state.addArticle.title);
-  const banner = useAppSelector((state) => state.addArticle.banner);
-  const elements = useAppSelector((state) => state.addArticle.elements);
-  const tags = useAppSelector((state) => state.addArticle.tags);
+  const isOpenElements = useAppSelector(addArticle).isOpenElements;
+  const title = useAppSelector(addArticle).title;
+  const banner = useAppSelector(addArticle).banner;
+  const elements = useAppSelector(addArticle).elements;
+  const tags = useAppSelector(addArticle).tags;
   const [tagValue, setTagValue] = React.useState<string>("");
   const token = JSON.parse(localStorage.getItem("user") || "{}").token;
 

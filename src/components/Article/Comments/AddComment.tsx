@@ -1,6 +1,6 @@
 import { FC, useEffect, ChangeEvent, FormEvent } from "react";
 import { useAppDispatch, useAppSelector } from "../../../store/store";
-import { setRating, setText } from "../../../store/slices/addCommentSlice";
+import { setRating, setText } from "../../../store/slices/commentSlice";
 import { useLocation } from "react-router-dom";
 import axios, { AxiosResponse } from "axios";
 import { setLoadingAddComment } from "../../../store/slices/loadersSlice";

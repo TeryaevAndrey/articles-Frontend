@@ -3,7 +3,7 @@ import { Dispatch } from "@reduxjs/toolkit";
 import {
   setFavourites,
   setFavouritesTotal,
-} from "../store/slices/favouriteSlice";
+} from "../store/slices/favouritesSlice";
 
 export const getFavouritesArticles =
   (limit: number, page: number) =>

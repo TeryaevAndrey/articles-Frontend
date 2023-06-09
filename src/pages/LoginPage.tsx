@@ -1,4 +1,4 @@
-import React, { FC, useState } from "react";
+import { FC, useState, ChangeEvent, FormEvent } from "react";
 import axios, { AxiosResponse } from "axios";
 import { useAppDispatch } from "../store/store";
 import { setIsAuth } from "../store/slices/mainSlice";
@@ -13,17 +13,15 @@ const LoginPage: FC = () => {
   const [password, setPassword] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  const onUserNameChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
+  const onUserNameChange = (e: ChangeEvent<HTMLInputElement>): void => {
     setUserName(e.target.value);
   };
 
-  const onPasswordChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
+  const onPasswordChange = (e: ChangeEvent<HTMLInputElement>): void => {
     setPassword(e.target.value);
   };
 
-  const formHandler = async (
-    e: React.FormEvent<HTMLFormElement>
-  ): Promise<void> => {
+  const formHandler = async (e: FormEvent<HTMLFormElement>): Promise<void> => {
     e.preventDefault();
 
     setIsLoading(true);

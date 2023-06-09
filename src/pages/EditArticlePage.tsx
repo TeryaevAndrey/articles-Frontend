@@ -4,6 +4,7 @@ import { BsCardText, BsCheck, BsImage } from "react-icons/bs";
 import { AiOutlinePlus } from "react-icons/ai";
 import { useParams } from "react-router-dom";
 import {
+  editArticle,
   setBanner,
   setElements,
   setIsOpenElements,
@@ -20,11 +21,7 @@ const EditArticlePage: FC = () => {
   const isOpenElements = useAppSelector(
     (state) => state.editArticle.isOpenElements
   );
-  const article = useAppSelector((state) => state.editArticle.article);
-  const title = useAppSelector((state) => state.editArticle.title);
-  const banner = useAppSelector((state) => state.editArticle.banner);
-  const elements = useAppSelector((state) => state.editArticle.elements);
-  const tags = useAppSelector((state) => state.editArticle.tags);
+  const editArticleStates = useAppSelector(editArticle);
   const [tagValue, setTagValue] = React.useState<string>("");
   const token = JSON.parse(localStorage.getItem("user") || "{}").token;
 
@@ -35,13 +32,13 @@ const EditArticlePage: FC = () => {
   }, []);
 
   useEffect(() => {
-    if (article) {
-      dispatch(setTitle(article.title));
-      dispatch(setBanner(article.banner));
-      dispatch(setElements(article.elements));
-      dispatch(setTags(article.tags));
+    if (editArticleStates.article) {
+      dispatch(setTitle(editArticleStates.article.title));
+      dispatch(setBanner(editArticleStates.article.banner));
+      dispatch(setElements(editArticleStates.article.elements));
+      dispatch(setTags(editArticleStates.article.tags));
     }
-  }, [article]);
+  }, [editArticleStates.article]);
 
   const formHandler = async (
     e: React.FormEvent<HTMLFormElement>
@@ -52,10 +49,10 @@ const EditArticlePage: FC = () => {
       .post(
         import.meta.env.VITE_PROXY + `/edit-article/${articleId}`,
         {
-          title,
-          banner,
-          elements,
-          tags,
+          title: editArticleStates.title,
+          banner: editArticleStates.banner,
+          elements: editArticleStates.elements,
+          tags: editArticleStates.tags,
         },
         {
           headers: {
@@ -97,7 +94,7 @@ const EditArticlePage: FC = () => {
                     onClick={() => {
                       dispatch(
                         setElements([
-                          ...elements,
+                          ...editArticleStates.elements,
                           {
                             type: "text",
                             value: "",
@@ -115,7 +112,7 @@ const EditArticlePage: FC = () => {
                     onClick={() => {
                       dispatch(
                         setElements([
-                          ...elements,
+                          ...editArticleStates.elements,
                           {
                             type: "title",
                             value: "",
@@ -133,7 +130,7 @@ const EditArticlePage: FC = () => {
                     onClick={() => {
                       dispatch(
                         setElements([
-                          ...elements,
+                          ...editArticleStates.elements,
                           {
                             type: "img",
                             src: undefined,
@@ -169,7 +166,7 @@ const EditArticlePage: FC = () => {
                   className="flex justify-center items-center p-3 bg-blue-500 rounded w-11 h-11"
                   onClick={() => {
                     if (tagValue.length > 0) {
-                      dispatch(setTags([...tags, tagValue]));
+                      dispatch(setTags([...editArticleStates.tags, tagValue]));
                       setTagValue("");
                     }
                   }}
@@ -179,7 +176,7 @@ const EditArticlePage: FC = () => {
               </div>
             </div>
 
-            <Tags tags={tags} setTags={setTags} />
+            <Tags tags={editArticleStates.tags} setTags={setTags} />
           </div>
 
           <button
