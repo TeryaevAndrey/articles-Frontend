@@ -7,12 +7,14 @@ const initialState: {
   loadingAddComment: boolean;
   loadingGetComments: boolean;
   loadingArticlesMainPage: boolean;
+  loadingPopularTags: boolean;
 } = {
   loadingProfileHeader: false,
   loadingOpenedArticle: false,
   loadingAddComment: false,
   loadingGetComments: false,
   loadingArticlesMainPage: false,
+  loadingPopularTags: false,
 };
 
 export const loadersSlice = createSlice({
@@ -38,6 +40,10 @@ export const loadersSlice = createSlice({
     setLoadingArticlesMainPage: (state, action: PayloadAction<boolean>) => {
       state.loadingArticlesMainPage = action.payload;
     },
+
+    setLoadingPopularTags: (state, action: PayloadAction<boolean>) => {
+      state.loadingPopularTags = action.payload;
+    },
   },
 });
 
@@ -47,6 +53,7 @@ export const {
   setLoadingAddComment,
   setLoadingGetComments,
   setLoadingArticlesMainPage,
+  setLoadingPopularTags,
 } = loadersSlice.actions;
 
 export const loaders = (state: RootState) => state.loaders;
