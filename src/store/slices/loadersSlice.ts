@@ -21,19 +21,19 @@ export const loadersSlice = createSlice({
   name: "loaders",
   initialState,
   reducers: {
-    setLoadingProfileHeader: (state, action: PayloadAction<boolean>) => {
+    setLoadingProfileHeader: (state) => {
       state.loadingProfileHeader = !state.loadingProfileHeader;
     },
 
     setLoadingOpenedArticle: (state, action: PayloadAction<boolean>) => {
-      state.loadingOpenedArticle = !state.loadingOpenedArticle;
+      state.loadingOpenedArticle = action.payload;
     },
 
-    setLoadingAddComment: (state, action: PayloadAction<boolean>) => {
+    setLoadingAddComment: (state) => {
       state.loadingAddComment = !state.loadingAddComment;
     },
 
-    setLoadingGetComments: (state, action: PayloadAction<boolean>) => {
+    setLoadingGetComments: (state) => {
       state.loadingGetComments = !state.loadingGetComments;
     },
 

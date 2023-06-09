@@ -21,7 +21,11 @@ export const Crumbs: FC<ICrumbs> = ({ way }) => {
       {way.map((el, idx) => {
         return (
           <Link
-            className="relative [&:not:last-child]after:content-['/'] after:absolute after:right-0 px-5 hover:text-gray-400 ease-linear duration-200"
+            className={`relative [&:not:last-child]after:content-['/'] after:absolute after:right-0 px-5 ${
+              idx !== way.length - 1 && "hover:text-gray-400"
+            } ease-linear duration-200 ${
+              idx === way.length - 1 && "text-gray-600"
+            }`}
             key={idx}
             to={el.href}
           >
