@@ -17,3 +17,4 @@ export * from "./getPopularTags";
 export * from "./getSearchedArticles";
 export * from "./getSearchedArticles";
 export * from "./addToFavourite";
+export * from "./deleteArticle";

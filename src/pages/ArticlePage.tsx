@@ -24,19 +24,8 @@ const ArticlePage: FC = () => {
   return (
     <div className="py-5 flex flex-grow">
       <div className="container mx-auto px-4">
-        <div className="py-1.5 md:py-3">
-          <Crumbs
-            way={[
-              {
-                title: `Статья №${articleData._id!}`,
-                href: `/articles/${articleData._id}`,
-              },
-            ]}
-          />
-        </div>
-
         <div className="flex flex-col lg:flex-row-reverse gap-3 lg:gap-10 mt-1.5 lg:mt-3 w-full h-full">
-          <div className="mt-5 lg:mt-0 lg:w-[30%]">
+          <div className="lg:mt-0 lg:w-[30%]">
             <ArticleSidebar loading={loading} />
           </div>
 

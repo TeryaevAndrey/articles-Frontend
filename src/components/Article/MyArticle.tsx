@@ -1,35 +1,40 @@
-import React, { FC } from "react";
+import { FC } from "react";
 import { AiOutlineEdit, AiOutlineEye } from "react-icons/ai";
 import { Link } from "react-router-dom";
-import { IArticle } from "../../types";
+import { IArticle, IFavourite } from "../../types";
 import { Tag } from "@/components";
+import { MdDelete } from "react-icons/md";
+import { useAppDispatch, useAppSelector } from "@/store/store";
+import { main } from "@/store/slices/mainSlice";
+import { deleteArticle } from "@/utils";
+import { myArticles } from "@/store/slices/myArticlesSlice";
 
-export const MyArticle: FC<IArticle> = ({
-  _id,
-  title,
-  banner,
-  elements,
-  tags,
-  views,
-  from,
-  createdAt,
-  updatedAt,
-}) => {
-  const text = elements.find((el) => el.type === "text");
+interface IProps {
+  data: IArticle;
+  favourites?: IFavourite[];
+}
+
+export const MyArticle: FC<IProps> = ({ data, favourites }) => {
+  const isAuth = useAppSelector(main).isAuth;
+  const myArticlesStates = useAppSelector(myArticles).articles;
+  const text = data && data.elements.find((el) => el.type === "text");
+  const dispatch = useAppDispatch();
 
   return (
     <div className="w-full rounded overflow-hidden">
       <div className="flex flex-col gap-3">
-        {banner && <img className="w-full h-auto" src={banner} alt="image" />}
+        {data.banner && (
+          <img className="w-full h-auto" src={data.banner} alt="image" />
+        )}
         <div className="flex flex-col gap-3">
-          <h2 className="font-medium leading-5">{title}</h2>
+          <h2 className="font-medium leading-5">{data.title}</h2>
 
           <p className="text-sm font-light text-gray-500">
             {text && text.value && text.value.slice(0, 200) + " ..."}
           </p>
 
           <div className="flex items-center gap-2 flex-wrap">
-            {tags.map((tag, idx) => {
+            {data.tags.map((tag, idx) => {
               return <Tag key={idx} tag={tag} />;
             })}
           </div>
@@ -37,21 +42,31 @@ export const MyArticle: FC<IArticle> = ({
             <div className="flex items-center gap-2">
               <AiOutlineEye size={15} />
               <p className="text-sm text-gray-300 font-light">
-                {views} просмотров
+                {data.views} просмотров
               </p>
             </div>
-            <Link
-              to={`/edit-article/${_id}`}
-              className="rounded bg-blue-500 p-1 w-7 h-7 ml-auto mr-3 cursor-pointer"
-            >
-              <AiOutlineEdit size={20} color="#fff" />
-            </Link>
-            <Link
-              className="px-2 py-1 text-sm bg-blue-500 text-white rounded"
-              to={`/articles/${_id}`}
-            >
-              Посетить
-            </Link>
+            <div className="ml-auto flex items-center gap-3">
+              <Link
+                to={`/edit-article/${data._id}`}
+                className="rounded bg-blue-500 p-1 w-7 h-7 cursor-pointer"
+              >
+                <AiOutlineEdit size={20} color="#fff" />
+              </Link>
+              <button
+                className="rounded bg-blue-500 p-1 w-7 h-7 cursor-pointer"
+                onClick={async () => {
+                  await deleteArticle(data._id, dispatch, myArticlesStates);
+                }}
+              >
+                <MdDelete size={20} color="#fff" />
+              </button>
+              <Link
+                className="px-2 py-1 text-sm bg-blue-500 text-white rounded"
+                to={`/articles/${data._id}`}
+              >
+                Посетить
+              </Link>
+            </div>
           </div>
         </div>
       </div>
