@@ -5,6 +5,7 @@ import { getFavouritesArticles } from "@/utils";
 import { IFavourite } from "../types";
 import { Article, Pagination } from "@/components";
 import { favourites } from "@/store/slices/favouritesSlice";
+import { main } from "@/store/slices/mainSlice";
 
 const FavouritePage: FC = () => {
   const dispatch = useAppDispatch();

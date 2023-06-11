@@ -16,7 +16,9 @@ export const Article: FC<IProps> = ({ data, favourites }) => {
   const [isFavourite, setIsFavourite] = useState<boolean>(false);
   const isAuth = useAppSelector((state) => state.main.isAuth);
   const text = data && data.elements.find((el) => el.type === "text");
-  const favourite = favourites?.find((el) => el.articleId === data._id);
+  const favourite = favourites?.find(
+    (el) => el.articleId === data._id || el.articleId._id === data._id
+  );
 
   useEffect(() => {
     if (favourite) {
