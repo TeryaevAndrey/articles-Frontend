@@ -1,8 +1,9 @@
-import { FC } from "react";
+import { FC, useState, useEffect } from "react";
 import { AiFillCaretDown } from "react-icons/ai";
 import { useAppDispatch, useAppSelector } from "../../../store/store";
 import { setIsOpenMenu } from "../../../store/slices/headerSlice";
 import { ProfileMenu } from "@/components";
+import { user } from "@/store/slices/userSlice";
 
 export const Profile: FC = () => {
   const dispatch = useAppDispatch();
@@ -10,7 +11,12 @@ export const Profile: FC = () => {
   const isLoading = useAppSelector(
     (state) => state.loaders.loadingProfileHeader
   );
-  const myData = useAppSelector((state) => state.user.myData);
+  const myData = useAppSelector(user).myData;
+  const [avatar, setAvatar] = useState<string | undefined>(myData.avatar);
+
+  useEffect(() => {
+    setAvatar(myData.avatar);
+  }, [myData]);
 
   return (
     <div className="relative">
@@ -25,8 +31,11 @@ export const Profile: FC = () => {
             <>
               <img
                 className="w-10 h-10 rounded-md bg-gray-300 object-cover"
-                src={myData.avatar}
+                src={avatar}
                 alt={myData.userName}
+                onError={() => {
+                  setAvatar("../../../../public/img/avatar.png");
+                }}
               />
               <div className="text-gray-600">{myData.userName}</div>
             </>

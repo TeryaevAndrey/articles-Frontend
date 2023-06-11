@@ -1,13 +1,17 @@
-import { FC, useState, ChangeEvent } from "react";
+import { FC, useState, ChangeEvent, useEffect } from "react";
 import axios from "axios";
-import { useAppDispatch } from "../store/store";
+import { useAppDispatch, useAppSelector } from "../store/store";
 import { getMyData } from "@/utils";
 import { FieldEditProfile } from "@/components";
+import { user } from "@/store/slices/userSlice";
 
 const EditProfilePage: FC = () => {
   const dispatch = useAppDispatch();
-  const user = JSON.parse(localStorage.getItem("user") || "{}");
-  const [avatar, setAvatar] = useState<string | File>(user.userInfo.avatar);
+  const userData = useAppSelector(user).myData;
+  const [avatar, setAvatar] = useState<string | File>(
+    userData.avatar || "../../public/img/avatar.png"
+  );
+  const token = JSON.parse(localStorage.getItem("user") || "{}").token;
   const [userName, setUserName] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [oldPassword, setOldPassword] = useState<string>("");
@@ -48,7 +52,7 @@ const EditProfilePage: FC = () => {
       .post(import.meta.env.VITE_PROXY + "/edit-profile", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
-          Authorization: `Bearer ${user.token}`,
+          Authorization: `Bearer ${token}`,
         },
       })
       .then((res) => {
@@ -87,7 +91,7 @@ const EditProfilePage: FC = () => {
                     ? avatar
                     : URL.createObjectURL(avatar)
                 }
-                alt={user.userInfo.userName}
+                alt={userData.userName}
               />
               <span className="text-blue-600">Изменить аватар</span>
             </label>
