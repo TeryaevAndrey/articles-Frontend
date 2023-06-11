@@ -1,7 +1,7 @@
 import { FC, useState, ChangeEvent, useEffect } from "react";
 import axios from "axios";
 import { useAppDispatch, useAppSelector } from "../store/store";
-import { getMyData } from "@/utils";
+import { deleteImg, getMyData } from "@/utils";
 import { FieldEditProfile } from "@/components";
 import { user } from "@/store/slices/userSlice";
 
@@ -57,6 +57,15 @@ const EditProfilePage: FC = () => {
       })
       .then((res) => {
         alert(res.data.message);
+
+        if (typeof avatar !== "string") {
+          if (
+            userData.avatar !== res.data.user.avatar &&
+            userData.avatar !== undefined
+          ) {
+            deleteImg(userData.avatar);
+          }
+        }
 
         dispatch(getMyData());
       })
