@@ -6,8 +6,11 @@ const initialState: {
   myData: IUser;
 } = {
   myData: {
+    _id: undefined,
     avatar: undefined,
     userName: undefined,
+    createdAt: undefined,
+    updatedAt: undefined,
   },
 };
 

@@ -1,6 +1,8 @@
 import { FC } from "react";
 import { IComment } from "../../../types";
 import { ArticleProfile, RatingShow } from "@/components";
+import { MdDelete } from "react-icons/md";
+import { useAppSelector } from "@/store/store";
 
 export const Comment: FC<IComment> = ({
   _id,
@@ -11,6 +13,8 @@ export const Comment: FC<IComment> = ({
   createdAt,
   updatedAt,
 }) => {
+  const currentUserId = useAppSelector((state) => state.user.myData._id);
+
   return (
     <div className="flex flex-col gap-3">
       <div className="flex items-center gap-2 flex-wrap">
@@ -19,6 +23,10 @@ export const Comment: FC<IComment> = ({
           <p>{new Date(createdAt).toLocaleDateString()}</p>
           <p>{new Date(createdAt).toLocaleTimeString()}</p>
         </div>
+
+        {currentUserId === from._id && (
+          <MdDelete className="text-red-500 cursor-pointer" size={20} />
+        )}
       </div>
 
       <RatingShow rating={rating} />

@@ -19,8 +19,11 @@ export const getMyData =
       .then((res) => {
         dispatch(
           setMyData({
+            _id: res.data.user._id,
             avatar: res.data.user.avatar,
             userName: res.data.user.userName,
+            createdAt: res.data.user.createdAt,
+            updatedAt: res.data.user.updatedAt,
           })
         );
       })

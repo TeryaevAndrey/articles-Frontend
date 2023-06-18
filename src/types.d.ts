@@ -1,6 +1,9 @@
 export interface IUser {
+  _id?: string;
   avatar?: string;
   userName?: string;
+  createdAt?: string;
+  updatedAt?: string;
 }
 
 export interface IElement {
