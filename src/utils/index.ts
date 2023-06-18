@@ -18,3 +18,4 @@ export * from "./getSearchedArticles";
 export * from "./getSearchedArticles";
 export * from "./addToFavourite";
 export * from "./deleteArticle";
+export * from "./deleteComment";
