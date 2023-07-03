@@ -16,7 +16,10 @@ interface IOpenedArticle {
 
 const initialState: {
   article: IOpenedArticle;
-  comments: IComment[];
+  comments: {
+    total: number;
+    comments: IComment[];
+  };
 } = {
   article: {
     _id: undefined,
@@ -29,7 +32,10 @@ const initialState: {
     createdAt: undefined,
     updatedAt: undefined,
   },
-  comments: [],
+  comments: {
+    total: 0,
+    comments: [],
+  },
 };
 
 export const openedArticleSlice = createSlice({
@@ -40,7 +46,10 @@ export const openedArticleSlice = createSlice({
       state.article = action.payload;
     },
 
-    setOpenedArticleComments: (state, action: PayloadAction<IComment[]>) => {
+    setOpenedArticleComments: (
+      state,
+      action: PayloadAction<{ total: number; comments: IComment[] }>
+    ) => {
       state.comments = action.payload;
     },
   },

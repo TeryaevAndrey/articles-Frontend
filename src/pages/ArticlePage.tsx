@@ -1,9 +1,9 @@
-import { FC, useEffect } from "react";
+import { FC, useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import { IElement } from "../types";
 import { useAppDispatch, useAppSelector } from "../store/store";
 import { getOpenedArticle, getComments } from "@/utils";
-import { Crumbs, ArticleSidebar, Comments, Loader } from "@/components";
+import { ArticleSidebar, Comments, Loader } from "@/components";
 import { openedArticle } from "@/store/slices/openedArticleSlice";
 import { loaders } from "@/store/slices/loadersSlice";
 
@@ -12,14 +12,51 @@ const ArticlePage: FC = () => {
   const articleData = useAppSelector(openedArticle).article;
   const comments = useAppSelector(openedArticle).comments;
   const loading = useAppSelector(loaders).loadingOpenedArticle;
+  const commentsLoading = useAppSelector(loaders).loadingGetComments;
   const { articleId } = useParams();
+  const [commentsPage, setCommentsPage] = useState(1);
+  const commentsBlockRef = useRef(null);
+  const [commentsFetching, setCommentsFetching] = useState(false);
+
+  const scrollHandler = () => {
+    if (
+      window.innerHeight + document.documentElement.scrollTop >=
+      document.documentElement.offsetHeight
+    ) {
+      setCommentsFetching(true);
+    }
+  };
+
+  useEffect(() => {
+    setCommentsPage((prev) => prev + 1);
+  }, [commentsFetching]);
+
+  useEffect(() => {
+    document.addEventListener("scroll", scrollHandler);
+
+    return () => {
+      document.removeEventListener("scroll", scrollHandler);
+    };
+  }, []);
 
   useEffect(() => {
     if (articleId) {
       dispatch(getOpenedArticle(articleId));
-      dispatch(getComments(articleId));
     }
   }, []);
+
+  useEffect(() => {
+    if (articleId) {
+      dispatch(
+        getComments(
+          articleId,
+          3,
+          commentsPage ? commentsPage : 1,
+          comments.comments
+        )
+      );
+    }
+  }, [commentsFetching]);
 
   return (
     <div className="py-5 flex flex-grow">
@@ -74,8 +111,19 @@ const ArticlePage: FC = () => {
                     }
                   })}
                 </div>
-                <div className="mt-7">
-                  <Comments comments={comments} />
+                <div className="mt-7" ref={commentsBlockRef}>
+                  <Comments comments={comments.comments} />
+                  {commentsLoading && (
+                    <div className="flex justify-center">
+                      <Loader
+                        style={{
+                          width: "40px",
+                          height: "40px",
+                          color: "#3b82f6",
+                        }}
+                      />
+                    </div>
+                  )}
                 </div>
               </>
             )}

@@ -29,11 +29,11 @@ export const loadersSlice = createSlice({
       state.loadingOpenedArticle = action.payload;
     },
 
-    setLoadingAddComment: (state) => {
+    setLoadingAddComment: (state, action: PayloadAction<boolean>) => {
       state.loadingAddComment = !state.loadingAddComment;
     },
 
-    setLoadingGetComments: (state) => {
+    setLoadingGetComments: (state, action: PayloadAction<boolean>) => {
       state.loadingGetComments = !state.loadingGetComments;
     },
 
