@@ -14,13 +14,6 @@ export const Header: FC = () => {
           <div className="flex justify-between items-center gap-3 md:gap-10">
             <Logo />
             <div className="md:hidden flex items-center gap-3 ml-auto md:mr-2">
-              <Link to="/search">
-                <AiOutlineSearch
-                  className="cursor-pointer"
-                  size="25"
-                  color="#3b82f6"
-                />
-              </Link>
               {!isAuth && <Burger />}
             </div>
             <div className="hidden md:flex w-full">

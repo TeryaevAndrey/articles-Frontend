@@ -2,7 +2,7 @@ import { FC, useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../store/store";
 import { useLocation, useParams } from "react-router-dom";
 import { getSearchedArticles } from "@/utils";
-import { Popular, Article, Pagination } from "@/components";
+import { Popular, Article, Pagination, Search } from "@/components";
 import { searchedArticles } from "@/store/slices/searchedArticlesSlice";
 
 const SearchPage: FC = () => {
@@ -24,12 +24,16 @@ const SearchPage: FC = () => {
     <div>
       <div className="container mx-auto px-4">
         <div className="flex flex-col lg:flex-row-reverse lg:justify-start lg:gap-10 py-5">
+          <div className="md:hidden">
+            <Search />
+          </div>
+
           <div className="mt-4 lg:mt-0 w-full lg:w-[30%]">
             <Popular beforeUrl={location.pathname} />
           </div>
 
           <div className="lg:w-[70%]">
-            <h1 className="flex items-center mb-5">
+            <h1 className="flex items-center mb-5 mt-5 md:mt-0">
               Стетей по запросу:{" "}
               <span className="font-bold text-xl ml-3">
                 {q}

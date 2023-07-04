@@ -2,7 +2,7 @@ import { FC, useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../store/store";
 import { getAllArticles } from "@/utils";
 import { useParams } from "react-router-dom";
-import { Popular, Article, Pagination, Loader } from "@/components";
+import { Popular, Article, Pagination, Loader, Search } from "@/components";
 import { getAllFavouritesArticles } from "@/utils/getAllFavouritesArticles";
 import { allArticles } from "@/store/slices/allArticlesSlice";
 import { favourites } from "@/store/slices/favouritesSlice";
@@ -33,6 +33,10 @@ const MainPage: FC = () => {
     <div className="flex flex-grow">
       <div className="container mx-auto px-4">
         <div className="flex flex-col lg:flex-row-reverse lg:justify-start lg:gap-10 py-5 h-full">
+          <div className="md:hidden">
+            <Search />
+          </div>
+
           <div className="mt-4 lg:mt-0 w-full lg:w-[30%]">
             <Popular beforeUrl="/all/page1" />
           </div>
