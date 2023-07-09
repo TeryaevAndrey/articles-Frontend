@@ -7,7 +7,10 @@ import axios, { AxiosError, AxiosResponse } from "axios";
 export const deleteComment = async (
   commentId: string,
   dispatch: Dispatch,
-  comments: IComment[]
+  comments: {
+    total: number;
+    commentsList: IComment[];
+  }
 ) => {
   const token = JSON.parse(localStorage.getItem("user") || "{}").token;
 
@@ -18,9 +21,16 @@ export const deleteComment = async (
       },
     })
     .then((res: AxiosResponse<{ message: string; commentId: string }>) => {
-      const filteredComments = comments.filter((el) => el._id !== commentId);
+      const filteredComments = comments.commentsList.filter(
+        (el) => el._id !== commentId
+      );
 
-      dispatch(setOpenedArticleComments(filteredComments));
+      dispatch(
+        setOpenedArticleComments({
+          total: comments.total - 1,
+          commentsList: filteredComments,
+        })
+      );
 
       alert(res.data.message);
     })

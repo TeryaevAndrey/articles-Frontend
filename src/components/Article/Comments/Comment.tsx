@@ -8,7 +8,10 @@ import { user } from "@/store/slices/userSlice";
 
 interface IProps {
   comment: IComment;
-  comments: IComment[];
+  comments: {
+    total: number;
+    commentsList: IComment[];
+  };
 }
 
 export const Comment: FC<IProps> = ({ comment, comments }) => {
@@ -31,7 +34,12 @@ export const Comment: FC<IProps> = ({ comment, comments }) => {
           <MdDelete
             className="text-red-500 cursor-pointer"
             size={20}
-            onClick={() => deleteComment(comment._id, dispatch, comments)}
+            onClick={() =>
+              deleteComment(comment._id, dispatch, {
+                total: comments.total,
+                commentsList: comments.commentsList,
+              })
+            }
           />
         )}
       </div>

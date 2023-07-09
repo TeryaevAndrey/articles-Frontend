@@ -20,7 +20,7 @@ export const getComments =
         dispatch(
           setOpenedArticleComments({
             total: res.data.total,
-            comments: [...comments, ...res.data.comments],
+            commentsList: [...comments, ...res.data.comments],
           })
         );
       });

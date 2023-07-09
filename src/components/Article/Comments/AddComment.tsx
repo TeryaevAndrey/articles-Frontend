@@ -57,8 +57,8 @@ export const AddComment: FC = () => {
 
         dispatch(
           setOpenedArticleComments({
-            total: 0,
-            comments: [res.data.comment, ...comments.comments],
+            total: comments?.total + 1,
+            commentsList: [res.data.comment, ...comments.commentsList],
           })
         );
 

@@ -21,14 +21,19 @@ const ArticlePage: FC = () => {
   const scrollHandler = () => {
     if (
       window.innerHeight + document.documentElement.scrollTop >=
-      document.documentElement.offsetHeight
+        document.documentElement.offsetHeight &&
+      comments.total > comments.commentsList.length
     ) {
       setCommentsFetching(true);
     }
   };
 
   useEffect(() => {
-    setCommentsPage((prev) => prev + 1);
+    if (commentsFetching) {
+      setCommentsPage((prev) => prev + 1);
+    }
+
+    setCommentsFetching(false);
   }, [commentsFetching]);
 
   useEffect(() => {
@@ -37,13 +42,13 @@ const ArticlePage: FC = () => {
     return () => {
       document.removeEventListener("scroll", scrollHandler);
     };
-  }, []);
+  }, [comments]);
 
   useEffect(() => {
     if (articleId) {
       dispatch(getOpenedArticle(articleId));
     }
-  }, []);
+  }, [articleId]);
 
   useEffect(() => {
     if (articleId) {
@@ -52,11 +57,11 @@ const ArticlePage: FC = () => {
           articleId,
           3,
           commentsPage ? commentsPage : 1,
-          comments.comments
+          comments.commentsList
         )
       );
     }
-  }, [commentsFetching]);
+  }, [commentsPage]);
 
   return (
     <div className="py-5 flex flex-grow">
@@ -112,7 +117,12 @@ const ArticlePage: FC = () => {
                   })}
                 </div>
                 <div className="mt-7" ref={commentsBlockRef}>
-                  <Comments comments={comments.comments} />
+                  <Comments
+                    comments={{
+                      total: comments.total,
+                      commentsList: comments.commentsList,
+                    }}
+                  />
                   {commentsLoading && (
                     <div className="flex justify-center">
                       <Loader

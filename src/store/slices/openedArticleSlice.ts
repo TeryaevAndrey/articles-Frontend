@@ -18,7 +18,7 @@ const initialState: {
   article: IOpenedArticle;
   comments: {
     total: number;
-    comments: IComment[];
+    commentsList: IComment[];
   };
 } = {
   article: {
@@ -34,7 +34,7 @@ const initialState: {
   },
   comments: {
     total: 0,
-    comments: [],
+    commentsList: [],
   },
 };
 
@@ -48,7 +48,7 @@ export const openedArticleSlice = createSlice({
 
     setOpenedArticleComments: (
       state,
-      action: PayloadAction<{ total: number; comments: IComment[] }>
+      action: PayloadAction<{ total: number; commentsList: IComment[] }>
     ) => {
       state.comments = action.payload;
     },
