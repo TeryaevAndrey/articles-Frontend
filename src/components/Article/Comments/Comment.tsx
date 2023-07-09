@@ -4,6 +4,7 @@ import { ArticleProfile, RatingShow } from "@/components";
 import { MdDelete } from "react-icons/md";
 import { useAppDispatch, useAppSelector } from "@/store/store";
 import { deleteComment } from "@/utils";
+import { user } from "@/store/slices/userSlice";
 
 interface IProps {
   comment: IComment;
@@ -11,7 +12,7 @@ interface IProps {
 }
 
 export const Comment: FC<IProps> = ({ comment, comments }) => {
-  const currentUserId = useAppSelector((state) => state.user.myData._id);
+  const { myData } = useAppSelector(user);
   const dispatch = useAppDispatch();
 
   return (
@@ -26,7 +27,7 @@ export const Comment: FC<IProps> = ({ comment, comments }) => {
           <p>{new Date(comment.createdAt).toLocaleTimeString()}</p>
         </div>
 
-        {currentUserId === comment.from._id && (
+        {myData._id === comment.from._id && (
           <MdDelete
             className="text-red-500 cursor-pointer"
             size={20}

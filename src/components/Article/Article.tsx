@@ -6,6 +6,7 @@ import { BsBookmark, BsBookmarkFill } from "react-icons/bs";
 import { useAppSelector } from "../../store/store";
 import { addToFavourite, deleteFavouriteArticle } from "@/utils";
 import { Tag } from "@/components";
+import { main } from "@/store/slices/mainSlice";
 
 interface IProps {
   data: IArticle;
@@ -14,7 +15,7 @@ interface IProps {
 
 export const Article: FC<IProps> = ({ data, favourites }) => {
   const [isFavourite, setIsFavourite] = useState<boolean>(false);
-  const isAuth = useAppSelector((state) => state.main.isAuth);
+  const { isAuth } = useAppSelector(main);
   const text = data && data.elements.find((el) => el.type === "text");
   const favourite = favourites?.find(
     (el) => el.articleId === data._id || el.articleId._id === data._id

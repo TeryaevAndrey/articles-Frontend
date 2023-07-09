@@ -1,16 +1,18 @@
-import React, { FC, useState } from "react";
+import { FC, useState, ChangeEvent } from "react";
 import { useAppDispatch, useAppSelector } from "../../store/store";
 import { MdDeleteForever } from "react-icons/md";
 import { v4 as uuidv4 } from "uuid";
 import { CiImport } from "react-icons/ci";
-import { setElements, setTitle } from "../../store/slices/addArticleSlice";
+import {
+  addArticle,
+  setElements,
+  setTitle,
+} from "../../store/slices/addArticleSlice";
 import { deleteImg, exportImg } from "@/utils";
 
 export const Elements: FC = () => {
   const dispatch = useAppDispatch();
-  const title = useAppSelector((state) => state.addArticle.title);
-  const elements = useAppSelector((state) => state.addArticle.elements);
-  const banner = useAppSelector((state) => state.addArticle.banner);
+  const { title, elements, banner } = useAppSelector(addArticle);
   const [imgLoading, setImgLoading] = useState<boolean>(false);
 
   const updateFieldChanged = (
@@ -24,7 +26,7 @@ export const Elements: FC = () => {
     dispatch(setElements(newArr));
   };
 
-  const onTitleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
+  const onTitleChange = (e: ChangeEvent<HTMLInputElement>): void => {
     dispatch(setTitle(e.target.value));
   };
 

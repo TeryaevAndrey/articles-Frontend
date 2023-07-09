@@ -1,20 +1,28 @@
 import { FC, useEffect, ChangeEvent, FormEvent } from "react";
 import { useAppDispatch, useAppSelector } from "../../../store/store";
-import { setRating, setText } from "../../../store/slices/commentSlice";
+import {
+  comment,
+  setRating,
+  setText,
+} from "../../../store/slices/commentSlice";
 import { useLocation } from "react-router-dom";
 import axios, { AxiosResponse } from "axios";
-import { setLoadingAddComment } from "../../../store/slices/loadersSlice";
-import { setOpenedArticleComments } from "../../../store/slices/openedArticleSlice";
+import {
+  loaders,
+  setLoadingAddComment,
+} from "../../../store/slices/loadersSlice";
+import {
+  openedArticle,
+  setOpenedArticleComments,
+} from "../../../store/slices/openedArticleSlice";
 import { Rating, Loader } from "@/components";
 
 export const AddComment: FC = () => {
   const dispatch = useAppDispatch();
   const location = useLocation();
-  const article = useAppSelector((state) => state.openedArticle.article);
-  const rating = useAppSelector((state) => state.comment.rating);
-  const text = useAppSelector((state) => state.comment.text);
-  const loading = useAppSelector((state) => state.loaders.loadingAddComment);
-  const comments = useAppSelector((state) => state.openedArticle.comments);
+  const { article, comments } = useAppSelector(openedArticle);
+  const { rating, text } = useAppSelector(comment);
+  const loading = useAppSelector(loaders).loadingAddComment;
   const token = JSON.parse(localStorage.getItem("user") || "{}").token;
 
   useEffect(() => {
@@ -47,8 +55,12 @@ export const AddComment: FC = () => {
       .then((res: AxiosResponse) => {
         alert(res.data.message);
 
-        dispatch(setOpenedArticleComments([res.data.comment, ...comments]));
-        console.log(res.data.comments);
+        dispatch(
+          setOpenedArticleComments({
+            total: 0,
+            comments: [res.data.comment, ...comments.comments],
+          })
+        );
 
         dispatch(setRating(0));
         dispatch(setText(""));

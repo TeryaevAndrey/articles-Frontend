@@ -1,17 +1,16 @@
 import { FC, useState, useEffect } from "react";
 import { AiFillCaretDown } from "react-icons/ai";
 import { useAppDispatch, useAppSelector } from "../../../store/store";
-import { setIsOpenMenu } from "../../../store/slices/headerSlice";
+import { header, setIsOpenMenu } from "../../../store/slices/headerSlice";
 import { ProfileMenu } from "@/components";
 import { user } from "@/store/slices/userSlice";
+import { loaders } from "@/store/slices/loadersSlice";
 
 export const Profile: FC = () => {
   const dispatch = useAppDispatch();
-  const isOpenMenu = useAppSelector((state) => state.header.isOpenMenu);
-  const isLoading = useAppSelector(
-    (state) => state.loaders.loadingProfileHeader
-  );
-  const myData = useAppSelector(user).myData;
+  const { isOpenMenu } = useAppSelector(header);
+  const isLoading = useAppSelector(loaders).loadingProfileHeader;
+  const { myData } = useAppSelector(user);
   const [avatar, setAvatar] = useState<string | undefined>(myData.avatar);
 
   useEffect(() => {

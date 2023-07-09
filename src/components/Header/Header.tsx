@@ -1,11 +1,11 @@
 import { FC } from "react";
 import { Link } from "react-router-dom";
-import { AiOutlineSearch } from "react-icons/ai";
 import { useAppSelector } from "../../store/store";
 import { Logo, Burger, Search, Profile, MenuMob } from "@/components";
+import { main } from "@/store/slices/mainSlice";
 
 export const Header: FC = () => {
-  const isAuth = useAppSelector((state) => state.main.isAuth);
+  const { isAuth } = useAppSelector(main);
 
   return (
     <>

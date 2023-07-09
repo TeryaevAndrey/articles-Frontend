@@ -1,10 +1,10 @@
 import { FC } from "react";
 import { useAppDispatch, useAppSelector } from "../../store/store";
-import { setIsOpenMenu } from "../../store/slices/headerSlice";
+import { header, setIsOpenMenu } from "../../store/slices/headerSlice";
 
 export const Burger: FC = () => {
   const dispatch = useAppDispatch();
-  const isOpenMenu = useAppSelector((state) => state.header.isOpenMenu);
+  const { isOpenMenu } = useAppSelector(header);
 
   return (
     <div
@@ -17,4 +17,3 @@ export const Burger: FC = () => {
     </div>
   );
 };
-

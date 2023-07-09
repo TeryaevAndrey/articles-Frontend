@@ -1,7 +1,11 @@
 import React, { FC, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { useAppDispatch, useAppSelector } from "../../store/store";
-import { setElements, setTitle } from "../../store/slices/editArticleSlice";
+import {
+  editArticle,
+  setElements,
+  setTitle,
+} from "../../store/slices/editArticleSlice";
 import { CiImport } from "react-icons/ci";
 import { exportImg } from "@/utils";
 import { MdDeleteForever } from "react-icons/md";
@@ -9,9 +13,7 @@ import { deleteImg } from "@/utils";
 
 export const EditElements: FC = () => {
   const dispatch = useAppDispatch();
-  const title = useAppSelector((state) => state.editArticle.title);
-  const elements = useAppSelector((state) => state.editArticle.elements);
-  const banner = useAppSelector((state) => state.editArticle.banner);
+  const { title, elements, banner } = useAppSelector(editArticle);
   const [imgLoading, setImgLoading] = useState<boolean>(false);
 
   const updateFieldChanged = (

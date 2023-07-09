@@ -7,7 +7,7 @@ interface IPopularLink {
 }
 
 export const PopularLink: FC<IPopularLink> = ({ title, beforeUrl }) => {
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
   const currentUrl = window.location.href;
 
   return (

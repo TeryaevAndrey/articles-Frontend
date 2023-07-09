@@ -2,15 +2,15 @@ import { FC, ChangeEvent } from "react";
 import { AiOutlineSearch } from "react-icons/ai";
 import { MdClose } from "react-icons/md";
 import { useAppDispatch, useAppSelector } from "../../store/store";
-import { setSearchValue } from "../../store/slices/headerSlice";
+import { header, setSearchValue } from "../../store/slices/headerSlice";
 import { useNavigate } from "react-router-dom";
 
 export const Search: FC = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const searchValue = useAppSelector((state) => state.header.searchValue);
+  const { searchValue } = useAppSelector(header);
 
-  const onSearchChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
+  const onSearchChange = (e: ChangeEvent<HTMLInputElement>): void => {
     dispatch(setSearchValue(e.target.value));
   };
 

@@ -1,21 +1,18 @@
 import { FC } from "react";
 import { AiOutlineEdit, AiOutlineEye } from "react-icons/ai";
 import { Link } from "react-router-dom";
-import { IArticle, IFavourite } from "../../types";
+import { IArticle } from "../../types";
 import { Tag } from "@/components";
 import { MdDelete } from "react-icons/md";
 import { useAppDispatch, useAppSelector } from "@/store/store";
-import { main } from "@/store/slices/mainSlice";
 import { deleteArticle } from "@/utils";
 import { myArticles } from "@/store/slices/myArticlesSlice";
 
 interface IProps {
   data: IArticle;
-  favourites?: IFavourite[];
 }
 
-export const MyArticle: FC<IProps> = ({ data, favourites }) => {
-  const isAuth = useAppSelector(main).isAuth;
+export const MyArticle: FC<IProps> = ({ data }) => {
   const myArticlesStates = useAppSelector(myArticles).articles;
   const text = data && data.elements.find((el) => el.type === "text");
   const dispatch = useAppDispatch();

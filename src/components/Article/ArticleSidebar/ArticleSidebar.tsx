@@ -1,14 +1,15 @@
 import { FC } from "react";
 import { useAppSelector } from "../../../store/store";
 import { ArticleProfile, Loader, Tag } from "@/components";
+import { openedArticle } from "@/store/slices/openedArticleSlice";
 
 interface IProps {
   loading?: boolean;
 }
 
 export const ArticleSidebar: FC<IProps> = ({ loading }) => {
-  const articleData = useAppSelector((state) => state.openedArticle.article);
-  const date = new Date(articleData.createdAt!);
+  const { article } = useAppSelector(openedArticle);
+  const date = new Date(article.createdAt!);
 
   return (
     <div className="bg-slate-100 rounded w-full h-max lg:gap-x-10 shadow p-3">
@@ -19,8 +20,8 @@ export const ArticleSidebar: FC<IProps> = ({ loading }) => {
       ) : (
         <div className="w-full flex flex-col gap-3">
           <ArticleProfile
-            avatar={articleData.from?.avatar}
-            userName={articleData.from?.userName!}
+            avatar={article.from?.avatar}
+            userName={article.from?.userName!}
           />
           <div>
             <div className="flex items-center gap-3">
@@ -28,11 +29,11 @@ export const ArticleSidebar: FC<IProps> = ({ loading }) => {
               <p>{date.toLocaleDateString()}</p>
             </div>
           </div>
-          {articleData.tags.length > 0 && (
+          {article.tags.length > 0 && (
             <div>
               <h5 className="text-gray-600">Теги</h5>
               <div className="flex items-center gap-2 flex-wrap mt-3">
-                {articleData.tags.map((tag, idx) => {
+                {article.tags.map((tag, idx) => {
                   return <Tag key={idx} tag={tag} />;
                 })}
               </div>

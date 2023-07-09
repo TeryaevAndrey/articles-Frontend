@@ -10,7 +10,7 @@ interface IPopular {
 }
 
 export const Popular: FC<IPopular> = ({ beforeUrl }) => {
-  const popularTagsStates = useAppSelector(popularTags).tags;
+  const { tags } = useAppSelector(popularTags);
   const loading = useAppSelector(loaders).loadingPopularTags;
   const [isShowMore, setIsShowMore] = useState<boolean>(false);
   const dispatch = useAppDispatch();
@@ -34,7 +34,7 @@ export const Popular: FC<IPopular> = ({ beforeUrl }) => {
           <>
             <div className="flex flex-col mt-3">
               {isShowMore
-                ? popularTagsStates.slice(0, 8).map((tag, idx) => {
+                ? tags.slice(0, 8).map((tag, idx) => {
                     return (
                       <PopularLink
                         key={idx}
@@ -43,7 +43,7 @@ export const Popular: FC<IPopular> = ({ beforeUrl }) => {
                       />
                     );
                   })
-                : popularTagsStates.slice(0, 4).map((tag, idx) => {
+                : tags.slice(0, 4).map((tag, idx) => {
                     return (
                       <PopularLink
                         key={idx}
@@ -53,7 +53,7 @@ export const Popular: FC<IPopular> = ({ beforeUrl }) => {
                     );
                   })}
             </div>
-            {popularTagsStates.length > 4 && (
+            {tags.length > 4 && (
               <div
                 className="text-center font-light mt-4 text-sm cursor-pointer active:opacity-001 ease-linear duration-75"
                 onClick={() => setIsShowMore(!isShowMore)}

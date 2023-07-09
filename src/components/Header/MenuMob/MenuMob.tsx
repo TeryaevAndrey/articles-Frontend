@@ -1,12 +1,13 @@
 import { FC } from "react";
 import { Link } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../../store/store";
-import { setIsOpenMenu } from "../../../store/slices/headerSlice";
+import { header, setIsOpenMenu } from "../../../store/slices/headerSlice";
+import { main } from "@/store/slices/mainSlice";
 
 export const MenuMob: FC = () => {
   const dispatch = useAppDispatch();
-  const isOpenMenu = useAppSelector((state) => state.header.isOpenMenu);
-  const isAuth = useAppSelector((state) => state.main.isAuth);
+  const { isOpenMenu } = useAppSelector(header);
+  const { isAuth } = useAppSelector(main);
 
   return (
     <div
