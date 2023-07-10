@@ -20,8 +20,7 @@ const ArticlePage: FC = () => {
 
   const scrollHandler = () => {
     if (
-      window.innerHeight + document.documentElement.scrollTop >=
-        document.documentElement.offsetHeight &&
+      window.innerHeight + window.scrollY >= document.body.offsetHeight &&
       comments.total > comments.commentsList.length
     ) {
       setCommentsFetching(true);
@@ -55,9 +54,9 @@ const ArticlePage: FC = () => {
       dispatch(
         getComments(
           articleId,
-          3,
+          6,
           commentsPage ? commentsPage : 1,
-          comments.commentsList
+          commentsPage === 1 ? [] : comments.commentsList
         )
       );
     }
@@ -118,6 +117,7 @@ const ArticlePage: FC = () => {
                 </div>
                 <div className="mt-7" ref={commentsBlockRef}>
                   <Comments
+                    setCommentsPage={setCommentsPage}
                     comments={{
                       total: comments.total,
                       commentsList: comments.commentsList,

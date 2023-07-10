@@ -7,15 +7,16 @@ interface IProps {
     total: number;
     commentsList: IComment[];
   };
+  setCommentsPage: Function
 }
 
-export const Comments: FC<IProps> = ({ comments }) => {
+export const Comments: FC<IProps> = ({ comments, setCommentsPage }) => {
 
   return (
     <div className="flex flex-col gap-3 w-full">
       <h3 className="text-lg font-medium">Отзывы</h3>
 
-      <AddComment />
+      <AddComment setCommentsPage={setCommentsPage} />
 
       <div className="flex flex-col gap-3 mt-5">
         {comments.commentsList &&

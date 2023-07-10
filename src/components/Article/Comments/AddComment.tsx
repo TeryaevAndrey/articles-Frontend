@@ -17,7 +17,11 @@ import {
 } from "../../../store/slices/openedArticleSlice";
 import { Rating, Loader } from "@/components";
 
-export const AddComment: FC = () => {
+type IProps = {
+  setCommentsPage: Function;
+};
+
+export const AddComment: FC<IProps> = ({ setCommentsPage }) => {
   const dispatch = useAppDispatch();
   const location = useLocation();
   const { article, comments } = useAppSelector(openedArticle);
@@ -55,12 +59,7 @@ export const AddComment: FC = () => {
       .then((res: AxiosResponse) => {
         alert(res.data.message);
 
-        dispatch(
-          setOpenedArticleComments({
-            total: comments?.total + 1,
-            commentsList: [res.data.comment, ...comments.commentsList],
-          })
-        );
+        setCommentsPage(1);
 
         dispatch(setRating(0));
         dispatch(setText(""));
