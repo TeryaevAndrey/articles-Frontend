@@ -51,14 +51,7 @@ const ArticlePage: FC = () => {
 
   useEffect(() => {
     if (articleId) {
-      dispatch(
-        getComments(
-          articleId,
-          6,
-          commentsPage ? commentsPage : 1,
-          commentsPage === 1 ? [] : comments.commentsList
-        )
-      );
+      dispatch(getComments(articleId, 3, commentsPage, comments.commentsList));
     }
   }, [commentsPage]);
 
@@ -118,6 +111,7 @@ const ArticlePage: FC = () => {
                 <div className="mt-7" ref={commentsBlockRef}>
                   <Comments
                     setCommentsPage={setCommentsPage}
+                    setCommentsFetching={setCommentsFetching}
                     comments={{
                       total: comments.total,
                       commentsList: comments.commentsList,

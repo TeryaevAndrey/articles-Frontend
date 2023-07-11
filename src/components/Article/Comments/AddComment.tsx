@@ -16,12 +16,17 @@ import {
   setOpenedArticleComments,
 } from "../../../store/slices/openedArticleSlice";
 import { Rating, Loader } from "@/components";
+import { getComments } from "@/utils";
 
 type IProps = {
   setCommentsPage: Function;
+  setCommentsFetching: Function;
 };
 
-export const AddComment: FC<IProps> = ({ setCommentsPage }) => {
+export const AddComment: FC<IProps> = ({
+  setCommentsPage,
+  setCommentsFetching,
+}) => {
   const dispatch = useAppDispatch();
   const location = useLocation();
   const { article, comments } = useAppSelector(openedArticle);
@@ -59,7 +64,16 @@ export const AddComment: FC<IProps> = ({ setCommentsPage }) => {
       .then((res: AxiosResponse) => {
         alert(res.data.message);
 
-        setCommentsPage(1);
+        dispatch(
+          setOpenedArticleComments({
+            total: 0,
+            commentsList: [],
+          })
+        );
+
+        setCommentsPage(0);
+
+        setCommentsFetching(true);
 
         dispatch(setRating(0));
         dispatch(setText(""));
